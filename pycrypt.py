@@ -16,13 +16,13 @@ class Decoder ():
 		ENGLISH_TRIGRAMS[i] /= 10000.0
 	#print sorted(ENGLISH_TRIGRAMS.iteritems(), key=operator.itemgetter(1))
 
-	#DEF_PERM_FUNC = lambda x: x**4
-	DEF_PERM_FUNC = lambda x: (-1/(x-27.0/26.0))/26.0
+	DEF_PERM_FUNC = lambda x: x**2
+	#DEF_PERM_FUNC = lambda x: (-1/(x-27.0/26.0))/26.0
 
 	def __init__ (self, frequency=ENGLISH_FREQUENCY, frequencies=None):
 		self.baseFrequency = frequency
 		self.words = None
-		self.maxWordLen = 0
+		self.maxWordLen = 10
 		self.minWordLen = 3
 		self.frequencies = frequencies
 		if (frequencies == None):
@@ -87,15 +87,38 @@ class Decoder ():
 			d[j] = f[i]
 		return 1 - sum(map(lambda a: abs(a[0] - a[1]) / 2, zip(d.values(), self.baseFrequency.values())))
 
-	def getScoreNgrams (self, s, freqs, key, score_list=False):
+	def getScores (self, s, freqs, key, iterations=0, score_list=False):
+		scores = self.getScoreNgrams(s, freqs, key)
+		if (score_list):
+			scores.append(self.getScoreWords(s, key))
+			return scores
+		#pprint.pprint(scores)
+		#result_score = scores[2]
+
+		result_score = 0
+		#if iterations > 80:
+		#	result_score = scores[0]
+		#if iterations <= 60 and iterations > 40:
+		#	result_score = scores[1]
+		#if iterations <= 40 and iterations > 20:
+		#	result_score = scores[2]
+		#if iterations <= 20:
+		#	result_score = self.getScoreWords(s, key) * 100
+		#result_score = score_list[2]
+		result_score = scores[0]/60 + scores[1]/2 + scores[2] / 1.5
+		#result_score = sum(map(lambda x: (x[0] + 1) * x[1], enumerate(scores))) / sum(range(len(scores)))
+
+		result_score += self.getScoreWords(s, key) * 10
+		return result_score
+
+	def getScoreNgrams (self, s, freqs, key):
 		scores = []
 		i = 0
-		rev_key = self.getReversedKey(key) # trva hrozne dlouho
 		for f in freqs:
 			translated_freq = {}
 			scores.append(0)
 			for ngram, ngram_freq in f.items():
-				translated_freq[self.applyKey(ngram, rev_key)] = ngram_freq
+				translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
 			for ngram in list(set(self.frequencies[i].keys()) | set(translated_freq.keys())):
 				#if (self.frequencies[i].has_key(ngram)):
@@ -124,18 +147,12 @@ class Decoder ():
 		# print scores
 		#for i in range(len(scores)):
 		#	scores[i] = 1 - scores[i]
-		if (score_list):
-			return scores
-		#pprint.pprint(scores)
-		#result_score = scores[2]
-		result_score = sum(map(lambda x: (x[0] + 1) * x[1], enumerate(scores))) / sum(range(len(scores)))
-		return result_score
+		return scores
 
 
-	def getScoreWords (self, s, f, key):
-		freqScore = self.getScoreFreq(s, f, key)
+	def getScoreWords (self, s, key):
 		if (self.maxWordLen == 0):
-			return freqScore
+			return 0
 
 		s = self.applyKey(s, key)
 		pts = 0.0
@@ -143,11 +160,11 @@ class Decoder ():
 			for pos in range(len(s) - 1 - length):
 				if (s[pos:pos+length] in self.words):
 					pts += length
-					if (length >= 5):
-						print s[pos:pos+length]
+					#if (length >= 5):
+					#	print s[pos:pos+length]
 
 		pts /= len(s)
-		return freqScore * 0.2 + (pts ** 2) * 0.8
+		return (pts ** 2) * 0.8
 
 	def getPermutation (self, d, num):
 		d = d.copy()
@@ -156,6 +173,9 @@ class Decoder ():
 			b = random.choice(self.alphabet)
 			while b == a:
 				b = random.choice(self.alphabet)
+			# Substituce:
+			#d[a] = b
+			# Permutace:
 			d[a], d[b] = d[b], d[a]
 
 		return d
@@ -194,23 +214,14 @@ class Decoder ():
 		t = time.time()
 		scores = []
 		for m in mutants:
-			result_score = self.getScoreNgrams(s, f, m, score_list=False)
-			#score_list = self.getScoreNgrams(s, f, m, score_list=True)
-			#result_score = 0
-			#if iterations > 60:
-			#	result_score = score_list[0]
-			#if iterations <= 70 and iterations > 30:
-			#	result_score = score_list[1]
-			#if iterations <= 30:
-			#	result_score = score_list[2]
-			#result_score = score_list[2]
+			result_score = self.getScores(s, f, m, score_list=False, iterations = iterations)
 			scores.append(result_score)
 
 		#if iterations in [99, 70,30]:
-		#	print sorted(zip(scores, mutants))[-1][0]
-		#	print self.applyKey(s, sorted(zip(scores, mutants))[-1][1])#[:100]
+		print sorted(zip(scores, mutants))[-1][0]
+		print self.applyKey(s, sorted(zip(scores, mutants))[-1][1])[:180]
 
-		mutants_scored = sorted(zip(scores, mutants))[-10:]
+		mutants_scored = sorted(zip(scores, mutants))[-population:]
 		cur = map(lambda x: x[1], mutants_scored)
 		if (log):
 			print "scoring: ", -(t - time.time())
@@ -220,24 +231,24 @@ class Decoder ():
 
 
 
-lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts. Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range.".upper()
+lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts. Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range."
 d = Decoder()
-#d.loadWords("/home/ja/Programming/dicts/english_words")
+d.loadWords("/usr/share/dict/words")
 #k = dict(zip(d.alphabet, d.alphabet))
 
 #lipsum = "LIVITCSWPIYVEWHEVSRIQMXLEYVEOIEWHRXEXIPFEMVEWHKVSTYLXZIXLIKIIXPIJVSZEYPERRGERIMWQLMGLMXQERIWGPSRIHMXQEREKIETXMJTPRGEVEKEITREWHEXXLEXXMZITWAWSQWXSWEXTVEPMRXRSJGSTVRIEYVIEXCVMUIMWERGMIWXMJMGCSMWXSJOMIQXLIVIQIVIXQSVSTWHKPEGARCSXRWIEVSWIIBXVIZMXFSJXLIKEGAEWHEPSWYSWIWIEVXLISXLIVXLIRGEPIRQIVIIBGIIHMWYPFLEVHEWHYPSRRFQMXLEPPXLIECCIEVEWGISJKTVWMRLIHYSPHXLIQIMYLXSJXLIMWRIGXQEROIVFVIZEVAEKPIEWHXEAMWYEPPXLMWYRMWXSGSWRMHIVEXMSWMGSTPHLEVHPFKPEZINTCMXIVJSVLMRSCMWMSWVIRCIGXMWYMX"
 #random.seed(1)
 
 print lipsum[:100]
-print d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
+print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
 lipsum = d.applyKey(lipsum, d.generateRandomKey())
-print d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
+print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
 print lipsum[:100]
 
-b = d.generateKey(lipsum, iterations=40, log=False)
+b = d.generateKey(lipsum, iterations=100, mutations=20, population=20, log=False)
 for a in b:
-	print d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScoreNgrams(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
-	print d.applyKey(lipsum[:100], a)
+	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
+	print d.applyKey(lipsum[:], a)
 
 # m = 0
 # mk = None
