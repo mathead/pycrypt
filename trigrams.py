@@ -112,8 +112,7 @@ ENGLISH_TRIGRAMS = {
 "RY ":16,
 "REA":15,
 "EVE":15,
-" FR":15,}
-{
+" FR":15,
 "STA":15,
 " WO":15,
 "TE ":15,

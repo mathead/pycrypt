@@ -16,7 +16,11 @@ class Decoder ():
 		ENGLISH_TRIGRAMS[i] /= 10000.0
 	#print sorted(ENGLISH_TRIGRAMS.iteritems(), key=operator.itemgetter(1))
 
-	DEF_PERM_FUNC = lambda x: x**2
+	def DEF_PERM_FUNC(x, iterations=1):
+		#i =  x**((((100-iterations)/100.0)+1)*2)
+		i =  x**2
+		#print iterations, (((100-iterations)/100.0)+1), i
+		return i
 	#DEF_PERM_FUNC = lambda x: (-1/(x-27.0/26.0))/26.0
 
 	def __init__ (self, frequency=ENGLISH_FREQUENCY, frequencies=None):
@@ -33,7 +37,6 @@ class Decoder ():
 		self.maxWordLen = 10
 
 	def getFrequency (self, s):
-		s = s.upper()
 		f = dict.fromkeys(self.alphabet, 0.0)
 		for c in s:
 			if (f.has_key(c)):
@@ -56,7 +59,6 @@ class Decoder ():
 		return d
 
 	def applyKey (self, s, key):
-		s = s.upper()
 		f = ""
 		for c in s:
 			if (key.has_key(c)):
@@ -108,7 +110,8 @@ class Decoder ():
 		result_score = scores[0]/60 + scores[1]/2 + scores[2] / 1.5
 		#result_score = sum(map(lambda x: (x[0] + 1) * x[1], enumerate(scores))) / sum(range(len(scores)))
 
-		result_score += self.getScoreWords(s, key) * 10
+		if iterations < 10:
+			result_score += self.getScoreWords(s, key) * 10
 		return result_score
 
 	def getScoreNgrams (self, s, freqs, key):
@@ -191,9 +194,9 @@ class Decoder ():
 
 		if (cur == None): # nasamplovani
 			cur = []
-			for i in range(population):
+			for i in range(population)*10:
 				cur.append(self.generateRandomKey())
-			cur[9] = dict(zip(self.alphabet, self.alphabet))
+			cur[0] = dict(zip(self.alphabet, self.alphabet))
 
 		if (iterations == 0): # konec
 			return cur
@@ -202,7 +205,7 @@ class Decoder ():
 		mutants = []
 		for c in cur:
 			for m in range(mutations):
-				mutants.append(self.getPermutation(c, int(perm_func(random.random()) * (len(self.baseFrequency) - 1) + 1)))
+				mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
 		if (log):
 			print "mutation: ", -(t - time.time())
 
@@ -231,7 +234,9 @@ class Decoder ():
 
 
 
-lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts. Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range."
+lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts."
+# Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range."
+lipsum = lipsum.upper()
 d = Decoder()
 d.loadWords("/usr/share/dict/words")
 #k = dict(zip(d.alphabet, d.alphabet))
