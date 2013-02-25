@@ -4,6 +4,11 @@ import pprint
 import time
 import trigrams
 import operator
+import pyevolve
+from pyevolve import G1DList
+from pyevolve import GSimpleGA
+from pyevolve import Selectors
+from cProfile import run
 
 class Decoder ():
 	alphabet = string.uppercase
@@ -14,49 +19,20 @@ class Decoder ():
 		ENGLISH_BIGRAMS[i] /= 100
 	for i in ENGLISH_TRIGRAMS.keys():
 		ENGLISH_TRIGRAMS[i] /= 10000.0
-	#print sorted(ENGLISH_TRIGRAMS.iteritems(), key=operator.itemgetter(1))
 
-	def DEF_PERM_FUNC(x, iterations=1):
-		#i =  x**((((100-iterations)/100.0)+1)*2)
-		i =  x**2
-		#print iterations, (((100-iterations)/100.0)+1), i
-		return i
-	#DEF_PERM_FUNC = lambda x: (-1/(x-27.0/26.0))/26.0
-
-	def __init__ (self, frequency=ENGLISH_FREQUENCY, frequencies=None):
+	def __init__ (self, string, frequency=ENGLISH_FREQUENCY, frequencies=None):
 		self.baseFrequency = frequency
 		self.words = None
 		self.maxWordLen = 10
 		self.minWordLen = 3
 		self.frequencies = frequencies
+		self.string = string
 		if (frequencies == None):
 			self.frequencies = [self.baseFrequency, self.ENGLISH_BIGRAMS, self.ENGLISH_TRIGRAMS]
 
 	def loadWords (self, path):
 		self.words = set([line.strip().upper() for line in open(path)])
 		self.maxWordLen = 10
-
-	def getFrequency (self, s):
-		f = dict.fromkeys(self.alphabet, 0.0)
-		for c in s:
-			if (f.has_key(c)):
-				f[c] += 1
-
-		suma = sum(f.values())
-		for i in f:
-			f[i] /= suma
-
-		return f
-
-	def getFrequencies (self, s, length):
-		d = {}
-		for i in range(len(s) - 1 - length):
-			if (d.has_key(s[i:i+length])):
-				d[s[i:i+length]] += 1.0 / len(s)
-			else:
-				d[s[i:i+length]] = 1.0 / len(s)
-
-		return d
 
 	def applyKey (self, s, key):
 		f = ""
@@ -79,189 +55,117 @@ class Decoder ():
 		"".join(shuf)
 		return dict(zip(self.alphabet, shuf))
 
-	def getScore (self, s, f, key): # zatim jednoduse
-		f = self.getFrequency(self.applyKey(s, key))
-		return 1 - sum(map(lambda a: abs(a[0] - a[1]) / 2, zip(f.values(), self.baseFrequency.values())))
-
 	def getScoreFreq (self, s, f, key):
 		d = {}
 		for i, j in key.items():
 			d[j] = f[i]
 		return 1 - sum(map(lambda a: abs(a[0] - a[1]) / 2, zip(d.values(), self.baseFrequency.values())))
 
-	def getScores (self, s, freqs, key, iterations=0, score_list=False):
-		scores = self.getScoreNgrams(s, freqs, key)
-		if (score_list):
-			scores.append(self.getScoreWords(s, key))
-			return scores
-		#pprint.pprint(scores)
-		#result_score = scores[2]
+	def getScoresGlist (self, glist, log=False):
+		return self.getScores(self.glistToKey(glist), log)
+
+	def getScores (self, key, log=False):
+		scores = self.getScoreNgrams(key)
 
 		result_score = 0
-		#if iterations > 80:
-		#	result_score = scores[0]
-		#if iterations <= 60 and iterations > 40:
-		#	result_score = scores[1]
-		#if iterations <= 40 and iterations > 20:
-		#	result_score = scores[2]
-		#if iterations <= 20:
-		#	result_score = self.getScoreWords(s, key) * 100
-		#result_score = score_list[2]
-		result_score = scores[0]/60 + scores[1]/2 + scores[2] / 1.5
-		#result_score = sum(map(lambda x: (x[0] + 1) * x[1], enumerate(scores))) / sum(range(len(scores)))
+		displace_index = 0
+		for letter in d.alphabet:
+			letter_count = 0
+			for key_letter in key.values():
+				if letter == key_letter:
+					letter_count += 1
+			if letter_count > 1:
+				displace_index += letter_count
+		displace_index = 26 - displace_index
+		score_words = self.getScoreWords(key)
+		result_score = scores[0]/40 + scores[1]/2 + scores[2] / 1.4 + displace_index / 26.0
+		result_score += score_words / 4
 
-		if iterations < 10:
-			result_score += self.getScoreWords(s, key) * 10
+		if log == True:
+			print scores, displace_index, score_words
+			print scores[0]/60, scores[1]/2, scores[2] / 1.5, displace_index / 26.0, score_words / 4
+			print result_score
+
 		return result_score
 
-	def getScoreNgrams (self, s, freqs, key):
+	def glistToKey(self, glist):
+		ret = []
+		for i in glist:
+			ret.append(str(unichr(i)))
+		return dict(zip(d.alphabet, ret))
+
+	def getScoreNgrams (self, key):
 		scores = []
 		i = 0
-		for f in freqs:
+		for f in d.frequencies:
 			translated_freq = {}
 			scores.append(0)
 			for ngram, ngram_freq in f.items():
 				translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
 			for ngram in list(set(self.frequencies[i].keys()) | set(translated_freq.keys())):
-				#if (self.frequencies[i].has_key(ngram)):
-				#	base = self.frequencies[i][ngram]
-				#else:
-				#	#continue
-				#	base = 0
-				#if (translated_freq.has_key(ngram)):
-				#	trans = translated_freq[ngram]
-				#else:
-				#	#continue
-				#	trans = 0
-
-				# if (" " in ngram):
-				# 	continue	
-
-				#print (abs(base - trans) / 2), scores[i]
 				if (self.frequencies[i].has_key(ngram)) and (translated_freq.has_key(ngram)):
-					#print ngram, self.frequencies[i][ngram], translated_freq[ngram]* len(s), self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
-					scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
-					# scores[i] += freq * translated_freq[basengram] * 100
-					# if (len(basengram) > 1):
-					# 	print basengram
+					scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(self.string)
 			i += 1
-
-		# print scores
-		#for i in range(len(scores)):
-		#	scores[i] = 1 - scores[i]
 		return scores
 
 
-	def getScoreWords (self, s, key):
+	def getScoreWords (self, key):
 		if (self.maxWordLen == 0):
 			return 0
 
-		s = self.applyKey(s, key)
+		s = self.applyKey(self.string, key)
 		pts = 0.0
 		for length in range(self.minWordLen, self.maxWordLen):
 			for pos in range(len(s) - 1 - length):
 				if (s[pos:pos+length] in self.words):
 					pts += length
-					#if (length >= 5):
-					#	print s[pos:pos+length]
 
 		pts /= len(s)
 		return (pts ** 2) * 0.8
 
-	def getPermutation (self, d, num):
-		d = d.copy()
-		for i in range(num):
-			a = random.choice(self.alphabet)
-			b = random.choice(self.alphabet)
-			while b == a:
-				b = random.choice(self.alphabet)
-			# Substituce:
-			#d[a] = b
-			# Permutace:
-			d[a], d[b] = d[b], d[a]
+lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail."
+#The upper parts are grey and the black under-wing flight feathers contrast with the white coverts. Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range."
 
-		return d
-
-	def generateKey (self, s, population=10, mutations=10, perm_func=DEF_PERM_FUNC, iterations=900, cur=None, log=False, f=None):
-		if (log):
-			print "iterations", iterations
-
-		if (f == None):
-			f = []
-			for i in self.frequencies:
-				f.append(self.getFrequencies(s, len(i.keys()[0])))
-
-		if (cur == None): # nasamplovani
-			cur = []
-			for i in range(population)*10:
-				cur.append(self.generateRandomKey())
-			cur[0] = dict(zip(self.alphabet, self.alphabet))
-
-		if (iterations == 0): # konec
-			return cur
-
-		t = time.time()
-		mutants = []
-		for c in cur:
-			for m in range(mutations):
-				mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
-		if (log):
-			print "mutation: ", -(t - time.time())
-
-		mutants.extend(cur)
-
-		# for m in mutants:
-		# 	print m
-
-		t = time.time()
-		scores = []
-		for m in mutants:
-			result_score = self.getScores(s, f, m, score_list=False, iterations = iterations)
-			scores.append(result_score)
-
-		#if iterations in [99, 70,30]:
-		print sorted(zip(scores, mutants))[-1][0]
-		print self.applyKey(s, sorted(zip(scores, mutants))[-1][1])[:180]
-
-		mutants_scored = sorted(zip(scores, mutants))[-population:]
-		cur = map(lambda x: x[1], mutants_scored)
-		if (log):
-			print "scoring: ", -(t - time.time())
-			print ""
-
-		return self.generateKey(s, population, mutations, perm_func, iterations - 1, cur, log, f)
-
-
-
-lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts."
-# Like many raptors, the female is slightly larger than the male, and can measure up to 90 cm (36 in) long with a wingspan of up to 2.2 m (7 ft), and weigh 4.5 kg (10 lb). The call is a loud goose-like honking. Resident from India and Sri Lanka through southeast Asia to Australia on coasts and major waterways, the White-bellied Sea Eagle breeds and hunts near water, and fish form around half of its diet. Opportunistic, it consumes carrion and a wide variety of animals. Although rated of Least Concern globally, it has declined in parts of southeast Asia such as Thailand, and southeastern Australia. Human disturbance to its habitat is the main threat, both from direct human activity near nests which impacts on breeding success, and from removal of suitable trees for nesting. The White-bellied Sea Eagle is revered by indigenous people in many parts of Australia, and is the subject of various folk tales throughout its range."
-lipsum = lipsum.upper()
-d = Decoder()
-d.loadWords("/usr/share/dict/words")
-#k = dict(zip(d.alphabet, d.alphabet))
-
-#lipsum = "LIVITCSWPIYVEWHEVSRIQMXLEYVEOIEWHRXEXIPFEMVEWHKVSTYLXZIXLIKIIXPIJVSZEYPERRGERIMWQLMGLMXQERIWGPSRIHMXQEREKIETXMJTPRGEVEKEITREWHEXXLEXXMZITWAWSQWXSWEXTVEPMRXRSJGSTVRIEYVIEXCVMUIMWERGMIWXMJMGCSMWXSJOMIQXLIVIQIVIXQSVSTWHKPEGARCSXRWIEVSWIIBXVIZMXFSJXLIKEGAEWHEPSWYSWIWIEVXLISXLIVXLIRGEPIRQIVIIBGIIHMWYPFLEVHEWHYPSRRFQMXLEPPXLIECCIEVEWGISJKTVWMRLIHYSPHXLIQIMYLXSJXLIMWRIGXQEROIVFVIZEVAEKPIEWHXEAMWYEPPXLMWYRMWXSGSWRMHIVEXMSWMGSTPHLEVHPFKPEZINTCMXIVJSVLMRSCMWMSWVIRCIGXMWYMX"
+lipsum = "hereuponlegrandarosewithagraveandstatelyairandbroughtmethebeetlefromaglasscaseinwhichitwasencloseditwasabeautifulscarabaeusandatthattimeunknowntonaturalistsofcourseagreatprizeinascientificpointofviewthereweretworoundblackspotsnearoneextremityofthebackandalongoneneartheotherthescaleswereexceedinglyhardandglossywithalltheappearanceofburnishedgoldtheweightoftheinsectwasveryremarkableandtakingallthingsintoconsiderationicouldhardlyblamejupiterforhisopinionrespectingit"
 #random.seed(1)
 
+lipsum = lipsum.upper()
+d = Decoder(lipsum)
+d.loadWords("/usr/share/dict/words")
+
+d.getScores(dict(zip(d.alphabet, d.alphabet)), log=True)
 print lipsum[:100]
-print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
-lipsum = d.applyKey(lipsum, d.generateRandomKey())
-print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
-print lipsum[:100]
 
-b = d.generateKey(lipsum, iterations=100, mutations=20, population=20, log=False)
-for a in b:
-	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
-	print d.applyKey(lipsum[:], a)
+def callback(ga):
+	if not ga.getCurrentGeneration() % 30:
+		result_genome = ga.bestIndividual()
+		d.getScoresGlist(result_genome, log=True)
+		b = d.glistToKey(result_genome)
+		print d.applyKey(d.string, b)
+	return False
 
-# m = 0
-# mk = None
-# for i in range(1000):
-# 	k = d.generateRandomKey()
-# 	if (d.getScore(lipsum, k) > m):
-# 		mk = k
-# 		m = d.getScore(lipsum, k)
+genome = G1DList.G1DList(26)
+genome.setParams(rangemin=65, rangemax=90)
+genome.evaluator.set(d.getScoresGlist)
+ga = GSimpleGA.GSimpleGA(genome)
+ga.selector.set(Selectors.GTournamentSelector)
 
-# print (m)
-# print d.applyKey(lipsum[:100], mk)
+#for i in range(10):
+#ga.setCrossoverRate(0)
+#ga.setMutationRate(0.05)
+ga.stepCallback.set(callback)
+
+#ga.setPopulationSize(10000)
+#ga.setGenerations(1)
+#ga.evolve(freq_stats=10)
+#
+#ga.setPopulationSize(100)
+ga.setGenerations(1000)
+
+run("ga.evolve(freq_stats=30)")
+
+result_genome = ga.bestIndividual()
+print d.getScoresGlist(result_genome, log=True)
+b = d.glistToKey(result_genome)
+print d.applyKey(d.string, b)
