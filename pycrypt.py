@@ -103,9 +103,8 @@ class Decoder ():
 			for ngram, ngram_freq in f.items():
 				translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
-			for ngram in list(set(self.frequencies[i].keys()) | set(translated_freq.keys())):
-				if (self.frequencies[i].has_key(ngram)) and (translated_freq.has_key(ngram)):
-					scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(self.string)
+			for ngram in list(set(self.frequencies[i].keys()) & set(translated_freq.keys())):
+				scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(self.string)
 			i += 1
 		return scores
 
@@ -161,7 +160,7 @@ ga.stepCallback.set(callback)
 #ga.evolve(freq_stats=10)
 #
 #ga.setPopulationSize(100)
-ga.setGenerations(1000)
+ga.setGenerations(10)
 
 run("ga.evolve(freq_stats=30)")
 
