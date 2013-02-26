@@ -4,6 +4,7 @@ import pprint
 import time
 import trigrams
 import operator
+from cProfile import run
 
 class Decoder ():
 	alphabet = string.uppercase
@@ -67,6 +68,22 @@ class Decoder ():
 				f += c
 		return f
 
+		# return "".join((key[c] if key.has_key(c) else c) for c in s)
+
+		# return string.translate(s, " " * 65 + "".join(j for i, j in sorted(key.items())) + " " * 165)
+
+	def applyKeyBi (self, s, key):
+		try:
+			return key[s[0]], key[s[1]]
+		except:
+			return self.applyKey(s, key)
+
+	def applyKeyTri (self, s, key):
+		try:
+			return key[s[0]], key[s[1]], key[s[2]]
+		except:
+			return self.applyKey(s, key)
+
 	def applyReversedKey (self, s, key):
 		return self.applyKey(s, dict(zip(key.values(), key.keys())))
 
@@ -120,8 +137,18 @@ class Decoder ():
 		for f in freqs:
 			translated_freq = {}
 			scores.append(0)
-			for ngram, ngram_freq in f.items():
-				translated_freq[self.applyKey(ngram, key)] = ngram_freq
+
+			# for ngram, ngram_freq in f.items():
+			# 	translated_freq[self.applyKey(ngram, key)] = ngram_freq
+			if (len(f.keys()[0]) == 3):
+				for ngram, ngram_freq in f.items():
+					translated_freq[self.applyKeyTri(ngram, key)] = ngram_freq
+			elif (len(f.keys()[0]) == 2):
+				for ngram, ngram_freq in f.items():
+					translated_freq[self.applyKeyBi(ngram, key)] = ngram_freq
+			else:
+				for ngram, ngram_freq in f.items():
+					translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
 			for ngram in list(set(self.frequencies[i].keys()) | set(translated_freq.keys())):
 				#if (self.frequencies[i].has_key(ngram)):
@@ -194,7 +221,7 @@ class Decoder ():
 
 		if (cur == None): # nasamplovani
 			cur = []
-			for i in range(population)*10:
+			for i in range(population*10):
 				cur.append(self.generateRandomKey())
 			cur[0] = dict(zip(self.alphabet, self.alphabet))
 
@@ -250,10 +277,10 @@ lipsum = d.applyKey(lipsum, d.generateRandomKey())
 print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
 print lipsum[:100]
 
-b = d.generateKey(lipsum, iterations=100, mutations=20, population=20, log=False)
-for a in b:
-	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
-	print d.applyKey(lipsum[:], a)
+run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=True)")
+# for a in b:
+# 	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
+# 	print d.applyKey(lipsum[:], a)
 
 # m = 0
 # mk = None
