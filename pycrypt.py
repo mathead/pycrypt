@@ -20,15 +20,15 @@ class Decoder ():
 	for i in ENGLISH_TRIGRAMS.keys():
 		ENGLISH_TRIGRAMS[i] /= 10000.0
 
-	def __init__ (self, string, frequency=ENGLISH_FREQUENCY, frequencies=None):
-		self.baseFrequency = frequency
+	def __init__ (self, ciphered_string, ideal_frequencies = [ENGLISH_FREQUENCY, ENGLISH_BIGRAMS, ENGLISH_TRIGRAMS]):
 		self.words = None
 		self.maxWordLen = 10
 		self.minWordLen = 3
-		self.frequencies = frequencies
-		self.string = string
-		if (frequencies == None):
-			self.frequencies = [self.baseFrequency, self.ENGLISH_BIGRAMS, self.ENGLISH_TRIGRAMS]
+		self.text_frequencies = []
+		self.ideal_frequencies = ideal_frequencies
+		for i in range(1,4):
+			self.text_frequencies.append(self.getFrequencies(ciphered_string, i))
+		self.ciphered_string = ciphered_string
 
 	def loadWords (self, path):
 		self.words = set([line.strip().upper() for line in open(path)])
@@ -42,6 +42,16 @@ class Decoder ():
 			else:
 				f += c
 		return f
+
+	def getFrequencies (self, s, length):
+		d = {}
+		for i in range(len(s) - 1 - length):
+			if (d.has_key(s[i:i+length])):
+				d[s[i:i+length]] += 1.0 / len(s)
+			else:
+				d[s[i:i+length]] = 1.0 / len(s)
+
+		return d
 
 	def applyReversedKey (self, s, key):
 		return self.applyKey(s, dict(zip(key.values(), key.keys())))
@@ -96,16 +106,23 @@ class Decoder ():
 
 	def getScoreNgrams (self, key):
 		scores = []
-		i = 0
-		for f in d.frequencies:
+		for i, text_frequency in enumerate(self.text_frequencies):
+			used_ngrams = {}
 			translated_freq = {}
 			scores.append(0)
-			for ngram, ngram_freq in f.items():
-				translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
-			for ngram in list(set(self.frequencies[i].keys()) & set(translated_freq.keys())):
-				scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(self.string)
-			i += 1
+			for ngram, ngram_freq in text_frequency.items():
+				translated_ngram = self.applyKey(ngram, key)
+				if self.ideal_frequencies[i].has_key(translated_ngram):
+					score = self.ideal_frequencies[i][translated_ngram] * ngram_freq * len(self.ciphered_string)
+					if not used_ngrams.has_key(translated_ngram):
+						used_ngrams[translated_ngram] = score
+					else:
+						used_ngrams[translated_ngram] = min(score, used_ngrams[translated_ngram])
+
+			for j in used_ngrams.values():
+				scores[i] += j
+
 		return scores
 
 
@@ -113,7 +130,7 @@ class Decoder ():
 		if (self.maxWordLen == 0):
 			return 0
 
-		s = self.applyKey(self.string, key)
+		s = self.applyKey(self.ciphered_string, key)
 		pts = 0.0
 		for length in range(self.minWordLen, self.maxWordLen):
 			for pos in range(len(s) - 1 - length):
@@ -141,7 +158,7 @@ def callback(ga):
 		result_genome = ga.bestIndividual()
 		d.getScoresGlist(result_genome, log=True)
 		b = d.glistToKey(result_genome)
-		print d.applyKey(d.string, b)
+		print d.applyKey(d.ciphered_string, b)
 	return False
 
 genome = G1DList.G1DList(26)
@@ -160,11 +177,11 @@ ga.stepCallback.set(callback)
 #ga.evolve(freq_stats=10)
 #
 #ga.setPopulationSize(100)
-ga.setGenerations(10)
+ga.setGenerations(100)
 
 run("ga.evolve(freq_stats=30)")
 
 result_genome = ga.bestIndividual()
 print d.getScoresGlist(result_genome, log=True)
 b = d.glistToKey(result_genome)
-print d.applyKey(d.string, b)
+print d.applyKey(d.ciphered_string, b)
