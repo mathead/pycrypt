@@ -124,7 +124,7 @@ class Decoder ():
 		#if iterations <= 20:
 		#	result_score = self.getScoreWords(s, key) * 100
 		#result_score = score_list[2]
-		result_score = scores[0]/60 + scores[1]/2 + scores[2] / 1.5
+		result_score = scores[0] / 60 + scores[1] / 2 + scores[2] / 1.5
 		#result_score = sum(map(lambda x: (x[0] + 1) * x[1], enumerate(scores))) / sum(range(len(scores)))
 
 		if iterations < 10:
@@ -138,19 +138,10 @@ class Decoder ():
 			translated_freq = {}
 			scores.append(0)
 
-			# for ngram, ngram_freq in f.items():
-			# 	translated_freq[self.applyKey(ngram, key)] = ngram_freq
-			if (len(f.keys()[0]) == 3):
-				for ngram, ngram_freq in f.items():
-					translated_freq[self.applyKeyTri(ngram, key)] = ngram_freq
-			elif (len(f.keys()[0]) == 2):
-				for ngram, ngram_freq in f.items():
-					translated_freq[self.applyKeyBi(ngram, key)] = ngram_freq
-			else:
-				for ngram, ngram_freq in f.items():
-					translated_freq[self.applyKey(ngram, key)] = ngram_freq
+			for ngram, ngram_freq in f.items():
+				translated_freq[self.applyKey(ngram, key)] = ngram_freq
 
-			for ngram in list(set(self.frequencies[i].keys()) | set(translated_freq.keys())):
+			for ngram in list(set(self.frequencies[i].keys()) & set(translated_freq.keys())):
 				#if (self.frequencies[i].has_key(ngram)):
 				#	base = self.frequencies[i][ngram]
 				#else:
@@ -166,9 +157,10 @@ class Decoder ():
 				# 	continue	
 
 				#print (abs(base - trans) / 2), scores[i]
-				if (self.frequencies[i].has_key(ngram)) and (translated_freq.has_key(ngram)):
+				# if (self.frequencies[i].has_key(ngram)) and (translated_freq.has_key(ngram)):
 					#print ngram, self.frequencies[i][ngram], translated_freq[ngram]* len(s), self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
-					scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
+				scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
+					# scores[i] += self.frequencies[i][ngram]*translated_freq[ngram]*len(s)
 					# scores[i] += freq * translated_freq[basengram] * 100
 					# if (len(basengram) > 1):
 					# 	print basengram
@@ -210,6 +202,17 @@ class Decoder ():
 
 		return d
 
+	def getAllNearPermutations (self, d):
+		d = d.copy()
+		ret = []
+		for i in range(len(d)):
+			for j in range(i + 1, len(d) - 1):
+				a = d.copy()
+				a[self.alphabet[i]], a[self.alphabet[j]] = a[self.alphabet[j]], a[self.alphabet[i]]
+				ret.append(a)
+
+		return a
+
 	def generateKey (self, s, population=10, mutations=10, perm_func=DEF_PERM_FUNC, iterations=900, cur=None, log=False, f=None):
 		if (log):
 			print "iterations", iterations
@@ -221,7 +224,7 @@ class Decoder ():
 
 		if (cur == None): # nasamplovani
 			cur = []
-			for i in range(population*10):
+			for i in range(population):
 				cur.append(self.generateRandomKey())
 			cur[0] = dict(zip(self.alphabet, self.alphabet))
 
@@ -231,8 +234,12 @@ class Decoder ():
 		t = time.time()
 		mutants = []
 		for c in cur:
-			for m in range(mutations):
-				mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
+			if (iterations > 10):
+				for m in range(mutations):
+					mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
+			else:
+				mutants.extend(self.getAllNearPermutations(c))
+				print mutants
 		if (log):
 			print "mutation: ", -(t - time.time())
 
@@ -268,7 +275,7 @@ d = Decoder()
 d.loadWords("/usr/share/dict/words")
 #k = dict(zip(d.alphabet, d.alphabet))
 
-#lipsum = "LIVITCSWPIYVEWHEVSRIQMXLEYVEOIEWHRXEXIPFEMVEWHKVSTYLXZIXLIKIIXPIJVSZEYPERRGERIMWQLMGLMXQERIWGPSRIHMXQEREKIETXMJTPRGEVEKEITREWHEXXLEXXMZITWAWSQWXSWEXTVEPMRXRSJGSTVRIEYVIEXCVMUIMWERGMIWXMJMGCSMWXSJOMIQXLIVIQIVIXQSVSTWHKPEGARCSXRWIEVSWIIBXVIZMXFSJXLIKEGAEWHEPSWYSWIWIEVXLISXLIVXLIRGEPIRQIVIIBGIIHMWYPFLEVHEWHYPSRRFQMXLEPPXLIECCIEVEWGISJKTVWMRLIHYSPHXLIQIMYLXSJXLIMWRIGXQEROIVFVIZEVAEKPIEWHXEAMWYEPPXLMWYRMWXSGSWRMHIVEXMSWMGSTPHLEVHPFKPEZINTCMXIVJSVLMRSCMWMSWVIRCIGXMWYMX"
+# lipsum = "LIVITCSWPIYVEWHEVSRIQMXLEYVEOIEWHRXEXIPFEMVEWHKVSTYLXZIXLIKIIXPIJVSZEYPERRGERIMWQLMGLMXQERIWGPSRIHMXQEREKIETXMJTPRGEVEKEITREWHEXXLEXXMZITWAWSQWXSWEXTVEPMRXRSJGSTVRIEYVIEXCVMUIMWERGMIWXMJMGCSMWXSJOMIQXLIVIQIVIXQSVSTWHKPEGARCSXRWIEVSWIIBXVIZMXFSJXLIKEGAEWHEPSWYSWIWIEVXLISXLIVXLIRGEPIRQIVIIBGIIHMWYPFLEVHEWHYPSRRFQMXLEPPXLIECCIEVEWGISJKTVWMRLIHYSPHXLIQIMYLXSJXLIMWRIGXQEROIVFVIZEVAEKPIEWHXEAMWYEPPXLMWYRMWXSGSWRMHIVEXMSWMGSTPHLEVHPFKPEZINTCMXIVJSVLMRSCMWMSWVIRCIGXMWYMX"
 #random.seed(1)
 
 print lipsum[:100]
@@ -277,7 +284,8 @@ lipsum = d.applyKey(lipsum, d.generateRandomKey())
 print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
 print lipsum[:100]
 
-run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=True)")
+run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=False)")
+# run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=True)")
 # for a in b:
 # 	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
 # 	print d.applyKey(lipsum[:], a)
