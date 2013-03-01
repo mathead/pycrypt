@@ -234,12 +234,12 @@ class Decoder ():
 		t = time.time()
 		mutants = []
 		for c in cur:
-			if (iterations > 10):
-				for m in range(mutations):
-					mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
-			else:
-				mutants.extend(self.getAllNearPermutations(c))
-				print mutants
+			# if (iterations > 10):
+			for m in range(mutations):
+				mutants.append(self.getPermutation(c, int(perm_func(random.random(), iterations) * (len(self.baseFrequency) - 1) + 1)))
+			# else:
+			# 	mutants.extend(self.getAllNearPermutations(c))
+			# 	print mutants
 		if (log):
 			print "mutation: ", -(t - time.time())
 
@@ -284,11 +284,11 @@ lipsum = d.applyKey(lipsum, d.generateRandomKey())
 print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], dict(zip(d.alphabet, d.alphabet)), score_list=False)
 print lipsum[:100]
 
-run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=False)")
+b = d.generateKey(lipsum, iterations=250, mutations=20, population=20, log=False)
 # run("d.generateKey(lipsum, iterations=10, mutations=20, population=20, log=True)")
-# for a in b:
-# 	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
-# 	print d.applyKey(lipsum[:], a)
+for a in b:
+	print d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=True), d.getScores(lipsum, [d.getFrequencies(lipsum, 1), d.getFrequencies(lipsum, 2), d.getFrequencies(lipsum, 3)], a, score_list=False)
+	print d.applyKey(lipsum[:], a)
 
 # m = 0
 # mk = None
