@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 #  English trigram frequency table
 # 
 #  This table is in the public domain, and is derived from the Brown Corpus.
@@ -7,11 +10,54 @@
 #  Trigrams less frequent than that are omitted.
 # 
 # 
+CZECH_TRIGRAMS = {
+	u"PRO": 21322,
+	u"ENÍ": 11917,
+	u"ÉHO":	9475,
+	u"ICK":	8387,
+	u"EDN":	7429,
+	u"ÁNÍ":	7224,
+	u"POL":	6704,
+	u"VAL":	6256,
+	u"OST": 18722,
+	u"OVA": 11822,
+	u"STI":	9121,
+	u"OVÁ":	8139,
+	u"SKÉ":	7349,
+	u"ENT":	7114,
+	u"SPO":	6686,
+	u"DNÍ":	6251,
+	u"STA": 12746,
+	u"POD": 10168,
+	u"ŘED":	9103,
+	u"PŘI":	7878,
+	u"PŘÍ":	7348,
+	u"STR":	6903,
+	u"VAT":	6489,
+	u"STO":	6189,
+	u"PŘE": 12057,
+	u"KTE":	9603,
+	u"KON":	9017,
+	u"SOU":	7541,
+	u"ODN":	7251,
+	u"OVÉ":	6810,
+	u"NÍM":	6439,
+	u"TAK":	6175,
+	u"TER": 11936,
+	u"PRA":	9521,
+	u"NOS":	8557,
+	u"IST":	7505,
+	u"TEL":	7231,
+	u"NOV":	6783,
+	u"JAK":	6330,
+	u"LOV":	6139
+}
+
 ENGLISH_TRIGRAMS = {
 " TH":230,
 "THE":192,
 "HE ":172,
-" S ":129,
+" S ":129,	
 "ED ":86,
 " OF":81,
 " AN":78,
