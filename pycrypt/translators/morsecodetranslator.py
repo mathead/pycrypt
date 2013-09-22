@@ -78,7 +78,7 @@ class MorseCodeTranslator(translator.Translator):
 		return "/".join([k.get(i, i) for i in cipher.upper()])
 
 	def graphicEncode(self, cipher, gkey={"-": [1], ".": [0]}):
-		"""change gkey dict to other . and - representations (ie. - can be [1, 1, 1])"""
+		"""change gkey dict to other . and - representations (ie. '-' can be [1, 1, 1])"""
 		k = dict(zip(self.key.values(), self.key.keys()))
 		final_array = []
 		for i in utils.line_split(cipher.upper()):

@@ -14,16 +14,22 @@ def line_split(string):
 	else:
 		return string
 
-def array_concat(arrays):
+def array_concat(raw_arrays):
 	"""concats 3d numpy arrays to one big one, lines don't have to be the same size"""
-	maxl = max([len(np.hstack(i)) for i in arrays])
+	arrays = []
+	for i in raw_arrays:
+		h = np.hstack(i)
+		if (h.ndim == 1):
+			arrays.append(h)
+		else:
+			arrays.extend(h)
+
+	maxl = max([len(i) for i in arrays])
 	result = np.zeros([0, maxl])
 	for i in arrays:
 		line = np.hstack(i)
 
 		zero_dim = [maxl - len(line)]
-		if (line.ndim == 2):
-			zero_dim[line.size / len(line), maxl - len(line)]
 
 		a = np.hstack([line, np.zeros(zero_dim)])
 		result = np.vstack([result, a])
