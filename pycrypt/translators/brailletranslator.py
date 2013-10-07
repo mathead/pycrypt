@@ -40,9 +40,9 @@ class BrailleTranslator(translator.Translator):
 
 	def parseInput(self, cipher):
 		cipher = cipher.lower()
-		seq = list('qazwsx')
+		seq = dict(zip(list('qazwsx'), range(6)))
 		cipher.replace(',', ' ')
-		return ["".join(sorted(i, key=lambda a: seq.index(a))) for i in (cipher.split(" "))]
+		return ["".join(sorted(i, key=lambda a: seq.get(a, 10))) for i in (cipher.split(" "))]
 
 	def translate(self, cipher):
 		return "".join([self.key.get(i, i) for i in self.parseInput(cipher)])
