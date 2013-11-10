@@ -72,3 +72,4 @@ def plot_dict(d):
 	plt.bar(range(len(val)), np.array(val.values()))
 	plt.xticks(np.arange(len(val))+0.4, d.keys())
 	plt.show()
+	

@@ -36,4 +36,3 @@ class Translator():
 		return cipher
 	def setKey(self, key):
 		self.key = key
-		

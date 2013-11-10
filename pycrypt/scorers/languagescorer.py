@@ -1,4 +1,5 @@
 import scorer
+from unidecode import unidecode
 
 class LanguageScorer(scorer.Scorer):
 	"""Scorer for languages based on N-grams and words"""
@@ -7,10 +8,14 @@ class LanguageScorer(scorer.Scorer):
 	minWordLen = 3
 	maxWordLen = 10
 	log = False
+	ngramWeights = None
+	wordWeight = 0
 
 	def setIdealNgramFrequencies(self, freqs):
 		self.idealNgramFrequencies = freqs
 		self.ngramLens = [len(i.keys()[0]) for i in freqs]
+		if (self.ngramWeights == None):
+			self.ngramWeights = [1] * len(freqs)
 
 	def loadWordList(self, path, minwordlen = 3, maxwordlen = 10):
 		"""Load words from file, 1 word per line"""
@@ -44,7 +49,7 @@ class LanguageScorer(scorer.Scorer):
 				text_freq = self.getNgramFrequencies(text, self.ngramLens[i])
 
 				for ngram in list(set(ideal_freq.keys()) & set(text_freq.keys())): # get only mutual ngrams
-					scores[i] += ideal_freq[ngram] * text_freq[ngram] * len(text) # weird equation, but it works
+					scores[i] += ideal_freq[ngram] * text_freq[ngram] # weird equation, but it works
 
 
 		return scores
@@ -64,12 +69,13 @@ class LanguageScorer(scorer.Scorer):
 		return (pts ** 2.0) * 0.8
 
 	def getScore(self, text):
+		text = unidecode(unicode(text)).upper()
 		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.getScoreNgrams(text))]
-		word_score = self.getScoreWords(text) * self.word_weight
+		word_score = self.getScoreWords(text) * self.wordWeight
 
-		final_score = ngrams_scores + word_score
+		final_score = sum(ngrams_scores) + word_score
 
-		if (log):
+		if (self.log):
 			print([ngrams_scores, word_score], "Total:", final_score)
 
 		return final_score
