@@ -7,4 +7,5 @@ from brailletranslator import *
 from semaphoretranslator import *
 from binarytranslator import *
 from vigeneretranslator import *
+from polishcrosstranslator import *
 from translator import *
