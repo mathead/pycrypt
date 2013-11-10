@@ -1,8 +1,11 @@
 class Translator():
-	"""Abstract class for translating standard ciphers (ie. Morse Code)"""
+	"""Abstract class for translating standard ciphers (i.e. Morse Code)"""
+
 	key = []
+
 	def translate(self):
 		raise NotImplementedError()
+
 	def interactiveTranslate(self):
 		"""For quick translating with each character typed from the user, type ! to remove last characters"""
 		print "Interactive translation:"
@@ -22,11 +25,15 @@ class Translator():
 	def encode(self):
 		"""Reversed translation"""
 		raise NotImplementedError()
+
 	def graphicEncode(self):
 		"""Return in numpy array for easy plotting"""
 		raise NotImplementedError()
+
 	def parseInput(self, cipher):
 		"""Standardize input to a list, values preferably integers indexed from 0"""
+
 		return cipher
 	def setKey(self, key):
 		self.key = key
+		
