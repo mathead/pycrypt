@@ -23,8 +23,14 @@ class PolishCrossTranslator(translator.Translator):
 
 	def translate(self, cipher):
 		ret = ""
-		for i in cipher:
-			ret += self.key[i[0]] * 3 + i[1] 
+		for i in self.parseInput(cipher):
+			if (len(i) == 2 and self.key.has_key(i[0])):
+				ret += self.alphabet[self.key[i[0]] * 3 + int(i[1]) - 1] # moc velky
+			else:
+				if (i == ""):
+					ret += " "
+				else:
+					ret += i
 		return ret
 
 	def encode(self, cipher):
