@@ -34,16 +34,24 @@ class PolishCrossTranslator(translator.Translator):
 		return ret
 
 	def encode(self, cipher):
-		###################TODO
-		k = dict(zip(self.key.values(), self.key.keys()))
-		return " ".join([k.get(i, i) for i in cipher.upper()])
+		ret = ""
+		key = list('qweasdzxc')
+		for i in cipher:
+			if (not i in self.alphabet):
+				ret += i
+			else:
+				index = self.alphabet.index(i)
+				ret += key[int(index / 3)] + str((index % 3) + 1)
+
+		return ret
 
 	def graphicEncode(self, cipher):
+		"""Splits input to words, draws letters in words over each other"""
 		final_array = []
-		seq = [['q', 'w'], ['a', 's'], ['z', 'x']]
+		seq = [['q', 'w', 'e'], ['a', 's', 'd'], ['z', 'x', 'c']]
 		for line in utils.line_split(cipher):
 			l = []
-			for braille_char in self.encode(line).split(" "):
+			for braille_char in self.encode(line).split(" "): ##############TODO
 				c = np.zeros([3, 2])
 				for i in braille_char:
 					for a, x in enumerate(seq):
