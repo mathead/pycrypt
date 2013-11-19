@@ -37,27 +37,36 @@ class PolishCrossTranslator(translator.Translator):
 		ret = ""
 		key = list('qweasdzxc')
 		for i in cipher:
-			if (not i in self.alphabet):
+			if (not str(i).upper() in self.alphabet):
 				ret += i
 			else:
-				index = self.alphabet.index(i)
-				ret += key[int(index / 3)] + str((index % 3) + 1)
+				index = self.alphabet.index(str(i).upper())
+				ret += key[int(index / 3)] + str((index % 3) + 1) + " "
 
-		return ret
+		return ret[:-1]
 
-	def graphicEncode(self, cipher):
-		"""Splits input to words, draws letters in words over each other"""
+	def graphicEncode(self, cipher, three_by_three_grid=False):
+		"""Splits input to words, draws letters in words over each other.
+		 If three_by_three_grid argument is False, 9x3 grid with individual letters in the polish cross will be used"""
 		final_array = []
 		seq = [['q', 'w', 'e'], ['a', 's', 'd'], ['z', 'x', 'c']]
 		for line in utils.line_split(cipher):
 			l = []
-			for braille_char in self.encode(line).split(" "): ##############TODO
-				c = np.zeros([3, 2])
-				for i in braille_char:
+			for word in self.encode(line).split("  "):
+				if (three_by_three_grid):
+					c = np.zeros([3, 3])
+				else:
+					c = np.zeros([3, 9])
+
+				for polish_char in word.split(" "):
 					for a, x in enumerate(seq):
 						for b, y in enumerate(x):
-							if (i == y):
-								c[a][b] = 1
+							if (y == polish_char[0]):
+								if (three_by_three_grid):
+									c[a][b] = 1
+								else:
+									c[a][b * 3 + int(polish_char[1]) - 1] = 1
+
 				l.append(c)
 			final_array.append(l)
 
