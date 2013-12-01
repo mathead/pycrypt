@@ -1,4 +1,4 @@
-class KeyGenerator():
+class KeyGenerator(object):
 	"""Abstract class for generating keys for specific Translator"""
 
 	def __init__(self, translator=None):
@@ -19,4 +19,5 @@ class KeyGenerator():
 	def translate(self, key):
 		if (self.translator == None):
 			raise AttributeError("No translator set")
+		self.translator.setKey(key)
 		return self.translator.translate()
