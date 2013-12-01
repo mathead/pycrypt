@@ -20,7 +20,6 @@ class SubstitutionKeyGenerator(KeyGenerator):
 		perm = self.alphabet[:]
 		while True:
 			if (_return_list):
-				print "asda"
 				yield perm
 			else:
 				yield dict(zip(self.alphabet, perm))
