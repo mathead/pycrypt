@@ -12,7 +12,7 @@ class KeyGenerator():
 		"""Get all possible keys, python generator preferably"""
 		raise NotImplementedError()
 
-	def mutateKey(self):
+	def mutateKey(self, key):
 		"""For genetics - get similar key"""
 		raise NotImplementedError()
 

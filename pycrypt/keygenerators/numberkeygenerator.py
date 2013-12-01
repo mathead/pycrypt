@@ -10,4 +10,10 @@ class NumberKeyGenerator(KeyGenerator):
 
 	def getRandomKey(self):
 		return random.randint(0, self.max_number - 1)
-		
+
+	def getAllKeys(self):
+		return xrange(self.max_number)
+
+	def mutateKey(self, key, rand_func=lambda x: x ** 6):
+		"""Change rand_func for different transformation after random.random"""
+		return (key + rand_func(random.random())) % self.max_number
