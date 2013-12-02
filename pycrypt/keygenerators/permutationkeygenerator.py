@@ -22,7 +22,7 @@ class PermutationKeyGenerator(SubstitutionKeyGenerator):
 	def lock(self, indx, value):
 		"""Lock an index of the key, so that the other functions return only keys with the set value on the given index"""
 		if (value not in self.alphabet):
-			raise ValueError("Arguments not in alphabet")
+			raise ValueError("Arguments not in sequence")
 		self.locks[self.sequence[indx]] = value
 
 	def unlock(self, indx):

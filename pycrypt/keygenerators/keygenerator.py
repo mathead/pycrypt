@@ -16,8 +16,8 @@ class KeyGenerator(object):
 		"""For genetics - get similar key"""
 		raise NotImplementedError()
 
-	def translate(self, key):
+	def translate(self, key, string=""):
 		if (self.translator == None):
-			raise AttributeError("No translator set")
+			return key
 		self.translator.setKey(key)
 		return self.translator.translate()
