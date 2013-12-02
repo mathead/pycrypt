@@ -6,24 +6,30 @@ import copy
 import random
 
 class SubstitutionKeyGenerator(KeyGenerator):
-	def __init__(self, translator=SubstitutionTranslator(), alphabet=utils.alphabet):
+	def __init__(self, alphabet=utils.alphabet, translator=SubstitutionTranslator()):
 		"""To be used with SubstitutionTranslator"""
 		KeyGenerator.__init__(self, translator)
 		self.alphabet = list(alphabet)
+		self.locks = {}
 
-	def getRandomKey(self):
-		a = self.alphabet[:]
-		random.shuffle(a)
-		return dict(zip(self.alphabet, a))
+	def getRandomKey(self, _return_list=False):
+		values = self._getLockedAlphabet()
+		random.shuffle(values)
+
+		ret = self._addLockedKeys(values)
+		if (_return_list):
+			return zip(*ret)[1]
+		return dict(ret)
 
 	def getAllKeys(self, _return_list=False):
-		"""Returns all keys in lexicographic order (according to indexing in the given alphabet)"""
-		perm = self.alphabet[:]
-		while True:
+		"""Generator of all keys in lexicographic order (according to indexing in the given alphabet)"""
+		perm = self._getLockedAlphabet()
+		while True: # doesn't use itertools because of locking speed optimization
+			ret = self._addLockedKeys(perm)
 			if (_return_list): # for PermutationKeyGenerator
-				yield perm[:]
+				yield zip(*ret)[1]
 			else:
-				yield dict(zip(self.alphabet, perm))
+				yield dict(ret)
 
 			k = None
 			for i in range(len(perm)-1):
@@ -41,11 +47,51 @@ class SubstitutionKeyGenerator(KeyGenerator):
 		"""Swaps random number of elements around"""
 		ret = copy.copy(key)
 
-		for i in range(int(ceil(rand_func(random.random()) * len(ret)))):
-			sample = self.alphabet
-			if (_return_list):
-				sample = range(len(ret))
+		sample = self._getLockedKeys()
+		if (_return_list):
+			sample = range(len(ret))
+			for lock in self.locks:
+				sample.remove(self.alphabet.index(lock))
+
+		for i in range(int(ceil(rand_func(random.random()) * len(self._getLockedAlphabet())))):
+			if (len(sample) < 2):
+				return ret
 			a, b = random.sample(sample, 2)
 			ret[a], ret[b] = ret[b], ret[a]
 
 		return ret
+
+	def lock(self, element, value):
+		"""Lock an element of the key, so that the other functions return only keys with the set value"""
+		if (element not in self.alphabet or value not in self.alphabet):
+			raise ValueError("Arguments not in alphabet")
+		self.locks[element] = value
+
+	def unlock(self, element):
+		return self.locks.pop(element)
+
+	def clearLock(self):
+		self.locks.clear()
+
+	def _getLockedAlphabet(self):
+		values = self.alphabet[:]
+		for i in self.locks:
+			values.remove(self.locks[i])
+
+		return values
+
+	def _getLockedKeys(self):
+		keys = self.alphabet[:]
+		for i in self.locks:
+			keys.remove(i)
+
+		return keys
+
+	def _addLockedKeys(self, values):
+		keys = self._getLockedKeys()
+
+		keys.extend(self.locks.keys())
+		val = values[:]
+		val.extend(self.locks.values())
+
+		return sorted(zip(keys, val), key=lambda x: self.alphabet.index(x[0]))

@@ -9,9 +9,7 @@ class PermutationKeyGenerator(SubstitutionKeyGenerator):
 		self.sequence = list(sequence)
 
 	def getRandomKey(self):
-		a = self.sequence[:]
-		random.shuffle(a)
-		return a
+		return super(PermutationKeyGenerator, self).getRandomKey(True)
 
 	def getAllKeys(self):
 		"""Returns all permutations in lexicographic order (according to indexing in the given sequence)"""
@@ -20,3 +18,12 @@ class PermutationKeyGenerator(SubstitutionKeyGenerator):
 	def mutateKey(self, key, rand_func=lambda x: x ** 5):
 		"""Swaps random number of elements around"""
 		return super(PermutationKeyGenerator, self).mutateKey(key, rand_func, True)
+
+	def lock(self, indx, value):
+		"""Lock an index of the key, so that the other functions return only keys with the set value on the given index"""
+		if (value not in self.alphabet):
+			raise ValueError("Arguments not in alphabet")
+		self.locks[self.sequence[indx]] = value
+
+	def unlock(self, indx):
+		return self.locks.pop(self.sequence[indx])
