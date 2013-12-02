@@ -2,6 +2,7 @@ from keygenerator import *
 from ..translators.substitutiontranslator import *
 from .. import utils
 from math import ceil
+import copy
 import random
 
 class SubstitutionKeyGenerator(KeyGenerator):
@@ -19,8 +20,8 @@ class SubstitutionKeyGenerator(KeyGenerator):
 		"""Returns all keys in lexicographic order (according to indexing in the given alphabet)"""
 		perm = self.alphabet[:]
 		while True:
-			if (_return_list):
-				yield perm
+			if (_return_list): # for PermutationKeyGenerator
+				yield perm[:]
 			else:
 				yield dict(zip(self.alphabet, perm))
 
@@ -38,12 +39,13 @@ class SubstitutionKeyGenerator(KeyGenerator):
 
 	def mutateKey(self, key, rand_func=lambda x: x ** 5, _return_list=False):
 		"""Swaps random number of elements around"""
-		ret = key.copy()
+		ret = copy.copy(key)
+
 		for i in range(int(ceil(rand_func(random.random()) * len(ret)))):
 			sample = self.alphabet
 			if (_return_list):
 				sample = range(len(ret))
-			a, b = random.sample(self.alphabet, 2)
+			a, b = random.sample(sample, 2)
 			ret[a], ret[b] = ret[b], ret[a]
 
 		return ret
