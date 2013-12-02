@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import OrderedDict
 
-alphabet = string.uppercase
-alphabetWithCh = list(string.uppercase)
+alphabet = string.ascii_uppercase
+alphabetWithCh = list(string.ascii_uppercase)
 alphabetWithCh.insert(8, 'CH')
 
 def split(string):
@@ -18,7 +18,7 @@ def line_split(string):
 		return string
 
 def array_concat(raw_arrays):
-	"""concats 2d numpy arrays to one big one, lines don't have to be the same size"""
+	"""Concats 2d numpy arrays to one big one, lines don't have to be the same size"""
 	arrays = []
 	for i in raw_arrays:
 		h = np.hstack(i)
@@ -40,6 +40,7 @@ def array_concat(raw_arrays):
 	return result
 
 def plot_array(arr):
+	"""Plots binary 2d numpy array"""
 	plt.imshow(arr, cmap=plt.cm.binary, interpolation='nearest')
 	plt.xticks([]), plt.yticks([])
 	plt.show()
@@ -68,8 +69,15 @@ def get_frequency(string, freq_alphabet=alphabet, ratio=False):
 	return f
 
 def plot_dict(d):
+	"""Plots bar graph of dict (usually used with get_frequency)"""
 	val = d
 	plt.bar(range(len(val)), np.array(val.values()))
 	plt.xticks(np.arange(len(val))+0.4, d.keys())
 	plt.show()
 	
+def pprint_dict(d):
+	"""Prints dicts keys and values on top of each other"""
+	keys = sorted(d.keys())
+	values = [d[i] for i in keys]
+	print "".join(keys)
+	print "".join(values)
