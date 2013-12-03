@@ -3,8 +3,8 @@ from ..translators.numberedalphabettranslator import *
 import random
 
 class NumberKeyGenerator(KeyGenerator):
-	def __init__(self, translator=NumberedAlphabetTranslator(), max_number=26):
-		"""To be used with NumberedAlphabetTranslator, max_number is -1 for list indexing"""
+	def __init__(self, max_number=26):
+		"""To be used with CaesarTranslator"""
 		KeyGenerator.__init__(self, translator)
 		self.max_number = max_number
 

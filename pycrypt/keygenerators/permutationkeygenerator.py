@@ -5,7 +5,7 @@ import random
 class PermutationKeyGenerator(SubstitutionKeyGenerator):
 	def __init__(self, sequence=utils.alphabet):
 		"""Similar to SubstitutionTranslator, but returns just lists"""
-		SubstitutionKeyGenerator.__init__(self, translator=None, alphabet=sequence)
+		SubstitutionKeyGenerator.__init__(self, alphabet=sequence)
 		self.sequence = list(sequence)
 
 	def getRandomKey(self):

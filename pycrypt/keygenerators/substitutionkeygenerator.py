@@ -6,9 +6,9 @@ import copy
 import random
 
 class SubstitutionKeyGenerator(KeyGenerator):
-	def __init__(self, alphabet=utils.alphabet, translator=SubstitutionTranslator()):
+	def __init__(self, alphabet=utils.alphabet):
 		"""To be used with SubstitutionTranslator"""
-		KeyGenerator.__init__(self, translator)
+		KeyGenerator.__init__(self)
 		self.alphabet = list(alphabet)
 		self.locks = {}
 
