@@ -5,7 +5,7 @@ import random
 class NumberKeyGenerator(KeyGenerator):
 	def __init__(self, max_number=26):
 		"""To be used with CaesarTranslator"""
-		KeyGenerator.__init__(self, translator)
+		KeyGenerator.__init__(self)
 		self.max_number = max_number
 
 	def getRandomKey(self):

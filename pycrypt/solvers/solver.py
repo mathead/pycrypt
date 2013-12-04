@@ -22,9 +22,14 @@ class Solver(object):
 	def getScore(self, key, text=None):
 		if (text and self.translator):
 			self.translator.setKey(key)
-			return self.scorer.getScore(self.translator.translate(text))
-		return self.scorer.getScore(key)
+			text = self.translator.translate(text)
+			return self.scorer.getScore(text), text
+		return self.scorer.getScore(key), text
 
 	def printer(self, key, score, text=None):
 		"""Callback method for every key generated and scored"""
+		pass
+
+	def lastPrint(self, key, score, text=None):
+		"""Callback method for last and best result"""
 		pass
