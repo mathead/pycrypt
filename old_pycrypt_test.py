@@ -140,7 +140,7 @@ lipsum = "The White-bellied Sea Eagle is a large diurnal bird of prey in the fam
 
 lipsum = lipsum.upper()
 d = Decoder(lipsum)
-d.loadWords("/usr/share/dict/words")
+# d.loadWords("/usr/share/dict/words")
 
 d.getScores(dict(zip(d.alphabet, d.alphabet)), log=True)
 print lipsum[:100]

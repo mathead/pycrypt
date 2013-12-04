@@ -3,9 +3,9 @@ from .. import utils
 import random
 
 class PermutationKeyGenerator(SubstitutionKeyGenerator):
-	def __init__(self, sequence=utils.alphabet):
+	def __init__(self, sequence=utils.alphabet, rand_func=lambda x: x ** 5):
 		"""Similar to SubstitutionTranslator, but returns just lists"""
-		SubstitutionKeyGenerator.__init__(self, alphabet=sequence)
+		SubstitutionKeyGenerator.__init__(self, alphabet=sequence, rand_func=rand_func)
 		self.sequence = list(sequence)
 
 	def getRandomKey(self):
@@ -15,9 +15,9 @@ class PermutationKeyGenerator(SubstitutionKeyGenerator):
 		"""Returns all permutations in lexicographic order (according to indexing in the given sequence)"""
 		return super(PermutationKeyGenerator, self).getAllKeys(True)
 
-	def mutateKey(self, key, rand_func=lambda x: x ** 5):
+	def mutateKey(self, key):
 		"""Swaps random number of elements around"""
-		return super(PermutationKeyGenerator, self).mutateKey(key, rand_func, True)
+		return super(PermutationKeyGenerator, self).mutateKey(key, True)
 
 	def lock(self, indx, value):
 		"""Lock an index of the key, so that the other functions return only keys with the set value on the given index"""

@@ -6,11 +6,12 @@ import copy
 import random
 
 class SubstitutionKeyGenerator(KeyGenerator):
-	def __init__(self, alphabet=utils.alphabet):
+	def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6):
 		"""To be used with SubstitutionTranslator"""
 		KeyGenerator.__init__(self)
 		self.alphabet = list(alphabet)
 		self.locks = {}
+		self.rand_func = rand_func
 
 	def getRandomKey(self, _return_list=False):
 		values = self._getLockedAlphabet()
@@ -43,9 +44,21 @@ class SubstitutionKeyGenerator(KeyGenerator):
 			perm[k], perm[l] = perm[l], perm[k]
 			perm = perm[:k+1] + list(reversed(perm[k+1:]))
 
-	def mutateKey(self, key, rand_func=lambda x: x ** 5, _return_list=False):
+	def mutateKey(self, key, _return_list=False):
 		"""Swaps random number of elements around"""
 		ret = copy.copy(key)
+
+		if (_return_list): # if locked key isn't what it is supposed to be
+			for i in self.locks:
+				j = self.alphabet.index(i)
+				a = self.locks[i]
+				b = ret[j]
+				ret[ret.index(self.locks[i])] = b
+				ret[j] = a
+		else:
+			bret = dict(zip(ret.values(), ret.keys()))
+			for i in self.locks:
+				ret[i], ret[bret[self.locks[i]]] = self.locks[i], ret[i]
 
 		sample = self._getLockedKeys()
 		if (_return_list):
@@ -53,7 +66,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
 			for lock in self.locks:
 				sample.remove(self.alphabet.index(lock))
 
-		for i in range(int(ceil(rand_func(random.random()) * len(self._getLockedAlphabet())))):
+		for i in range(int(ceil(self.rand_func(random.random()) * len(self._getLockedAlphabet())))):
 			if (len(sample) < 2):
 				return ret
 			a, b = random.sample(sample, 2)

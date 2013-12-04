@@ -8,7 +8,7 @@ class BruteForceSolver(solver.Solver):
 	"""Tries out all possible solutions"""
 
 	def __init__(self, keyGenerator=NumberKeyGenerator(), translator=CaesarTranslator(), scorer=CzechScorer(), quiet=False):
-		"""keyGenerator can be either KeyGenerator or iterable"""
+		"""keyGenerator can be either KeyGenerator or iterable, to silence text output use quiet"""
 		solver.Solver.__init__(self, keyGenerator, translator, scorer)
 		if (quiet):
 			self.printer = lambda *x: None
@@ -18,7 +18,7 @@ class BruteForceSolver(solver.Solver):
 		best = (0.0, None)
 		all_keys = []
 		gen = self.keyGenerator
-		if (isinstance(self.keyGenerator, KeyGenerator)):
+		if (isinstance(self.keyGenerator, KeyGenerator)): # otherwise iterable
 			gen = self.keyGenerator.getAllKeys()
 
 		for key in gen:
@@ -31,11 +31,11 @@ class BruteForceSolver(solver.Solver):
 
 		self.lastPrint(best[1], best[0], self.getScore(best[1], text)[1])
 		if (return_all_keys):
-			return sorted(all_keys, key=lambda x: x[0])
+			return sorted(all_keys, key=lambda x: -x[0])
 		return best
 
 	def printer(self, key, score, text=None):
-		print ("Score: {:.5f}      Key: {:2}      Text: {}").format(score, key, text[:50])
+		print ("Score: {:.5f}      Key: {:2}      Text: {}").format(score, key, text[:80])
 
 	def lastPrint(self, key, score, text=None):
 		print
@@ -43,6 +43,9 @@ class BruteForceSolver(solver.Solver):
 		print "Score:", score
 		print "Key:", key
 		print "Text:", text[:100]
+
+	def setKeyGenerator(self, keyGenerator):
+		self.keyGenerator = keyGenerator
 
 	def setStartingPoint(self, startingPoint):
 		raise NotImplementedError()

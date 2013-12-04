@@ -19,12 +19,17 @@ class Solver(object):
 		"""Set where the findBestKey method should start (useful for continuing genetics)"""
 		self.startingPoint = startingPoint
 
-	def getScore(self, key, text=None):
+	def getScore(self, key, text=None, return_ciphered=True):
 		if (text and self.translator):
 			self.translator.setKey(key)
 			text = self.translator.translate(text)
-			return self.scorer.getScore(text), text
-		return self.scorer.getScore(key), text
+			if (return_ciphered):
+				return self.scorer.getScore(text), text
+			return self.scorer.getScore(text)
+
+		if (return_ciphered):
+			return self.scorer.getScore(key), text
+		return self.scorer.getScore(key)
 
 	def printer(self, key, score, text=None):
 		"""Callback method for every key generated and scored"""

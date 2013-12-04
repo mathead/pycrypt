@@ -34,9 +34,12 @@ class LanguageScorer(scorer.Scorer):
 		d = {}
 		for i in range(len(text) - 1 - length):
 			if (d.has_key(text[i:i+length])):
-				d[text[i:i+length]] += 1.0 / len(text)
+				d[text[i:i+length]] += 1.0
 			else:
-				d[text[i:i+length]] = 1.0 / len(text)
+				d[text[i:i+length]] = 1.0
+
+		for i in d:
+			d[i] /= len(text)
 
 		return d
 
