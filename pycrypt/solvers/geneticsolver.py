@@ -9,7 +9,7 @@ class GeneticSolver(solver.Solver):
 	"""Uses own genetic algorithm, calls KeyGenerators mutateKey method"""
 
 	def __init__(self, keyGenerator=SubstitutionKeyGenerator(), translator=SubstitutionTranslator(), scorer=CzechScorer(),
-				 population_size=20, mutations=20, random_starting_population=1000, quiet=False):
+				 population_size=10, mutations=40, random_starting_population=1000, quiet=False):
 		"""To silence text output use quiet, other params to tune the genetic algorithm"""
 		solver.Solver.__init__(self, keyGenerator, translator, scorer)
 		if (quiet):
@@ -26,6 +26,7 @@ class GeneticSolver(solver.Solver):
 	def findBestKey(self, text=None, iterations=0):
 		"""Set iterations to 0 for infinite loop"""
 		best = (0.0, None)
+		tried = []
 
 		if (self.startingPoint == None): # fill population from random samples
 			self.bruteForceSolver.setKeyGenerator((self.keyGenerator.getRandomKey() for i in range(self.random_starting_population)))
@@ -34,19 +35,26 @@ class GeneticSolver(solver.Solver):
 			population = zip([self.getScore(i, text, False) for i in self.startingPoint], self.startingPoint)
 			print population
 
+		tried.extend(population)
+
 		try:
 			while (iterations != 1):
 				iterations -= 1
 				
 				next_population = population[:]
 				for sample in population:
-					next_population.extend([(self.getScore(i, text, False), i) for i in (self.keyGenerator.mutateKey(sample[1]) for i in range(self.mutations))])
+					for i in range(self.mutations):
+						mutant = self.keyGenerator.mutateKey(sample[1])
+						while (mutant in tried):
+							mutant = self.keyGenerator.mutateKey(sample[1])
+						tried.append(mutant)
+						next_population.append((self.getScore(mutant, text, False), mutant))
 
 				population = sorted(next_population, key=lambda x: -x[0])[:self.population_size]
 
 				key = population[0][1] # best in current
 				score, ciphered_text = self.getScore(key, text)
-				self.printer(key, score, ciphered_text)
+				self.printer(key, score, ciphered_text, iterations)
 				if (score > best[0]):
 					best = (score, key)
 
@@ -57,9 +65,9 @@ class GeneticSolver(solver.Solver):
 		self.lastPrint(best[1], best[0], self.getScore(best[1], text)[1])
 		return best
 
-	def printer(self, key, score, text=None):
+	def printer(self, key, score, text=None, iterations=None):
 		"""Gets the best sample in population in every cycle"""
-		print ("Score: {:.5f}      Text: {}").format(score, text[:self.printLength])
+		print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
 
 	def lastPrint(self, key, score, text=None):
 		print
