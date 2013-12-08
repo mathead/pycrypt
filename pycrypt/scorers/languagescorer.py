@@ -1,5 +1,6 @@
 import scorer
 from unidecode import unidecode
+import cgetngramfrequencies
 
 class LanguageScorer(scorer.Scorer):
 	"""Scorer for languages based on N-grams and words"""
@@ -31,15 +32,17 @@ class LanguageScorer(scorer.Scorer):
 
 	def getNgramFrequencies(self, text, length):
 		"""Get dictionary of frequencies of N-grams (of given length)"""
+		# return cgetngramfrequencies.getNgramFrequencies(text, length)
 		d = {}
-		for i in range(len(text) - 1 - length):
-			if (d.has_key(text[i:i+length])):
-				d[text[i:i+length]] += 1.0
+		for i in range(len(text) + 1 - length):
+			sub = text[i:i+length]
+			if (d.has_key(sub)):
+				d[sub] += 1
 			else:
-				d[text[i:i+length]] = 1.0
+				d[sub] = 1
 
-		for i in d:
-			d[i] /= len(text)
+		# for i in d:
+		# 	d[i] /= len(text)
 
 		return d
 
@@ -52,8 +55,7 @@ class LanguageScorer(scorer.Scorer):
 				text_freq = self.getNgramFrequencies(text, self.ngramLens[i])
 
 				for ngram in list(set(ideal_freq.keys()) & set(text_freq.keys())): # get only mutual ngrams
-					scores[i] += ideal_freq[ngram] * text_freq[ngram] # weird equation, but it works
-
+					scores[i] += ideal_freq[ngram] * (text_freq[ngram] / float(len(text))) # weird equation, but it works
 
 		return scores
 		
@@ -72,7 +74,7 @@ class LanguageScorer(scorer.Scorer):
 		return (pts ** 2.0) * 0.8
 
 	def getScore(self, text):
-		text = unidecode(unicode(text)).upper()
+		# text = unidecode(unicode(text)).upper()
 		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.getScoreNgrams(text))]
 		word_score = self.getScoreWords(text) * self.wordWeight
 
