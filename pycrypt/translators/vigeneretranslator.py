@@ -4,7 +4,7 @@ from .. import utils
 
 class VigenereTranslator(translator.Translator):
 	"""Adds perpetually key letters to text (Caesar with longer keys)"""
-	def __init__(self, key, ignore_nonletters=True):
+	def __init__(self, key="A", ignore_nonletters=True):
 		self.key = key
 		self.ignore_nonletters = ignore_nonletters
 
@@ -32,3 +32,6 @@ class VigenereTranslator(translator.Translator):
 		ret = self.translate(cipher, False)
 		self.key = subs.encode(self.key)
 		return ret
+
+	# def setKey(self, key):
+	# 	self.key = "".join(key).upper()

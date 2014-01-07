@@ -1,6 +1,6 @@
 import scorer
 from unidecode import unidecode
-import cgetngramfrequencies
+# import cgetngramfrequencies
 
 class LanguageScorer(scorer.Scorer):
 	"""Scorer for languages based on N-grams and words"""
