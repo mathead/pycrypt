@@ -25,8 +25,7 @@ class CombinationKeyGenerator(KeyGenerator):
 		"""Generator of all combinations from shortest to longest from length_range"""
 		ret = []
 		for i in range(self.length_range[0], self.length_range[1] + 1):
-			ret.extend(it.combinations_with_replacement(self.alphabet, i))
-			# ret.extend(it.product([self.alphabet] * i))
+			ret.extend(it.product(*([self.alphabet] * i)))
 		return ret
 
 	def mutateKey(self, key):

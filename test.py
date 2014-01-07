@@ -16,7 +16,7 @@ text = unidecode(u"Na začátku si musíme vytvořit tabulku substitucí, což j
 
 
 c = pc.VigenereTranslator(key="ABC")
-text = c.encode(text[:100])
+text = c.translate(text[:100])
 print text
 
 b = pc.BruteForceSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 3)), translator=pc.VigenereTranslator())
