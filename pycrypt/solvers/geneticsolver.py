@@ -9,13 +9,18 @@ class GeneticSolver(solver.Solver):
 	"""Uses own genetic algorithm, calls KeyGenerators mutateKey method"""
 
 	def __init__(self, keyGenerator=SubstitutionKeyGenerator(), translator=SubstitutionTranslator(), scorer=CzechScorer(),
-				 population_size=10, mutations=40, random_starting_population=1000, quiet=False):
-		"""To silence text output use quiet, other params to tune the genetic algorithm"""
+				 population_size=10, mutations=40, random_starting_population=1000, quiet=False, exclude_tried=False):
+		"""
+		To silence text output use quiet, exclude_tried is for not using same keys more times. 
+		Other params to tune the genetic algorithm
+		"""
+
 		solver.Solver.__init__(self, keyGenerator, translator, scorer)
 		if (quiet):
 			self.printer = lambda *x: None
 			self.lastPrint = lambda *x: None
 
+		self.exclude_tried = exclude_tried
 		self.population_size = population_size
 		self.mutations = mutations
 		self.random_starting_population = random_starting_population
@@ -33,9 +38,9 @@ class GeneticSolver(solver.Solver):
 			population = self.bruteForceSolver.findBestKey(text=text, return_all_keys=True)[:self.population_size]
 		else:
 			population = zip([self.getScore(i, text, False) for i in self.startingPoint], self.startingPoint)
-			print population
 
-		tried.extend(population)
+		if (self.exclude_tried):
+			tried.extend(population)
 
 		try:
 			while (iterations != 1):
@@ -45,9 +50,10 @@ class GeneticSolver(solver.Solver):
 				for sample in population:
 					for i in range(self.mutations):
 						mutant = self.keyGenerator.mutateKey(sample[1])
-						while (mutant in tried):
-							mutant = self.keyGenerator.mutateKey(sample[1])
-						tried.append(mutant)
+						if (self.exclude_tried):
+							while (mutant in tried):
+								mutant = self.keyGenerator.mutateKey(sample[1])
+							tried.append(mutant)
 						next_population.append((self.getScore(mutant, text, False), mutant))
 
 				population = sorted(next_population, key=lambda x: -x[0])[:self.population_size]
@@ -83,3 +89,13 @@ class GeneticSolver(solver.Solver):
 			self.startingPoint = startingPoint
 		else:
 			self.startingPoint = [startingPoint]
+
+	def lock(self, char, key=None):
+		"""Lock character in the keyGenerator for the given key, if None, startingPoint key is used"""
+		if (key==None):
+			if (self.startingPoint):
+				key = self.startingPoint[0]
+			else:
+				key = self.translator.key
+
+		self.keyGenerator.lock(char, key=key)

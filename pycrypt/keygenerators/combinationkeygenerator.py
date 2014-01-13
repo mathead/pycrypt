@@ -32,11 +32,12 @@ class CombinationKeyGenerator(KeyGenerator):
 		"""Changes random number of elements, randomly changes length by 1"""
 		ret = list(key)
 
-		rand = random.randint(1, 4)
-		if (rand == 1 and len(ret)+1 <= self.length_range[1]):
-			ret += random.choice(self.alphabet)
-		elif (rand == 2 and len(ret)-1 >= self.length_range[0]):
-			ret = ret[0:len(ret)-1]
+		for i in range(len(ret)):
+			rand = random.randint(1, 4 * len(ret))
+			if (rand == 1 and len(ret)+1 <= self.length_range[1]):
+				ret += random.choice(self.alphabet)
+			elif (rand == 2 and len(ret)-1 >= self.length_range[0]):
+				ret = ret[0:len(ret)-1]
 
 		for i in range(int(ceil(self.rand_func(random.random()) * len(key)))):
 			ret[random.choice(range(len(ret)))] = random.choice(self.alphabet)

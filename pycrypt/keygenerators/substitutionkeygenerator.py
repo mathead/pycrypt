@@ -74,11 +74,14 @@ class SubstitutionKeyGenerator(KeyGenerator):
 
 		return ret
 
-	def lock(self, element, value):
+	def lock(self, element, value=None, key=None):
 		"""Lock an element of the key, so that the other functions return only keys with the set value"""
-		if (element not in self.alphabet or value not in self.alphabet):
-			raise ValueError("Arguments not in alphabet")
-		self.locks[element] = value
+		if (value):
+			if (element not in self.alphabet or value not in self.alphabet):
+				raise ValueError("Arguments not in alphabet")
+			self.locks[element] = value
+		elif (key):
+			self.locks[dict(zip(key.values(), key.keys()))[element]] = element
 
 	def unlock(self, element):
 		return self.locks.pop(element)
