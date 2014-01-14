@@ -6,6 +6,15 @@
 Welcome to pycrypt's documentation!
 ===================================
 
+Yoyo **yo** , testing reST
+
+term reST
+	reStructuredText
+
+code sample::
+
+	import pycrypt as pc
+
 Contents:
 
 .. toctree::
