@@ -15,7 +15,6 @@ class VigenereTranslator(translator.Translator):
 		result = ""
 		char_num = 0
 		for i in self.parseInput(cipher):
-
 			if (utils.alphabet.find(i) != -1):
 				curr_key_char = utils.alphabet.find(self.key[char_num % len(self.key)]) + int(a_is_one)
 				result += utils.alphabet[(utils.alphabet.find(i) + curr_key_char) % len(utils.alphabet)]
