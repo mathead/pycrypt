@@ -1,0 +1,40 @@
+Getting started
+***************
+
+Getting pycrypt
+===============
+
+Right now, the only way to get pycrypt is to clone it from github `here <https://github.com/PrehistoricTeam/pycrypt/>`_.
+You can clone it with::
+
+	git clone https://github.com/PrehistoricTeam/pycrypt.git
+
+Prerequisites
+=============
+
+Pycrypt was developed on Python 2.7.5, but should work fine on previous versions.
+
+For graphic capabilities NumPy and pyplot are required. You can get these modules with pip:
+
+.. code-block:: bash
+	
+	pip install numpy
+	pip install pyplot
+
+Optional, but recommended modules are unidecode and ipython console for interactive use:
+
+.. code-block:: bash
+
+	pip install unidecode
+	pip install ipython
+
+Running tests
+=============
+
+Pycrypt has some unit tests, you can run them in shell, while in the root directory of pycrypt, with:
+
+.. code-block:: bash
+
+	python -m unittest discover
+
+	
