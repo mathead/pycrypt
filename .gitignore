@@ -47,3 +47,5 @@ docs/_build/html/_sources/pycrypt.translators.txt
 docs/_build/html/_sources/pycrypt.txt
 docs/_build/html/modules.html
 docs/_build/html/py-modindex.html
+docs/_build
+docs/_build/*
