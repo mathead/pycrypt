@@ -12,7 +12,7 @@ You can clone it with::
 Prerequisites
 =============
 
-Pycrypt was developed on Python 2.7.5, but should work fine on previous versions.
+Pycrypt was developed on Python 2.7.5, but should work fine on previous versions as well.
 
 For graphical capabilities, NumPy and pyplot are required. You can get these modules with pip:
 
@@ -40,7 +40,7 @@ Pycrypt has some unit tests, you can run them in shell, while in the root direct
 First script
 ============
 
-To start solving a basic substitution cipher, try out this code:
+To start solving a basic `substitution cipher <http://en.wikipedia.org/wiki/Substitution_cipher>`_, try out this code:
 
 .. code-block:: python
 	

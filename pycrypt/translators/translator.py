@@ -4,6 +4,7 @@ class Translator():
 	key = []
 
 	def translate(self):
+		"""Base method for decoding a cipher"""
 		raise NotImplementedError()
 
 	def interactiveTranslate(self):
@@ -26,13 +27,17 @@ class Translator():
 		"""Reversed translation"""
 		raise NotImplementedError()
 
+	def decode(self, *args):
+		"""Just and alias for translate"""
+		return self.translate(*args)
+
 	def graphicEncode(self):
 		"""Return in numpy array for easy plotting"""
 		raise NotImplementedError()
 
 	def parseInput(self, cipher):
 		"""Standardize input to a list, values preferably integers indexed from 0"""
-
 		return cipher
+
 	def setKey(self, key):
 		self.key = key

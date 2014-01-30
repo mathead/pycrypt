@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Script to convert n-gram files http://ufal.mff.cuni.cz/~hajic/courses/npfl067/stats/czech.html to python dictionaries
+"""
 
 from pprint import pprint
 import pprint

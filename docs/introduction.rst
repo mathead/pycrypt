@@ -4,7 +4,7 @@ Introduction
 What is it for?
 ===============
 
-Pycrypt was originally intended as a substitution cipher solver. When it did succeed, I wanted to bring to project a little bit further. It is meant to be used in cipher games, which often take place outside and at night. Therefore, pycrypt is (or at least is trying to be) fast to get started in, full of existing useful tools and easily extensible.
+Pycrypt was originally intended as a substitution cipher solver. When it did succeed, I wanted to bring to project a little bit further. It is meant to be used in cryptographic games, which often take place outside and at night. Therefore, pycrypt is (or at least is trying to be) fast to get started in, full of existing useful tools and easily extensible.
 
 What does it do?
 ================

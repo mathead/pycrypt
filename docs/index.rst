@@ -6,26 +6,7 @@
 Welcome to pycrypt's documentation!
 ===================================
 
-Yoyo **yo** , testing reST
-
-term reST
-	reStructuredText
-
-code sample::
-
-	import pycrypt as pc
-
-.. note::
-
-	yoyoyo
-
-.. warning::
-
-	noyo
-
-.. seealso::
-	
-	yo!
+Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games!
 
 Contents:
 
