@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='pycrypt',
@@ -11,6 +11,6 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         "numpy",
-        "pyplot",
+        "matplotlib",
     ],
 )
