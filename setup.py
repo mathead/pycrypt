@@ -13,5 +13,6 @@ setup(
 	"mock",
         "numpy",
         "matplotlib",
+	"unidecode",
     ],
 )
