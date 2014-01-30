@@ -9,6 +9,14 @@ scorers Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`scorer` Module
+--------------------
+
+.. automodule:: pycrypt.scorers.scorer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`cgetngramfrequencies` Module
 ----------------------------------
 
@@ -61,14 +69,6 @@ scorers Package
 -----------------------------
 
 .. automodule:: pycrypt.scorers.ngram_converter
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`scorer` Module
---------------------
-
-.. automodule:: pycrypt.scorers.scorer
     :members:
     :undoc-members:
     :show-inheritance:

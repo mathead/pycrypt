@@ -9,6 +9,14 @@ translators Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`translator` Module
+------------------------
+
+.. automodule:: pycrypt.translators.translator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`asciitranslator` Module
 -----------------------------
 
@@ -77,78 +85,6 @@ translators Package
 ------------------------------------
 
 .. automodule:: pycrypt.translators.substitutiontranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_binarytranslator` Module
------------------------------------
-
-.. automodule:: pycrypt.translators.test_binarytranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_brailletranslator` Module
-------------------------------------
-
-.. automodule:: pycrypt.translators.test_brailletranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_caesartranslator` Module
------------------------------------
-
-.. automodule:: pycrypt.translators.test_caesartranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_morsecodetranslator` Module
---------------------------------------
-
-.. automodule:: pycrypt.translators.test_morsecodetranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_polishcrosstranslator` Module
-----------------------------------------
-
-.. automodule:: pycrypt.translators.test_polishcrosstranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_semaphoretranslator` Module
---------------------------------------
-
-.. automodule:: pycrypt.translators.test_semaphoretranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_substitutiontranslator` Module
------------------------------------------
-
-.. automodule:: pycrypt.translators.test_substitutiontranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`test_vigeneretranslator` Module
--------------------------------------
-
-.. automodule:: pycrypt.translators.test_vigeneretranslator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`translator` Module
-------------------------
-
-.. automodule:: pycrypt.translators.translator
     :members:
     :undoc-members:
     :show-inheritance:

@@ -30,12 +30,13 @@ code sample::
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    introduction
    getting_started
+   structure
    translators
-   modules
+   pycrypt
 
 
 

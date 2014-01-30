@@ -10,13 +10,13 @@ class Solver(object):
 		self.translator = translator
 		self.startingPoint = None
 
-	def findBestKey(self, text=None):
+	def solve(self, text=None):
 		"""Find best scored key for the given text (if None, the key itself will be scored)
 		Returns best (score, key) pair"""
 		raise NotImplementedError()
 
 	def setStartingPoint(self, startingPoint):
-		"""Set where the findBestKey method should start (useful for continuing genetics)"""
+		"""Set where the solve method should start (useful for continuing genetics)"""
 		self.startingPoint = startingPoint
 
 	def getScore(self, key, text=None, return_ciphered=True):

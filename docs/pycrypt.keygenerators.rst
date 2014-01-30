@@ -9,18 +9,18 @@ keygenerators Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`combinationkeygenerator` Module
--------------------------------------
-
-.. automodule:: pycrypt.keygenerators.combinationkeygenerator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`keygenerator` Module
 --------------------------
 
 .. automodule:: pycrypt.keygenerators.keygenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`combinationkeygenerator` Module
+-------------------------------------
+
+.. automodule:: pycrypt.keygenerators.combinationkeygenerator
     :members:
     :undoc-members:
     :show-inheritance:

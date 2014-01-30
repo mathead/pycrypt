@@ -28,14 +28,14 @@ class GeneticSolver(solver.Solver):
 
 		self.bruteForceSolver = BruteForceSolver(translator=translator, scorer=scorer, quiet=True) # for scoring population
 
-	def findBestKey(self, text=None, iterations=0):
+	def solve(self, text=None, iterations=0):
 		"""Set iterations to 0 for infinite loop"""
 		best = (0.0, None)
 		tried = []
 
 		if (self.startingPoint == None): # fill population from random samples
 			self.bruteForceSolver.setKeyGenerator((self.keyGenerator.getRandomKey() for i in range(self.random_starting_population)))
-			population = self.bruteForceSolver.findBestKey(text=text, return_all_keys=True)[:self.population_size]
+			population = self.bruteForceSolver.solve(text=text, return_all_keys=True)[:self.population_size]
 		else:
 			population = zip([self.getScore(i, text, False) for i in self.startingPoint], self.startingPoint)
 

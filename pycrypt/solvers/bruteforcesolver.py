@@ -14,7 +14,7 @@ class BruteForceSolver(solver.Solver):
 			self.printer = lambda *x: None
 			self.lastPrint = lambda *x: None
 
-	def findBestKey(self, text=None, return_all_keys=False):
+	def solve(self, text=None, return_all_keys=False):
 		best = (0.0, None)
 		all_keys = []
 		gen = self.keyGenerator

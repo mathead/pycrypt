@@ -3,8 +3,11 @@ Translators
 
 Yoyoyoyo
 
-List of translators
-===================
 
-.. automodule:: pycrypt.translators
-	:members:
+Further reading
+===============
+To check out all translators, see the API
+
+.. seealso::
+	
+	`Translators <pycrypt.translators.html>`_

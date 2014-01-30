@@ -1,18 +1,10 @@
-pycrypt Package
-===============
+API
+===
 
 :mod:`pycrypt` Package
 ----------------------
 
 .. automodule:: pycrypt.__init__
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`utils` Module
--------------------
-
-.. automodule:: pycrypt.utils
     :members:
     :undoc-members:
     :show-inheritance:
@@ -27,3 +19,11 @@ Subpackages
     pycrypt.solvers
     pycrypt.translators
 
+
+:mod:`utils` Module
+-------------------
+
+.. automodule:: pycrypt.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:

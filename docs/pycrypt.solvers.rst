@@ -9,6 +9,14 @@ solvers Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`solver` Module
+--------------------
+
+.. automodule:: pycrypt.solvers.solver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`bruteforcesolver` Module
 ------------------------------
 
@@ -21,14 +29,6 @@ solvers Package
 ---------------------------
 
 .. automodule:: pycrypt.solvers.geneticsolver
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`solver` Module
---------------------
-
-.. automodule:: pycrypt.solvers.solver
     :members:
     :undoc-members:
     :show-inheritance:
