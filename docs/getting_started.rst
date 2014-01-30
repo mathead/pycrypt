@@ -14,7 +14,7 @@ Prerequisites
 
 Pycrypt was developed on Python 2.7.5, but should work fine on previous versions.
 
-For graphic capabilities NumPy and pyplot are required. You can get these modules with pip:
+For graphical capabilities, NumPy and pyplot are required. You can get these modules with pip:
 
 .. code-block:: bash
 	

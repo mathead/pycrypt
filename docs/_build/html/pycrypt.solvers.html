@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>solvers Package &mdash; pycrypt 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'0.1',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="pycrypt 0.1 documentation" href="index.html"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> pycrypt</a>
+        <form class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-it-for">What is it for?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-does-it-do">What does it do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#who-is-it-for">Who is it for?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#getting-pycrypt">Getting pycrypt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="translators.html">Translators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="translators.html#module-pycrypt.translators">List of translators</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="/">pycrypt</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="index.html">Docs</a> &raquo;</li>
+  <li><a href="">solvers Package</a></li>
+  
+</ul>
+<hr/>
+
+          
+  <div class="section" id="solvers-package">
+<h1>solvers Package<a class="headerlink" href="#solvers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">solvers</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-pycrypt.solvers"></span></div>
+<div class="section" id="module-pycrypt.solvers.bruteforcesolver">
+<span id="bruteforcesolver-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">bruteforcesolver</span></tt> Module<a class="headerlink" href="#module-pycrypt.solvers.bruteforcesolver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver">
+<em class="property">class </em><tt class="descclassname">pycrypt.solvers.bruteforcesolver.</tt><tt class="descname">BruteForceSolver</tt><big>(</big><em>keyGenerator=&lt;pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator object at 0xa11fbec&gt;</em>, <em>translator=&lt;pycrypt.translators.caesartranslator.CaesarTranslator instance at 0xa11fc4c&gt;</em>, <em>scorer=&lt;pycrypt.scorers.czechscorer.CzechScorer instance at 0xa11fc6c&gt;</em>, <em>quiet=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.solvers.solver.Solver" title="pycrypt.solvers.solver.Solver"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.solvers.solver.Solver</span></tt></a></p>
+<p>Tries out all possible solutions</p>
+<dl class="method">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver.findBestKey">
+<tt class="descname">findBestKey</tt><big>(</big><em>text=None</em>, <em>return_all_keys=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver.findBestKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver.findBestKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver.lastPrint">
+<tt class="descname">lastPrint</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver.lastPrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver.lastPrint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver.printer">
+<tt class="descname">printer</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver.printer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver.printer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver.setKeyGenerator">
+<tt class="descname">setKeyGenerator</tt><big>(</big><em>keyGenerator</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver.setKeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver.setKeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.bruteforcesolver.BruteForceSolver.setStartingPoint">
+<tt class="descname">setStartingPoint</tt><big>(</big><em>startingPoint</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/bruteforcesolver.html#BruteForceSolver.setStartingPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.bruteforcesolver.BruteForceSolver.setStartingPoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.solvers.geneticsolver">
+<span id="geneticsolver-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">geneticsolver</span></tt> Module<a class="headerlink" href="#module-pycrypt.solvers.geneticsolver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver">
+<em class="property">class </em><tt class="descclassname">pycrypt.solvers.geneticsolver.</tt><tt class="descname">GeneticSolver</tt><big>(</big><em>keyGenerator=&lt;pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator object at 0xa11ffac&gt;</em>, <em>translator=&lt;pycrypt.translators.substitutiontranslator.SubstitutionTranslator instance at 0xa12c04c&gt;</em>, <em>scorer=&lt;pycrypt.scorers.czechscorer.CzechScorer instance at 0x8d4470c&gt;</em>, <em>population_size=10</em>, <em>mutations=40</em>, <em>random_starting_population=1000</em>, <em>quiet=False</em>, <em>exclude_tried=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.solvers.solver.Solver" title="pycrypt.solvers.solver.Solver"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.solvers.solver.Solver</span></tt></a></p>
+<p>Uses own genetic algorithm, calls KeyGenerators mutateKey method</p>
+<dl class="method">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver.findBestKey">
+<tt class="descname">findBestKey</tt><big>(</big><em>text=None</em>, <em>iterations=0</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver.findBestKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver.findBestKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set iterations to 0 for infinite loop</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver.lastPrint">
+<tt class="descname">lastPrint</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver.lastPrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver.lastPrint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver.lock">
+<tt class="descname">lock</tt><big>(</big><em>char</em>, <em>key=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver.lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock character in the keyGenerator for the given key, if None, startingPoint key is used</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver.printer">
+<tt class="descname">printer</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em>, <em>iterations=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver.printer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver.printer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the best sample in population in every cycle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.geneticsolver.GeneticSolver.setStartingPoint">
+<tt class="descname">setStartingPoint</tt><big>(</big><em>startingPoint</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/geneticsolver.html#GeneticSolver.setStartingPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.geneticsolver.GeneticSolver.setStartingPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starting population -&gt; can be list</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.solvers.solver">
+<span id="solver-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">solver</span></tt> Module<a class="headerlink" href="#module-pycrypt.solvers.solver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.solvers.solver.Solver">
+<em class="property">class </em><tt class="descclassname">pycrypt.solvers.solver.</tt><tt class="descname">Solver</tt><big>(</big><em>keyGenerator</em>, <em>translator=None</em>, <em>scorer=&lt;pycrypt.scorers.czechscorer.CzechScorer instance at 0xa11f84c&gt;</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Abstract class for connecting KeyGenerators, Scorers and optionally Translators</p>
+<dl class="method">
+<dt id="pycrypt.solvers.solver.Solver.findBestKey">
+<tt class="descname">findBestKey</tt><big>(</big><em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver.findBestKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver.findBestKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find best scored key for the given text (if None, the key itself will be scored)
+Returns best (score, key) pair</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.solver.Solver.getScore">
+<tt class="descname">getScore</tt><big>(</big><em>key</em>, <em>text=None</em>, <em>return_ciphered=True</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver.getScore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver.getScore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.solver.Solver.lastPrint">
+<tt class="descname">lastPrint</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver.lastPrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver.lastPrint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback method for last and best result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.solver.Solver.printer">
+<tt class="descname">printer</tt><big>(</big><em>key</em>, <em>score</em>, <em>text=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver.printer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver.printer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback method for every key generated and scored</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.solvers.solver.Solver.setStartingPoint">
+<tt class="descname">setStartingPoint</tt><big>(</big><em>startingPoint</em><big>)</big><a class="reference internal" href="_modules/pycrypt/solvers/solver.html#Solver.setStartingPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.solvers.solver.Solver.setStartingPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set where the findBestKey method should start (useful for continuing genetics)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          <footer>
+  
+
+  <hr/>
+
+  <p>
+      &copy; Copyright 2014, Matěj Hlaváček.
+  </p>
+
+  <a href="https://www.github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="http://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+</body>
+</html>

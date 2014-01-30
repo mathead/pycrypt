@@ -15,6 +15,18 @@ code sample::
 
 	import pycrypt as pc
 
+.. note::
+
+	yoyoyo
+
+.. warning::
+
+	noyo
+
+.. seealso::
+	
+	yo!
+
 Contents:
 
 .. toctree::
@@ -22,6 +34,8 @@ Contents:
 
    introduction
    getting_started
+   translators
+   modules
 
 
 
