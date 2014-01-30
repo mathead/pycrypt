@@ -10,6 +10,7 @@ setup(
     description='Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games.',
     long_description=open('README.txt').read(),
     install_requires=[
+	"mock",
         "numpy",
         "matplotlib",
     ],
