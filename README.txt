@@ -1,0 +1,1 @@
+You can check out the docs at http://pycrypt.readthedocs.org/en/latest/
