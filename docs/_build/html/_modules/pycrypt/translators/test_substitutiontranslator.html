@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pycrypt.translators.test_substitutiontranslator &mdash; pycrypt 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'../../../',
+        VERSION:'0.1',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="pycrypt 0.1 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="icon icon-home"> pycrypt</a>
+        <form class="wy-form" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#what-is-it-for">What is it for?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#what-does-it-do">What does it do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#who-is-it-for">Who is it for?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html#getting-pycrypt">Getting pycrypt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../translators.html">Translators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../translators.html#module-pycrypt.translators">List of translators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../pycrypt.html">pycrypt Package</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="/">pycrypt</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="../../../index.html">Docs</a> &raquo;</li>
+  <li><a href="">pycrypt.translators.test_substitutiontranslator</a></li>
+  
+</ul>
+<hr/>
+
+          
+  <h1>Source code for pycrypt.translators.test_substitutiontranslator</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">substitutiontranslator</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">utils</span>
+
+<div class="viewcode-block" id="TestSubstitutionTranslator"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator">[docs]</a><span class="k">class</span> <span class="nc">TestSubstitutionTranslator</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestSubstitutionTranslator.setUp"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ST</span> <span class="o">=</span> <span class="n">SubstitutionTranslator</span><span class="p">()</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">alphabet</span><span class="p">))</span>
+        <span class="n">key</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="s">&#39;B&#39;</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;C&quot;</span><span class="p">,</span> <span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="s">&quot;B&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">setKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestSubstitutionTranslator.test_translate"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator.test_translate">[docs]</a>    <span class="k">def</span> <span class="nf">test_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    	<span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">&quot;ab c&quot;</span><span class="p">),</span> <span class="s">&quot;CA B&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestSubstitutionTranslator.test_encode"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator.test_encode">[docs]</a>    <span class="k">def</span> <span class="nf">test_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    	<span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">),</span> <span class="s">&quot;BCA&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestSubstitutionTranslator.test_parseInput"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator.test_parseInput">[docs]</a>    <span class="k">def</span> <span class="nf">test_parseInput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    	<span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">parseInput</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">),</span> <span class="s">&quot;ABC&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestSubstitutionTranslator.test_setKey"><a class="viewcode-back" href="../../../pycrypt.translators.html#pycrypt.translators.test_substitutiontranslator.TestSubstitutionTranslator.test_setKey">[docs]</a>    <span class="k">def</span> <span class="nf">test_setKey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">alphabet</span><span class="p">))</span>
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          <footer>
+  
+
+  <hr/>
+
+  <p>
+      &copy; Copyright 2014, Matěj Hlaváček.
+  </p>
+
+  <a href="https://www.github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="http://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+</body>
+</html>

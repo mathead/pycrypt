@@ -1,0 +1,303 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>keygenerators Package &mdash; pycrypt 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'0.1',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="pycrypt 0.1 documentation" href="index.html"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> pycrypt</a>
+        <form class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-it-for">What is it for?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-does-it-do">What does it do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#who-is-it-for">Who is it for?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#getting-pycrypt">Getting pycrypt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="translators.html">Translators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="translators.html#module-pycrypt.translators">List of translators</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="/">pycrypt</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="index.html">Docs</a> &raquo;</li>
+  <li><a href="">keygenerators Package</a></li>
+  
+</ul>
+<hr/>
+
+          
+  <div class="section" id="keygenerators-package">
+<h1>keygenerators Package<a class="headerlink" href="#keygenerators-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">keygenerators</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-pycrypt.keygenerators"></span></div>
+<div class="section" id="module-pycrypt.keygenerators.combinationkeygenerator">
+<span id="combinationkeygenerator-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">combinationkeygenerator</span></tt> Module<a class="headerlink" href="#module-pycrypt.keygenerators.combinationkeygenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator">
+<em class="property">class </em><tt class="descclassname">pycrypt.keygenerators.combinationkeygenerator.</tt><tt class="descname">CombinationKeyGenerator</tt><big>(</big><em>alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'</em>, <em>rand_func=&lt;function &lt;lambda&gt; at 0xa1275dc&gt;</em>, <em>length_range=(1</em>, <em>6)</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/combinationkeygenerator.html#CombinationKeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.keygenerators.keygenerator.KeyGenerator" title="pycrypt.keygenerators.keygenerator.KeyGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.keygenerators.keygenerator.KeyGenerator</span></tt></a></p>
+<dl class="method">
+<dt id="pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.getAllKeys">
+<tt class="descname">getAllKeys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/combinationkeygenerator.html#CombinationKeyGenerator.getAllKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.getAllKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of all combinations from shortest to longest from length_range</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.getRandomKey">
+<tt class="descname">getRandomKey</tt><big>(</big><em>length=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/combinationkeygenerator.html#CombinationKeyGenerator.getRandomKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.getRandomKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>If length is None, random from range is set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.mutateKey">
+<tt class="descname">mutateKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/combinationkeygenerator.html#CombinationKeyGenerator.mutateKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.combinationkeygenerator.CombinationKeyGenerator.mutateKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes random number of elements, randomly changes length by 1</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.keygenerators.keygenerator">
+<span id="keygenerator-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">keygenerator</span></tt> Module<a class="headerlink" href="#module-pycrypt.keygenerators.keygenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.keygenerators.keygenerator.KeyGenerator">
+<em class="property">class </em><tt class="descclassname">pycrypt.keygenerators.keygenerator.</tt><tt class="descname">KeyGenerator</tt><a class="reference internal" href="_modules/pycrypt/keygenerators/keygenerator.html#KeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.keygenerator.KeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Abstract class for generating keys for specific Translator</p>
+<dl class="method">
+<dt id="pycrypt.keygenerators.keygenerator.KeyGenerator.getAllKeys">
+<tt class="descname">getAllKeys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/keygenerator.html#KeyGenerator.getAllKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.keygenerator.KeyGenerator.getAllKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all possible keys, python generator preferably</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.keygenerator.KeyGenerator.getRandomKey">
+<tt class="descname">getRandomKey</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/keygenerator.html#KeyGenerator.getRandomKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.keygenerator.KeyGenerator.getRandomKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random key i.e. for starting genetic population</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.keygenerator.KeyGenerator.mutateKey">
+<tt class="descname">mutateKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/keygenerator.html#KeyGenerator.mutateKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.keygenerator.KeyGenerator.mutateKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>For genetics - get similar key</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.keygenerators.numberkeygenerator">
+<span id="numberkeygenerator-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">numberkeygenerator</span></tt> Module<a class="headerlink" href="#module-pycrypt.keygenerators.numberkeygenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator">
+<em class="property">class </em><tt class="descclassname">pycrypt.keygenerators.numberkeygenerator.</tt><tt class="descname">NumberKeyGenerator</tt><big>(</big><em>max_number=26</em>, <em>rand_func=&lt;function &lt;lambda&gt; at 0xa07aed4&gt;</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/numberkeygenerator.html#NumberKeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.keygenerators.keygenerator.KeyGenerator" title="pycrypt.keygenerators.keygenerator.KeyGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.keygenerators.keygenerator.KeyGenerator</span></tt></a></p>
+<dl class="method">
+<dt id="pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.getAllKeys">
+<tt class="descname">getAllKeys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/numberkeygenerator.html#NumberKeyGenerator.getAllKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.getAllKeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.getRandomKey">
+<tt class="descname">getRandomKey</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/numberkeygenerator.html#NumberKeyGenerator.getRandomKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.getRandomKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.mutateKey">
+<tt class="descname">mutateKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/numberkeygenerator.html#NumberKeyGenerator.mutateKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.numberkeygenerator.NumberKeyGenerator.mutateKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change rand_func for different transformation number after random.random</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.keygenerators.permutationkeygenerator">
+<span id="permutationkeygenerator-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">permutationkeygenerator</span></tt> Module<a class="headerlink" href="#module-pycrypt.keygenerators.permutationkeygenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator">
+<em class="property">class </em><tt class="descclassname">pycrypt.keygenerators.permutationkeygenerator.</tt><tt class="descname">PermutationKeyGenerator</tt><big>(</big><em>sequence='ABCDEFGHIJKLMNOPQRSTUVWXYZ'</em>, <em>rand_func=&lt;function &lt;lambda&gt; at 0xa1273e4&gt;</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator" title="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator</span></tt></a></p>
+<dl class="method">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.getAllKeys">
+<tt class="descname">getAllKeys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator.getAllKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.getAllKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all permutations in lexicographic order (according to indexing in the given sequence)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.getRandomKey">
+<tt class="descname">getRandomKey</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator.getRandomKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.getRandomKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.lock">
+<tt class="descname">lock</tt><big>(</big><em>indx</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator.lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock an index of the key, so that the other functions return only keys with the set value on the given index</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.mutateKey">
+<tt class="descname">mutateKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator.mutateKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.mutateKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swaps random number of elements around</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.unlock">
+<tt class="descname">unlock</tt><big>(</big><em>indx</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/permutationkeygenerator.html#PermutationKeyGenerator.unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.permutationkeygenerator.PermutationKeyGenerator.unlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycrypt.keygenerators.substitutionkeygenerator">
+<span id="substitutionkeygenerator-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">substitutionkeygenerator</span></tt> Module<a class="headerlink" href="#module-pycrypt.keygenerators.substitutionkeygenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator">
+<em class="property">class </em><tt class="descclassname">pycrypt.keygenerators.substitutionkeygenerator.</tt><tt class="descname">SubstitutionKeyGenerator</tt><big>(</big><em>alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'</em>, <em>rand_func=&lt;function &lt;lambda&gt; at 0xa127144&gt;</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycrypt.keygenerators.keygenerator.KeyGenerator" title="pycrypt.keygenerators.keygenerator.KeyGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pycrypt.keygenerators.keygenerator.KeyGenerator</span></tt></a></p>
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.clearLock">
+<tt class="descname">clearLock</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.clearLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.clearLock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.getAllKeys">
+<tt class="descname">getAllKeys</tt><big>(</big><em>_return_list=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.getAllKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.getAllKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of all keys in lexicographic order (according to indexing in the given alphabet)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.getRandomKey">
+<tt class="descname">getRandomKey</tt><big>(</big><em>_return_list=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.getRandomKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.getRandomKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.lock">
+<tt class="descname">lock</tt><big>(</big><em>element</em>, <em>value=None</em>, <em>key=None</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock an element of the key, so that the other functions return only keys with the set value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.mutateKey">
+<tt class="descname">mutateKey</tt><big>(</big><em>key</em>, <em>_return_list=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.mutateKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.mutateKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swaps random number of elements around</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.unlock">
+<tt class="descname">unlock</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="_modules/pycrypt/keygenerators/substitutionkeygenerator.html#SubstitutionKeyGenerator.unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.keygenerators.substitutionkeygenerator.SubstitutionKeyGenerator.unlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          <footer>
+  
+
+  <hr/>
+
+  <p>
+      &copy; Copyright 2014, Matěj Hlaváček.
+  </p>
+
+  <a href="https://www.github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="http://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+</body>
+</html>

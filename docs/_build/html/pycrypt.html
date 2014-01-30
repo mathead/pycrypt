@@ -1,0 +1,261 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pycrypt Package &mdash; pycrypt 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:'',
+        VERSION:'0.1',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="pycrypt 0.1 documentation" href="index.html"/>
+        <link rel="up" title="API" href="modules.html"/>
+        <link rel="next" title="keygenerators Package" href="pycrypt.keygenerators.html"/>
+        <link rel="prev" title="API" href="modules.html"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> pycrypt</a>
+        <form class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-it-for">What is it for?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-does-it-do">What does it do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#who-is-it-for">Who is it for?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#getting-pycrypt">Getting pycrypt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="translators.html">Translators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="translators.html#module-pycrypt.translators">List of translators</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">pycrypt Package</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="/">pycrypt</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="index.html">Docs</a> &raquo;</li>
+  <li><a href="">pycrypt Package</a></li>
+  
+</ul>
+<hr/>
+
+          
+  <div class="section" id="pycrypt-package">
+<h1>pycrypt Package<a class="headerlink" href="#pycrypt-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">pycrypt</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-pycrypt.__init__"></span></div>
+<div class="section" id="module-pycrypt.utils">
+<span id="utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#module-pycrypt.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pycrypt.utils.array_concat">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">array_concat</tt><big>(</big><em>raw_arrays</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#array_concat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.array_concat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concats 2d numpy arrays to one big one, lines don&#8217;t have to be the same size</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.get_frequency">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">get_frequency</tt><big>(</big><em>string</em>, <em>freq_alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'</em>, <em>ratio=False</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#get_frequency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.get_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count frequency of given alphabet, if None, count every char. Set ratio True to divide by length</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.line_split">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">line_split</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#line_split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.line_split" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.plot_array">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">plot_array</tt><big>(</big><em>arr</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#plot_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.plot_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots binary 2d numpy array</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.plot_dict">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">plot_dict</tt><big>(</big><em>d</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#plot_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.plot_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots bar graph of dict (usually used with get_frequency)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.pprint_dict">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">pprint_dict</tt><big>(</big><em>d</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#pprint_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.pprint_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints dicts keys and values on top of each other</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycrypt.utils.split">
+<tt class="descclassname">pycrypt.utils.</tt><tt class="descname">split</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/pycrypt/utils.html#split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pycrypt.utils.split" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pycrypt.keygenerators.html">keygenerators Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#id1"><tt class="docutils literal"><span class="pre">keygenerators</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#module-pycrypt.keygenerators.combinationkeygenerator"><tt class="docutils literal"><span class="pre">combinationkeygenerator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#module-pycrypt.keygenerators.keygenerator"><tt class="docutils literal"><span class="pre">keygenerator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#module-pycrypt.keygenerators.numberkeygenerator"><tt class="docutils literal"><span class="pre">numberkeygenerator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#module-pycrypt.keygenerators.permutationkeygenerator"><tt class="docutils literal"><span class="pre">permutationkeygenerator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.keygenerators.html#module-pycrypt.keygenerators.substitutionkeygenerator"><tt class="docutils literal"><span class="pre">substitutionkeygenerator</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pycrypt.scorers.html">scorers Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#id1"><tt class="docutils literal"><span class="pre">scorers</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#cgetngramfrequencies-module"><tt class="docutils literal"><span class="pre">cgetngramfrequencies</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.czechfrequencies"><tt class="docutils literal"><span class="pre">czechfrequencies</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.czechscorer"><tt class="docutils literal"><span class="pre">czechscorer</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.englishfrequencies"><tt class="docutils literal"><span class="pre">englishfrequencies</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.englishscorer"><tt class="docutils literal"><span class="pre">englishscorer</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.languagescorer"><tt class="docutils literal"><span class="pre">languagescorer</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#ngram-converter-module"><tt class="docutils literal"><span class="pre">ngram_converter</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.scorers.html#module-pycrypt.scorers.scorer"><tt class="docutils literal"><span class="pre">scorer</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pycrypt.solvers.html">solvers Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.solvers.html#id1"><tt class="docutils literal"><span class="pre">solvers</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.solvers.html#module-pycrypt.solvers.bruteforcesolver"><tt class="docutils literal"><span class="pre">bruteforcesolver</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.solvers.html#module-pycrypt.solvers.geneticsolver"><tt class="docutils literal"><span class="pre">geneticsolver</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.solvers.html#module-pycrypt.solvers.solver"><tt class="docutils literal"><span class="pre">solver</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pycrypt.translators.html">translators Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#id1"><tt class="docutils literal"><span class="pre">translators</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.asciitranslator"><tt class="docutils literal"><span class="pre">asciitranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.binarytranslator"><tt class="docutils literal"><span class="pre">binarytranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.brailletranslator"><tt class="docutils literal"><span class="pre">brailletranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.caesartranslator"><tt class="docutils literal"><span class="pre">caesartranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.morsecodetranslator"><tt class="docutils literal"><span class="pre">morsecodetranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.numberedalphabettranslator"><tt class="docutils literal"><span class="pre">numberedalphabettranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.polishcrosstranslator"><tt class="docutils literal"><span class="pre">polishcrosstranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.semaphoretranslator"><tt class="docutils literal"><span class="pre">semaphoretranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.substitutiontranslator"><tt class="docutils literal"><span class="pre">substitutiontranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_binarytranslator"><tt class="docutils literal"><span class="pre">test_binarytranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_brailletranslator"><tt class="docutils literal"><span class="pre">test_brailletranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_caesartranslator"><tt class="docutils literal"><span class="pre">test_caesartranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_morsecodetranslator"><tt class="docutils literal"><span class="pre">test_morsecodetranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_polishcrosstranslator"><tt class="docutils literal"><span class="pre">test_polishcrosstranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_semaphoretranslator"><tt class="docutils literal"><span class="pre">test_semaphoretranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_substitutiontranslator"><tt class="docutils literal"><span class="pre">test_substitutiontranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.test_vigeneretranslator"><tt class="docutils literal"><span class="pre">test_vigeneretranslator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.translator"><tt class="docutils literal"><span class="pre">translator</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycrypt.translators.html#module-pycrypt.translators.vigeneretranslator"><tt class="docutils literal"><span class="pre">vigeneretranslator</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          <footer>
+  
+    <div class="rst-footer-buttons">
+      
+        <a href="pycrypt.keygenerators.html" class="btn btn-neutral float-right" title="keygenerators Package"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <p>
+      &copy; Copyright 2014, Matěj Hlaváček.
+  </p>
+
+  <a href="https://www.github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="http://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+</body>
+</html>
