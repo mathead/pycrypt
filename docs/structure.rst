@@ -6,11 +6,11 @@ Class diagram
 
 Pycrypt's overall structure consist of 4 main parts. But first, let's take a look at the UML diagram:
 
-.. figure::  diagram.png
+.. figure::  _static/diagram.png
    :align:   center
    :target: `big_diagram`_
 
-.. _big_diagram: diagram.png
+.. _big_diagram: _static/diagram.png
 
 .. warning::
 

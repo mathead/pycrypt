@@ -6,7 +6,7 @@
 Welcome to pycrypt's documentation!
 ===================================
 
-Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games!
+Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games.
 
 Contents:
 
@@ -17,6 +17,8 @@ Contents:
    getting_started
    structure
    translators
+   keygenerators
+   scorers
    pycrypt
 
 

@@ -22,14 +22,14 @@ class BruteForceSolver(solver.Solver):
 			gen = self.keyGenerator.getAllKeys()
 
 		for key in gen:
-			score, ciphered_text = self.getScore(key, text)
+			score, ciphered_text = self.score(key, text)
 			if (return_all_keys):
 				all_keys.append((score, key))
 			self.printer(key, score, ciphered_text)
 			if (score > best[0]):
 				best = (score, key)
 
-		self.lastPrint(best[1], best[0], self.getScore(best[1], text)[1])
+		self.lastPrint(best[1], best[0], self.score(best[1], text)[1])
 		if (return_all_keys):
 			return sorted(all_keys, key=lambda x: -x[0])
 		return best

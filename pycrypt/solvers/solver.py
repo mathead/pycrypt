@@ -19,17 +19,17 @@ class Solver(object):
 		"""Set where the solve method should start (useful for continuing genetics)"""
 		self.startingPoint = startingPoint
 
-	def getScore(self, key, text=None, return_ciphered=True):
+	def score(self, key, text=None, return_ciphered=True):
 		if (text and self.translator):
 			self.translator.setKey(key)
 			text = self.translator.translate(text)
 			if (return_ciphered):
-				return self.scorer.getScore(text), text
-			return self.scorer.getScore(text)
+				return self.scorer.score(text), text
+			return self.scorer.score(text)
 
 		if (return_ciphered):
-			return self.scorer.getScore(key), text
-		return self.scorer.getScore(key)
+			return self.scorer.score(key), text
+		return self.scorer.score(key)
 
 	def printer(self, key, score, text=None):
 		"""Callback method for every key generated and scored"""

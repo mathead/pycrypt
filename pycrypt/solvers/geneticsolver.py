@@ -37,7 +37,7 @@ class GeneticSolver(solver.Solver):
 			self.bruteForceSolver.setKeyGenerator((self.keyGenerator.getRandomKey() for i in range(self.random_starting_population)))
 			population = self.bruteForceSolver.solve(text=text, return_all_keys=True)[:self.population_size]
 		else:
-			population = zip([self.getScore(i, text, False) for i in self.startingPoint], self.startingPoint)
+			population = zip([self.score(i, text, False) for i in self.startingPoint], self.startingPoint)
 
 		if (self.exclude_tried):
 			tried.extend(population)
@@ -54,12 +54,12 @@ class GeneticSolver(solver.Solver):
 							while (mutant in tried):
 								mutant = self.keyGenerator.mutateKey(sample[1])
 							tried.append(mutant)
-						next_population.append((self.getScore(mutant, text, False), mutant))
+						next_population.append((self.score(mutant, text, False), mutant))
 
 				population = sorted(next_population, key=lambda x: -x[0])[:self.population_size]
 
 				key = population[0][1] # best in current
-				score, ciphered_text = self.getScore(key, text)
+				score, ciphered_text = self.score(key, text)
 				self.printer(key, score, ciphered_text, iterations)
 				if (score > best[0]):
 					best = (score, key)
@@ -68,7 +68,7 @@ class GeneticSolver(solver.Solver):
 			print "Evolution interrupted! Setting starting point to continue"
 			self.startingPoint = [best[1]]
 
-		self.lastPrint(best[1], best[0], self.getScore(best[1], text)[1])
+		self.lastPrint(best[1], best[0], self.score(best[1], text)[1])
 		return best
 
 	def printer(self, key, score, text=None, iterations=None):

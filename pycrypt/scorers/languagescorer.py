@@ -46,7 +46,7 @@ class LanguageScorer(scorer.Scorer):
 
 		return d
 
-	def getScoreNgrams(self, text):
+	def scoreNgrams(self, text):
 		scores = []
 		for i, ideal_freq in enumerate(self.idealNgramFrequencies):
 			scores.append(0.0)
@@ -59,7 +59,7 @@ class LanguageScorer(scorer.Scorer):
 
 		return scores
 		
-	def getScoreWords(self, text):
+	def scoreWords(self, text):
 		if (self.maxWordLen == 0 or self.words == None):
 			return 0
 
@@ -73,10 +73,10 @@ class LanguageScorer(scorer.Scorer):
 		pts /= len(s)
 		return (pts ** 2.0) * 0.8
 
-	def getScore(self, text):
-		# text = unidecode(unicode(text)).upper()
-		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.getScoreNgrams(text))]
-		word_score = self.getScoreWords(text) * self.wordWeight
+	def score(self, text):
+		text = unidecode(unicode(text)).upper()
+		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.scoreNgrams(text))]
+		word_score = self.scoreWords(text) * self.wordWeight
 
 		final_score = sum(ngrams_scores) + word_score
 
