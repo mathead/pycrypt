@@ -19,6 +19,7 @@ Contents:
    translators
    keygenerators
    scorers
+   solvers
    pycrypt
 
 

@@ -3,7 +3,7 @@ Translators
 
 Translators take care of translating to and from a specific cipher. There are some (over 10) already included in pycrypt.
 
-Basic Usage
+Basic usage
 ===========
 
 Let's take a look at decoding a `Caesar cipher <http://en.wikipedia.org/wiki/Caesar_cipher>`_ with alphabet shift of 1:
@@ -71,7 +71,7 @@ All you have to do when inheriting from ``Translator`` is to implement the ``tra
 
 Further reading
 ===============
-To check out all Translators, see the API
+To check out all Translators, see the API:
 
 .. seealso::
 	
