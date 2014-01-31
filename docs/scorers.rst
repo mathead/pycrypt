@@ -33,7 +33,9 @@ If you want a ``LanguageScorer``, you'll need some frequency statistics, but fir
 
 As you can see, all you have to do is call the ``setIdealNgramFrequencies`` method to load frequency dictionaries. The ``setWeights`` just multiplies the score got from their respective n-gram frequencies (pentagrams are more relevant than monograms and pentagrams usually score much lower because of their limited dictionaries).
 
-The frequency dictionaries are just python ``dict``s, which have the n-grams as a key and their probability distribution as a value. The values, if all possible keys are referenced, should sum up to 1. The Czech data is generated from `here <http://ufal.mff.cuni.cz/~hajic/courses/npfl067/stats/czech.html>`_. There are only Czech and English statistics to date, but more languages are to come. Should you want to process them, you can use the ngram_converter.py script, which comes with pycrypt.
+The frequency dictionaries are just python ``dict`` s, which have the n-grams as a key and their probability distribution as a value. The values, if all possible keys are referenced, should sum up to 1. The Czech data is generated from `here <http://ufal.mff.cuni.cz/~hajic/courses/npfl067/stats/czech.html>`_. There are only Czech and English statistics to date, but more languages are to come. Should you want to process them, you can use the ngram_converter.py script, which comes with pycrypt.
+
+Keep in mind, that a good Scorer should not only give good score to correct results and bad score to incorrect. It should also give half the score (or log half or something) to half correct results. This is essential, when using the genetic algorithms (and several others), to let the algorithm know, that it is on the right track. You should avoid making too big local maxima as well.
 
 Further reading
 ===============
