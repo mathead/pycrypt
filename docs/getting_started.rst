@@ -28,7 +28,7 @@ For graphical capabilities, NumPy and pyplot are required. You can get these mod
 .. code-block:: bash
 	
 	$ pip install numpy
-	$ pip install pyplot
+	$ pip install matplotlib
 
 Optional, but recommended modules are unidecode and ipython console for interactive use:
 

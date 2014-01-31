@@ -24,7 +24,8 @@ class CombinationKeyGenerator(KeyGenerator):
 	def getAllKeys(self):
 		"""Generator of all combinations from shortest to longest from length_range"""
 		for i in range(self.length_range[0], self.length_range[1] + 1):
-			yield it.product(*([self.alphabet] * i))
+			for j in it.product(*([self.alphabet] * i)):
+				yield j
 
 	def mutateKey(self, key):
 		"""Changes random number of elements, randomly changes length by 1"""
