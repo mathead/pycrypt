@@ -42,7 +42,7 @@ class BruteForceSolver(solver.Solver):
 		print "=====Best Solution====="
 		print "Score:", score
 		print "Key:", "".join(key)
-		print "Text:", text[:100]
+		print "Text:", text
 
 	def setKeyGenerator(self, keyGenerator):
 		self.keyGenerator = keyGenerator
