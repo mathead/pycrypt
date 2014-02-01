@@ -32,7 +32,7 @@ Since the Vigenère cipher key is only 3 characters long, the ``BruteForceSolver
 .. code-block:: python
 
 	s = pc.BruteForceSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 3)),
-		translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
+		 translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
 	s.solve(cipher)
 
 The first line sets up our ``BruteForceSolver``. ``CombinationKeyGenerator`` with small ``length_range``, so that we can try out all the keys, obviously ``VigenereTranslator`` as the specified Translator and ``EnglishScorer``.
@@ -56,7 +56,7 @@ When you'll run this, you should see all of the possible keys with their respect
 	Key: EGG
 	Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPITRIDAE. A DISTINCTIVE BIRD, ADULTS HAVE A WHITE HEAD, BREAST, UNDER-WING COVERTS AND TAIL. THE UPPER PARTS ARE GREY AND THE BLACK UNDER-WING FLIGHT FEATHERS CONTRAST WITH THE WHITE COVERTS.
 
-If we knew, that the key was a meaningful word, we could have used for instance some sort of word list KeyGenerator (which, as of now, doesn't exist). 
+If we would know, that the key was a meaningful word, we could use for instance some sort of word list KeyGenerator (which, as of now, doesn't exist). 
 
 GeneticSolver
 -------------
@@ -78,7 +78,8 @@ Now let's try to solve it:
 
 .. code-block:: python
 
-	s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 11)), translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
+	s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 11)),
+		 translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
 	s.solve(cipher)
 
 You *should* see output similar (but maybe very different) to this::
@@ -114,27 +115,123 @@ If you'll stop the process with Ctrl-C (you have to be in some sort of interacti
 
 .. warning::
 
-	Right now, it is not unusual for the GA algorithm to get stuck in a local maxima. It does not happen often, but when it does, just restart the script. It shouldn't happen in the future, as many improvements are planned to the actual algorithm as well as some more tools to help to resolve this problem.
+	Right now, it is not unusual for the genetic algorithm to get stuck in a local maxima. It does not happen often, but when it does, just restart the script. It shouldn't happen in the future, as many improvements are planned to the actual algorithm as well as some more tools to help to resolve this problem.
 
 As you can see, the ``GeneticSolver`` can prove to be highly effective. You'll want to use them in most cases, however, if you can try out all the keys in a reasonable time, ``BruteForceSolver`` is a better choice, as the ``GeneticSolver`` can prove unreliable sometimes.
 
 Advanced usage
 ==============
 
+Let's move on to a more complex case of a cipher, such as a substitution cipher. Again, we'll make the encoded text first:
+
+.. code-block:: python
+
+	t = pc.SubstitutionTranslator()
+	t.setKey(dict(zip(pc.alphabet, reversed(pc.alphabet))))
+	cipher = t.encode(text)
+
+	print cipher
+
+We set the ``SubstitutionTranslator`` key to a reversed alphabet (which produces a very simple cipher), but we could have chosen any possible unordered alphabet, this is just for illustration. We'll end up with this cipher::
+
+	GSV DSRGV-YVOORVW HVZ VZTOV RH Z OZITV WRFIMZO YRIW LU KIVB RM GSV UZNROB ZXXRKRGIRWZV. Z WRHGRMXGREV YRIW, ZWFOGH SZEV Z DSRGV SVZW, YIVZHG, FMWVI-DRMT XLEVIGH ZMW GZRO. GSV FKKVI KZIGH ZIV TIVB ZMW GSV YOZXP FMWVI-DRMT UORTSG UVZGSVIH XLMGIZHG DRGS GSV DSRGV XLEVIGH.
+
+Now we will attempt to solve it with the ``GeneticSolver``:
+
+.. code-block:: python
+
+	s = pc.GeneticSolver(keyGenerator=pc.SubstitutionKeyGenerator(),
+		 translator=pc.SubstitutionTranslator(), scorer=pc.EnglishScorer())
+	s.solve(cipher)
+
+Unless you are very lucky, you will see that the substitution cipher is much harder to solve. You might even want to restart a few times. Let's see an example output::
+
+	  1.      Score: 1.04425      Text: END PNTED-KDMMTDV HDZ DZFMD TH Z MZIFD VTRIAZM KTIV CB YIDQ TA END BZSTMQ ZJJTYT
+	  2.      Score: 1.78308      Text: THE KHOTE-NECCOEB WEF EFUCE OW F CFAUE BOPAZFC NOAB LV DAEI OZ THE VFQOCI FGGODO
+	  3.      Score: 1.98144      Text: THE KHOTE-NECCOEB WES ESUCE OW S CSAUE BOPAZSC NOAB LV DAEI OZ THE VSQOCI SGGODO
+	  4.      Score: 2.03995      Text: THE KHOTE-BECCOEN WES ESUCE OW S CSAUE NOPAZSC BOAN LV DAEI OZ THE VSQOCI SGGODO
+	  5.      Score: 2.11829      Text: THE KHOTE-BECCOEN WES ESUCE OW S CSAUE NOPARSC BOAN LV DAEI OR THE VSQOCI SGGODO
+	  6.      Score: 2.18511      Text: THE KHOTE-BECCOEN WES ESUCE OW S CSRUE NOPRASC BORN LV DREI OA THE VSQOCI SGGODO
+	  7.      Score: 2.21979      Text: THE CHOTE-LEJJOEN WES ESBJE OW S JSABE NOPAISJ LOAN VU DAER OI THE USQOJR SGGODO
+	  8.      Score: 2.27611      Text: THE KHOTE-BECCOEN WES ESUCE OW S CSRUE NOPRFSC BORN LV IRED OF THE VSQOCD SAAOIO
+	  9.      Score: 2.34155      Text: THE WHOTE-QEVVOEB RES ESGVE OR S VSAGE BOIANSV QOAB YC PAED ON THE CSZOVD SUUOPO
+	 10.      Score: 2.38612      Text: THE WHITE-QEVVIEB RES ESGVE IR S VSAGE BIOANSV QIAB YK PAED IN THE KSZIVD SUUIPI
+	 11.      Score: 2.40644      Text: THE WHOTE-QEVVOEU AES ESGVE OA S VSRGE UOIRNSV QORU YC PRED ON THE CSZOVD SBBOPO
+	 12.      Score: 2.46465      Text: THE VHOTE-QERROED FEA EAGRE OF A RASGE DOISNAR QOSD YC PSEB ON THE CAZORB AUUOPO
+	 13.      Score: 2.48524      Text: THE WHOTE-QERROED FES ESGRE OF S RSIGE DOAINSR QOID YC PIEB ON THE CSZORB SUUOPO
+	 Evolution interrupted! Setting starting point to continue
+
+	=====Best Solution=====
+	Score: 2.46465315985
+	Key:
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ
+	KBWVLITFSXPYNZRJMOHGCEDUQA
+	Text: THE VHOTE-QERROED FEA EAGRE OF A RASGE DOISNAR QOSD YC PSEB ON THE CAZORB AUUOPOTSODAE. A DOFTONUTOLE QOSD, ADIRTF HALE A VHOTE HEAD, QSEAFT, INDES-VONG UYLESTF AND TAOR. THE IPPES PASTF ASE GSEB AND THE QRAUJ INDES-VONG CROGHT CEATHESF UYNTSAFT VOTH THE VHOTE UYLESTF.
+
+At the end, we have stopped the process with Ctrl-C. If you are using an interactive python shell (e.g. regular command-line python, ipython or IDLE's python shell), you should be able to continue issuing commands.
+
 Interactive mode
 ----------------
 
-yoyoyo
+The ability to interrupt the process is very useful, as we can *help* the Solver. You might want to play around with different settings for the algorithm (like population size or the randomness of mutations). But we can have a more direct control. For instance, if we take a look at the last evolution from our last example::
 
-Substitution cipher example
----------------------------
+	13.      Score: 2.48524      Text: THE WHOTE-QERROED FES ESGRE OF S RSIGE DOAINSR QOID YC PIEB ON THE CSZORB SUUOPO
 
-yoyoyyo
+We can tell, that the "THE" is probably right. We can then lock it in place, so further evolution doesn't change it.
+
+>>> s.lock("THE")
+
+``GeneticSolver``'s ``lock`` processes the arguments and the just calls its keyGenerator's ``lock`` to add some rules. If no key is set (as an optional argument), it locks according to the key from the last evolution. If we, for example, would know that A translates to Z (which it does), we could call ``SubstitutionKeyGenerator``'s ``lock`` directly:
+
+>>> s.keyGenerator.lock('A', 'Z')
+
+Also now that we have some readable results, we can increase the randomness a bit:
+
+>>>	s.keyGenerator.randFunc = lambda x: x ** 3
+
+When the ``SubstitutionKeyGenerator`` calculates how many elements to swap around, it gets a random value between 0 and 1. It is then put through its randFunc. The default is ``lambda x: x ** 6``, so now, it will tend to swap more characters.
+
+.. tip::
+
+	If, for any reason, you want to start the evolution again while keeping the locks, you can do:
+
+	>>> s.setStartingPoint(None)
+
+Now, let's continue the evolution:
+
+>>> s.solve(cipher)
+
+You may have to set up some more locks, but in the end, you should end up with this::
+
+	...
+	 17.      Score: 2.89556      Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPI
+	 Evolution interrupted! Setting starting point to continue
+
+	=====Best Solution=====
+	Score: 2.89555799257
+	Key:
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ
+	ZYXWVUTSRQPONMLKJIHGFEDCBA
+	Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPITRIDAE. A DISTINCTIVE BIRD, ADULTS HAVE A WHITE HEAD, BREAST, UNDER-WING COVERTS AND TAIL. THE UPPER PARTS ARE GREY AND THE BLACK UNDER-WING FLIGHT FEATHERS CONTRAST WITH THE WHITE COVERTS.
+
+As we can see, the correct key is in fact the reversed alphabet.
+
+Making your own Solver
+======================
+
+All you have to do is to implement the ``solve`` method. You should be supporting the ``startingPoint`` variable, as it is a useful feature. For printing, there are prepared the ``printer`` and ``lastPrint`` methods. (TODO)
+
+Conclusion
+==========
+
+We have covered Solvers, which is the last part of pycrypt. You should be now able to use it efficiently.
+
+If you want more guidelines, you can see example uses on ciphers from real cryptography game (hopefully regularly updated).
 
 Further reading
 ===============
 
-To check out all more Solvers, check out the API:
+To see the source code of Solvers, check out the API:
 
 .. seealso::
 	

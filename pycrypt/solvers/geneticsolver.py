@@ -90,10 +90,12 @@ class GeneticSolver(solver.Solver):
 		"""Starting population -> can be list"""
 		if (type(startingPoint) == list):
 			self.startingPoint = startingPoint
+		elif (startingPoint == None):
+			self.startingPoint = None
 		else:
 			self.startingPoint = [startingPoint]
 
-	def lock(self, char, key=None):
+	def lock(self, string, key=None):
 		"""Lock character in the keyGenerator for the given key, if None, startingPoint key is used"""
 		if (key==None):
 			if (self.startingPoint):
@@ -101,4 +103,5 @@ class GeneticSolver(solver.Solver):
 			else:
 				key = self.translator.key
 
-		self.keyGenerator.lock(char, key=key)
+		for char in string:
+			self.keyGenerator.lock(char, key=key)

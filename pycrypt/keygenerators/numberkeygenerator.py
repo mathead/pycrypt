@@ -7,7 +7,7 @@ class NumberKeyGenerator(KeyGenerator):
 		"""To be used with CaesarTranslator"""
 		KeyGenerator.__init__(self)
 		self.max_number = max_number
-		self.rand_func = rand_func
+		self.randFunc = rand_func
 
 	def getRandomKey(self):
 		return random.randint(0, self.max_number - 1)
@@ -16,5 +16,5 @@ class NumberKeyGenerator(KeyGenerator):
 		return xrange(self.max_number)
 
 	def mutateKey(self, key):
-		"""Change rand_func for different transformation number after random.random"""
-		return (key + int(self.rand_func(random.random() + 1))) % self.max_number
+		"""Change randFunc for different transformation number after random.random"""
+		return (key + int(self.randFunc(random.random() + 1))) % self.max_number

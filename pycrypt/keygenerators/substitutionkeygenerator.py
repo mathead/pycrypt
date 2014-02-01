@@ -11,7 +11,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
 		KeyGenerator.__init__(self)
 		self.alphabet = list(alphabet)
 		self.locks = {}
-		self.rand_func = rand_func
+		self.randFunc = rand_func
 
 	def getRandomKey(self, _return_list=False):
 		values = self._getLockedAlphabet()
@@ -66,7 +66,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
 			for lock in self.locks:
 				sample.remove(self.alphabet.index(lock))
 
-		for i in range(int(ceil(self.rand_func(random.random()) * len(self._getLockedAlphabet())))):
+		for i in range(int(ceil(self.randFunc(random.random()) * len(self._getLockedAlphabet())))):
 			if (len(sample) < 2):
 				return ret
 			a, b = random.sample(sample, 2)

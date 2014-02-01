@@ -12,7 +12,7 @@ class CombinationKeyGenerator(KeyGenerator):
 		KeyGenerator.__init__(self)
 		self.alphabet = list(alphabet)
 		self.locks = {}
-		self.rand_func = rand_func
+		self.randFunc = rand_func
 		self.length_range = length_range
 
 	def getRandomKey(self, length=None):
@@ -38,7 +38,7 @@ class CombinationKeyGenerator(KeyGenerator):
 			elif (rand == 2 and len(ret)-1 >= self.length_range[0]):
 				ret = ret[0:len(ret)-1]
 
-		for i in range(int(ceil(self.rand_func(random.random()) * len(key)))):
+		for i in range(int(ceil(self.randFunc(random.random()) * len(key)))):
 			ret[random.choice(range(len(ret)))] = random.choice(self.alphabet)
 
 		return ret 
