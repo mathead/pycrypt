@@ -221,10 +221,12 @@ Making your own Solver
 
 All you have to do is to implement the ``solve`` method. You should be supporting the ``startingPoint`` variable, as it is a useful feature. For printing, there are prepared the ``printer`` and ``lastPrint`` methods. (TODO)
 
-Conclusion
+Next steps
 ==========
 
 We have covered Solvers, which is the last part of pycrypt. You should be now able to use it efficiently.
+
+Next, we will go over some useful external modules, which could come in handy.
 
 If you want more guidelines, you can see example uses on ciphers from real cryptography game (hopefully regularly updated).
 
