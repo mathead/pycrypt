@@ -46,7 +46,7 @@ class GeneticSolver(solver.Solver):
 			while (iterations != 1):
 				iterations -= 1
 				
-				next_population = population[:]
+				next_population = population[:] # copy the current population, so that the keys can't get worse (maybe remove this?)
 				for sample in population:
 					for i in range(self.mutations):
 						mutant = self.keyGenerator.mutateKey(sample[1])
@@ -79,8 +79,11 @@ class GeneticSolver(solver.Solver):
 		print
 		print "=====Best Solution====="
 		print "Score:", score
-		print "Key:"
-		utils.pprint_dict(key)
+		if (type(key) == dict):
+			print "Key:"
+			utils.pprint_dict(key)
+		else:
+			print "Key:", key
 		print "Text:", text
 
 	def setStartingPoint(self, startingPoint):

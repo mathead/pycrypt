@@ -28,5 +28,5 @@ cipher = t.encode(text)
 
 print cipher
 
-s = pc.BruteForceSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 3)), translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
+s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 11)), translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
 s.solve(cipher)

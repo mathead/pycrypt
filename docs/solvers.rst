@@ -27,7 +27,7 @@ We will get the encoded output::
 
 	OAX RABOX-UZEEDXW NXT ZTZGX BN T EVKZZ WBPKGVE UDKW JY IMXR DG MCX YVFBGR TXVBKBMMBWVX. T YBLOBGXMBQX UDKW, VWNGML CTOZ T PCBMZ AXVW, UMXTNM, NIWXM-PBIZ VJOXMML VGW OTBG. MAZ NIKXK KTKOL TMX ZMXR VGW OAX WETXD NIWXM-PBIZ YGBZCM YZTMCXKN VHIMKVLM RBMC MAZ PADMX XHOZKMN.
 
-Since the Vigenère cipher key is only 3 characters long, the ``BruteForceSolver`` should suffice::
+Since the Vigenère cipher key is only 3 characters long, the ``BruteForceSolver`` should suffice:
 
 .. code-block:: python
 
@@ -61,7 +61,7 @@ If we knew, that the key was a meaningful word, we could have used for instance 
 GeneticSolver
 -------------
 
-3 character long keys take about 20 seconds with the ``BruteForceSolver``, but 4 characters would take 26 times that! That is over 8 minutes. To try out all the possible 8 character long keys, it would take over 6000 years. That's where the ``GeneticSolver`` comes in. It uses a very basic `genetic algorithm <http://en.wikipedia.org/wiki/Genetic_algorithm>`_. But first, let's make a more complex Vigenère cipher from our sample text:
+3 character long keys take about 20 seconds with the ``BruteForceSolver``, but 4 characters would take 26 times that! That is over 8 minutes. To try out all the possible 8 character keys, it would take over 6000 years. That's where the ``GeneticSolver`` comes in. It uses a very basic `genetic algorithm <http://en.wikipedia.org/wiki/Genetic_algorithm>`_. But first, let's make a more complex Vigenère cipher from our sample text:
 
 .. code-block:: python
 
@@ -74,6 +74,49 @@ We'll get this::
 
 	ARD JGUPZ-UXSSSDQ RQW ZTZSL SR N KMNBX WPBBMNK NEMW HM WBDL HZ PCX YHTSKL ZOYDIBAYSCND. M ZDLMPUMSVUQ XDKW, HKEKGR TWQX T DOSSR GQWY, UKLHCS, HMPAM-PBUN MNIDDPN TGK AKHY. STA PIILY ZZESE WMX ZYLI ZAC FDZ UEHJU TACQN-RBGN MVHTGF BZTMOLBR PNZPMTLA DSSU STA RABAL MNIDDPN.
 
+Now let's try to solve it:
+
+.. code-block:: python
+
+	s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(length_range=(1, 11)), translator=pc.VigenereTranslator(), scorer=pc.EnglishScorer())
+	s.solve(cipher)
+
+You *should* see output similar (but maybe very different) to this::
+
+	 1.      Score: 0.74231      Text: HLE ENNWT-VSZLZXR MXP GNANS LY H LHUUE QQWIFUE OZTP OG XWKE OT QXE RONTFS SVSEDI
+	 2.      Score: 0.85933      Text: THE QZOSP-KMFLIEX KKZ PJOFE IS U DGQRN LCURNUD HHCM WZ PRES AT SSN NUMILS SIBTYQ
+	 3.      Score: 0.93790      Text: THE QZOSP-KMILIEX KKZ PJOIE IS U DGQRN LFURNUD HHCM WC PRES AT SSN NXMILS SIBTYQ
+	 4.      Score: 1.02072      Text: THE QZOSV-KMLLIEX KKZ VJOLE IS U DGQXN LIURNUD HHIM WF PRES AT SYN NAMILS SIBZYQ
+	 5.      Score: 1.11349      Text: THE QZOSE-BMILIEX KKZ EAOIE IS U DGQGE LFURNUD HHRD WC PRES AT SHE NXMILS SIBIPQ
+	 6.      Score: 1.13169      Text: THE QOOSB-KMLLIEX ZKZ BJOLE IS U SGQDN LIURNUS HHOM WF PRES PT SEN NAMILS HIBFYQ
+	 7.      Score: 1.36420      Text: THE QZOTE-BMILIEX KKA EAOIE IS U DGRGE LFURNUD HIRD WC PRES AT THE NXMILS SICIPQ
+	 8.      Score: 1.36962      Text: THE QZOTE-BHILIEX KKA EAJIE IS U DGRGE GFURNUD HIRD RC PRES AT THE IXMILS SICIPL
+	 9.      Score: 1.74856      Text: THE QZITE-BMILIEX KEA EAOIE IS U DARGE LFURNUD BIRD WC PRES AN THE NXMILS SCCIPQ
+	10.      Score: 1.88447      Text: THE QZITE-BEILIEX KEA EAGIE IS U DARGE DFURNUD BIRD OC PRES AN THE FXMILS SCCIPI
+	11.      Score: 2.20848      Text: THE QZITE-BELLIEX KEA EAGLE IS U DARGE DIURNUD BIRD OF PRES AN THE FAMILS SCCIPI
+	12.      Score: 2.31031      Text: THE WZITE-BELLIED KEA EAGLE IS A DARGE DIURNAD BIRD OF PREY AN THE FAMILY SCCIPI
+	13.      Score: 2.34455      Text: THE WTITE-BELLIED EEA EAGLE IS A XARGE DIURNAX BIRD OF PREY UN THE FAMILY MCCIPI
+	14.      Score: 2.63445      Text: THE QHITE-BELLIEX SEA EAGLE IS U LARGE DIURNUL BIRD OF PRES IN THE FAMILS ACCIPI
+	15.      Score: 2.63445      Text: THE QHITE-BELLIEX SEA EAGLE IS U LARGE DIURNUL BIRD OF PRES IN THE FAMILS ACCIPI
+	16.      Score: 2.63445      Text: THE QHITE-BELLIEX SEA EAGLE IS U LARGE DIURNUL BIRD OF PRES IN THE FAMILS ACCIPI
+	17.      Score: 2.89494      Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPI
+	18.      Score: 2.89494      Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPI
+
+If you'll stop the process with Ctrl-C (you have to be in some sort of interactive shell), you'll see the last evolution::
+
+	18.      Score: 2.89494      Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPI
+	Evolution interrupted! Setting starting point to continue
+
+	=====Best Solution=====
+	Score: 2.89494237918
+	Key: ['S', 'P', 'A', 'M', 'A', 'N', 'D', 'E', 'G', 'G', 'S']
+	Text: THE WHITE-BELLIED SEA EAGLE IS A LARGE DIURNAL BIRD OF PREY IN THE FAMILY ACCIPITRIDAE. A DISTINCTIVE BIRD, ADULTS HAVE A WHITE HEAD, BREAST, UNDER-WING COVERTS AND TAIL. THE UPPER PARTS ARE GREY AND THE BLACK UNDER-WING FLIGHT FEATHERS CONTRAST WITH THE WHITE COVERTS.
+
+.. warning::
+
+	Right now, it is not unusual for the GA algorithm to get stuck in a local maxima. It does not happen often, but when it does, just restart the script. It shouldn't happen in the future, as many improvements are planned to the actual algorithm as well as some more tools to help to resolve this problem.
+
+As you can see, the ``GeneticSolver`` can prove to be highly effective. You'll want to use them in most cases, however, if you can try out all the keys in a reasonable time, ``BruteForceSolver`` is a better choice, as the ``GeneticSolver`` can prove unreliable sometimes.
 
 Advanced usage
 ==============
