@@ -187,7 +187,7 @@ We can tell, that the "THE" is probably right. We can then lock it in place, so 
 
 Also now that we have some readable results, we can increase the randomness a bit:
 
->>>	s.keyGenerator.randFunc = lambda x: x ** 3
+>>> s.keyGenerator.randFunc = lambda x: x ** 3
 
 When the ``SubstitutionKeyGenerator`` calculates how many elements to swap around, it gets a random value between 0 and 1. It is then put through its randFunc. The default is ``lambda x: x ** 6``, so now, it will tend to swap more characters.
 
@@ -233,7 +233,7 @@ If you want more guidelines, you can see example uses on ciphers from real crypt
 Further reading
 ===============
 
-To see the source code of Solvers, check out the API:
+To see the source code of Solvers, you can refer to the API:
 
 .. seealso::
 	
