@@ -80,7 +80,7 @@ You can use ``getRandomKey`` to ... well, guess:
 
 Notice, how the rule we set before (length_range) also applies to this (and all other) method.
 
-Now let's take a look at ``mutateKey``, which is mainly used by the ``GeneticSolver``. ``mutateKey`` returns a similar key based on the random number generator. The entropy can be changed with the rand_func lambda function passed as an optional argument:
+Now let's take a look at ``mutateKey``, which is mainly used by the ``GeneticSolver``. ``mutateKey`` returns a similar key based on the random number generator. The entropy can be changed with the randFunc lambda function passed as an optional argument:
 
 .. code-block:: python
 

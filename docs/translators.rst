@@ -20,7 +20,7 @@ Which should output::
 
 	HELLO WORLD!
 
-We have created a Translator, set its key (alphabet shift) to 1 and called the method translate to uncover the secret message.
+We have created a Translator, set its key (alphabet shift) to 1 and called the method ``translate`` to uncover the secret message.
 
 .. note::
 	Since Translators are meant to be used on encrypted text, here the method ``translate`` actually shifted the alphabet by 1 back, not forward. You can also use the method ``decode``, which is just an alias for ``translate`` and is maybe more semantically correct.
