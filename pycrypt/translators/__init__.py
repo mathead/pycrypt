@@ -8,4 +8,6 @@ from semaphoretranslator import *
 from binarytranslator import *
 from vigeneretranslator import *
 from polishcrosstranslator import *
+from xortranslator import *
+from mulxortranslator import *
 from translator import *

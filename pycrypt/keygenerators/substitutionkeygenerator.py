@@ -1,5 +1,4 @@
 from keygenerator import *
-from ..translators.substitutiontranslator import *
 from .. import utils
 from math import ceil
 import copy

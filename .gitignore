@@ -49,3 +49,14 @@ docs/_build/html/modules.html
 docs/_build/html/py-modindex.html
 docs/_build
 docs/_build/*
+.idea/.name
+.idea/codeStyleSettings.xml
+.idea/encodings.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/pycrypt.iml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
