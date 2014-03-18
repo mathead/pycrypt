@@ -14,6 +14,7 @@ class LanguageScorer(scorer.Scorer):
 
 	def setIdealNgramFrequencies(self, freqs):
 		self.idealNgramFrequencies = freqs
+		self.idealNgramsKeySets = [set(i.keys()) for i in freqs]
 		self.ngramLens = [len(i.keys()[0]) for i in freqs]
 		if (self.ngramWeights == None):
 			self.ngramWeights = [1] * len(freqs)
@@ -54,7 +55,7 @@ class LanguageScorer(scorer.Scorer):
 
 				text_freq = self.getNgramFrequencies(text, self.ngramLens[i])
 
-				for ngram in list(set(ideal_freq.keys()) & set(text_freq.keys())): # get only mutual ngrams
+				for ngram in list(self.idealNgramsKeySets[i] & set(text_freq.keys())): # get only mutual ngrams
 					scores[i] += ideal_freq[ngram] * (text_freq[ngram] / float(len(text))) # weird equation, but it works
 
 		return scores
