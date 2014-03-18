@@ -27,6 +27,7 @@ text = "The White-bellied Sea Eagle is a large diurnal bird of prey in the famil
 t = pc.SubstitutionTranslator()
 t.setKey(dict(zip(pc.alphabet, reversed(pc.alphabet))))
 cipher = t.encode(text)
+print cipher
 
 s = pc.GeneticSolver(keyGenerator=pc.SubstitutionKeyGenerator(), translator=pc.SubstitutionTranslator(), scorer=pc.EnglishScorer())
 s.solve(cipher)
