@@ -35,15 +35,8 @@ ciphers = ("32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e90
 "271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad6e04d513e96d99de2569bc5e50eeeca709b50a8a987f4264edb6896fb537d0a716132ddc938fb0f836480e06ed0fcd6e9759f40462f9cf57f4564186a2c1778f1543efa270bda5e933421cbe88a4a52222190f471e9bd15f652b653b7071aec59a2705081ffe72651d08f822c9ed6d76e48b63ab15d0208573a7eef027",
 "466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83",)
 
-<<<<<<< HEAD
-t = pc.SubstitutionTranslator()
-t.setKey(dict(zip(pc.alphabet, reversed(pc.alphabet))))
-cipher = t.encode(text)
-print cipher
-=======
 ciphers = [c.decode('hex') for c in ciphers]
 # print [[ord(i) for i in c] for c in ciphers]
->>>>>>> 525d322b9124db6fa7186feae15cb734e712a85a
 
 s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(alphabet=[chr(i) for i in range(255)], length_range=(83, 83)), translator=pc.MulXorTranslator(), scorer=pc.EnglishScorer())
 s.scorer.unidec = False
