@@ -11,6 +11,7 @@ class LanguageScorer(scorer.Scorer):
 	log = False
 	ngramWeights = None
 	wordWeight = 0
+	unidec = True
 
 	def setIdealNgramFrequencies(self, freqs):
 		self.idealNgramFrequencies = freqs
@@ -75,7 +76,10 @@ class LanguageScorer(scorer.Scorer):
 		return (pts ** 2.0) * 0.8
 
 	def score(self, text):
-		text = unidecode(unicode(text)).upper()
+		if (self.unidec):
+			text = unidecode(unicode(text)).upper()
+		else:
+			text = text.upper()
 		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.scoreNgrams(text))]
 		word_score = self.scoreWords(text) * self.wordWeight
 
