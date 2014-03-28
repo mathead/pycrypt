@@ -11,5 +11,5 @@ for i in range(26):
 	b.setKey(i + 3)
 	ctext = b.translate(text)
 	print ctext
-	a.getScore(ctext)
+	a.score(ctext)
 	print "\n\n\n"
