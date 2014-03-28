@@ -1,99 +1,174 @@
-translators Package
-===================
+pycrypt.translators package
+===========================
 
-:mod:`translators` Package
---------------------------
+Submodules
+----------
 
-.. automodule:: pycrypt.translators
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`translator` Module
-------------------------
-
-.. automodule:: pycrypt.translators.translator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`asciitranslator` Module
------------------------------
+pycrypt.translators.asciitranslator module
+------------------------------------------
 
 .. automodule:: pycrypt.translators.asciitranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`binarytranslator` Module
-------------------------------
+pycrypt.translators.binarytranslator module
+-------------------------------------------
 
 .. automodule:: pycrypt.translators.binarytranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`brailletranslator` Module
--------------------------------
+pycrypt.translators.brailletranslator module
+--------------------------------------------
 
 .. automodule:: pycrypt.translators.brailletranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`caesartranslator` Module
-------------------------------
+pycrypt.translators.caesartranslator module
+-------------------------------------------
 
 .. automodule:: pycrypt.translators.caesartranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`morsecodetranslator` Module
----------------------------------
+pycrypt.translators.morsecodetranslator module
+----------------------------------------------
 
 .. automodule:: pycrypt.translators.morsecodetranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`numberedalphabettranslator` Module
-----------------------------------------
+pycrypt.translators.numberedalphabettranslator module
+-----------------------------------------------------
 
 .. automodule:: pycrypt.translators.numberedalphabettranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`polishcrosstranslator` Module
------------------------------------
+pycrypt.translators.polishcrosstranslator module
+------------------------------------------------
 
 .. automodule:: pycrypt.translators.polishcrosstranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`semaphoretranslator` Module
----------------------------------
+pycrypt.translators.semaphoretranslator module
+----------------------------------------------
 
 .. automodule:: pycrypt.translators.semaphoretranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`substitutiontranslator` Module
-------------------------------------
+pycrypt.translators.substitutiontranslator module
+-------------------------------------------------
 
 .. automodule:: pycrypt.translators.substitutiontranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`vigeneretranslator` Module
---------------------------------
+pycrypt.translators.test_binarytranslator module
+------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_binarytranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_brailletranslator module
+-------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_brailletranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_caesartranslator module
+------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_caesartranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_morsecodetranslator module
+---------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_morsecodetranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_polishcrosstranslator module
+-----------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_polishcrosstranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_semaphoretranslator module
+---------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_semaphoretranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_substitutiontranslator module
+------------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_substitutiontranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.test_vigeneretranslator module
+--------------------------------------------------
+
+.. automodule:: pycrypt.translators.test_vigeneretranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.translator module
+-------------------------------------
+
+.. automodule:: pycrypt.translators.translator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.translators.vigeneretranslator module
+---------------------------------------------
 
 .. automodule:: pycrypt.translators.vigeneretranslator
     :members:
     :undoc-members:
     :show-inheritance:
 
+pycrypt.translators.xortranslator module
+----------------------------------------
+
+.. automodule:: pycrypt.translators.xortranslator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pycrypt.translators
+    :members:
+    :undoc-members:
+    :show-inheritance:
