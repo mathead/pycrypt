@@ -8,7 +8,7 @@ class MorseCodeTranslator(translator.Translator):
 	key  = {
 			'': ' ',
 			'.----.': '\'',
-			'-.--.-': ')',
+			'-.--.': ')',
 			'-.--.-': '(',
 			'-....-': '-',
 			'--..--': ',',

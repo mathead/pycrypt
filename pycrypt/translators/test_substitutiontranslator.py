@@ -10,13 +10,13 @@ class TestSubstitutionTranslator(unittest.TestCase):
         self.ST.setKey(key)
 
     def test_translate(self):
-    	self.assertEqual(self.ST.translate("ab c"), "CA B")
+        self.assertEqual(self.ST.translate("ab c"), "CA B")
 
     def test_encode(self):
-    	self.assertEqual(self.ST.encode("abc"), "BCA")
+        self.assertEqual(self.ST.encode("abc"), "BCA")
 
     def test_parseInput(self):
-    	self.assertEqual(self.ST.parseInput("abc"), "ABC")
+        self.assertEqual(self.ST.parseInput("abc"), "ABC")
 
     def test_setKey(self):
         self.assertEqual(self.ST.key.keys(), list(utils.alphabet))

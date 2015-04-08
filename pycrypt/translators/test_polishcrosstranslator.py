@@ -11,10 +11,10 @@ class TestPolishCrossTranslator(unittest.TestCase):
         self.assertEqual(self.T.translate("q1 q2  c3"), "AB Z")
 
     def test_encode(self):
-    	self.assertEqual(self.T.encode("B D"), "q2  w1")
+        self.assertEqual(self.T.encode("B D"), "q2  w1")
 
     def test_graphicEncode(self):
-    	arr = numpy.vstack([numpy.ones([1, 9]), numpy.zeros([2, 9])])
+        arr = numpy.vstack([numpy.ones([1, 9]), numpy.zeros([2, 9])])
         self.T.setUsingCh(False)
         self.assertTrue((self.T.graphicEncode(["abcdefghi"]) == arr).all())
         self.T.setUsingCh(True)

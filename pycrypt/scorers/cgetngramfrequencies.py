@@ -1,3 +1,8 @@
+"""
+Experimental getNgramFrequencies implemented in C for more speed.
+Turned out to be even slower due to so many simple function calls.
+"""
+
 from ctypes import *
 
 from ctypes.util import find_library

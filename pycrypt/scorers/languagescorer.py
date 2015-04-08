@@ -65,7 +65,7 @@ class LanguageScorer(scorer.Scorer):
 		if (self.maxWordLen == 0 or self.words == None):
 			return 0
 
-		s = self.applyKey(self.ciphered_string, key)
+		s = text
 		pts = 0.0
 		for length in range(self.minWordLen, self.maxWordLen):
 			for pos in range(len(s) - 1 - length):

@@ -3,7 +3,7 @@ class Translator():
 
 	key = []
 
-	def translate(self):
+	def translate(self, *args):
 		"""Base method for decoding a cipher"""
 		raise NotImplementedError()
 
@@ -14,7 +14,7 @@ class Translator():
 		while True:
 			try:
 				i = raw_input(" "*len(result))
-				if (i[0] == "!"):
+				if (len(i) and i[0] == "!"):
 					result = result[:-len(i)]
 				else:
 					result += self.translate(i)
@@ -23,7 +23,7 @@ class Translator():
 				print result
 				return result
 
-	def encode(self):
+	def encode(self, *args):
 		"""Reversed translation"""
 		raise NotImplementedError()
 
@@ -31,7 +31,7 @@ class Translator():
 		"""Just and alias for translate"""
 		return self.translate(*args)
 
-	def graphicEncode(self):
+	def graphicEncode(self, *args):
 		"""Return in numpy array for easy plotting"""
 		raise NotImplementedError()
 

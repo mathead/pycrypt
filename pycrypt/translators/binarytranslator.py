@@ -30,7 +30,6 @@ class BinaryTranslator(translator.Translator):
 		return ret
 
 	def encode(self, cipher):
-		ret = ""
 		l = []
 		for i in range(len(utils.alphabet)):
 			num = ""

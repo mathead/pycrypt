@@ -11,7 +11,7 @@ class TestVigenereTranslator(unittest.TestCase):
         self.assertEqual(self.T.translate("AAABBB"), "BCDCDE")
 
     def test_encode(self):
-    	self.assertEqual(self.T.encode("B C"), "A A")
+        self.assertEqual(self.T.encode("B C"), "A A")
 
 if __name__ == '__main__':
     unittest.main()

@@ -11,7 +11,7 @@ class TestBinaryTranslator(unittest.TestCase):
         self.assertEqual(self.T.translate("0 1 00010"), "ABC")
 
     def test_encode(self):
-    	self.assertEqual(self.T.encode("a b"), "00000   00001")
+        self.assertEqual(self.T.encode("a b"), "00000   00001")
 
     def test_graphicEncode(self):
         self.assertTrue((self.T.graphicEncode("a\nb") == numpy.array([[0, 0, 0, 0, 0], [0, 0, 0, 0, 1]])).all())
