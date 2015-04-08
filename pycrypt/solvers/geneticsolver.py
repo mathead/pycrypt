@@ -28,7 +28,7 @@ class GeneticSolver(solver.Solver):
 
 		self.bruteForceSolver = BruteForceSolver(translator=translator, scorer=scorer, quiet=True) # for scoring population
 
-	def solve(self, text=None, iterations=0):
+	def solve(self, text=None, iterations=0, return_all_keys=False):
 		"""Set iterations to 0 for infinite loop"""
 		best = (0.0, None)
 		tried = []
@@ -69,6 +69,8 @@ class GeneticSolver(solver.Solver):
 			self.startingPoint = [best[1]]
 
 		self.lastPrint(best[1], best[0], self.score(best[1], text)[1])
+		if return_all_keys:
+			return population
 		return best
 
 	def printer(self, key, score, text=None, iterations=None):
