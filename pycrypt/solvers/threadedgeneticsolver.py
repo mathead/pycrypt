@@ -1,4 +1,5 @@
 import pathos.multiprocessing as mp
+import itertools
 import solver
 from geneticsolver import GeneticSolver
 from ..translators.substitutiontranslator import *
@@ -36,7 +37,8 @@ class ThreadedGeneticSolver(solver.Solver):
                         for i in range(self.num_processes)] # only one solver will not be quiet
         self.solvers[0].lastPrint = lambda *x: None
 
-    def solve(self, text=None, iterations=0):
+    def solve(self, text=None, iterations=0, return_all_keys=False):
+        """Paralelized GeneticSolver's solve. Note that you can't interrupt the evolution as you could normally."""
         def mapper(solver):
             return solver.solve(text, self.migration_size, return_all_keys=True)
 
@@ -59,25 +61,25 @@ class ThreadedGeneticSolver(solver.Solver):
             translated = self.translator.translate(text)
             self.printer(best[1], best[0], translated, iterations)
 
+        results = itertools.chain(*results)
+        results = sorted(results, key=lambda x: -x[0])
+        self.lastPrint(results[0][1], results[0][0], self.score(results[0][1], text)[1])
+        if return_all_keys:
+            return results
+        return results[0]
 
     def printer(self, key, score, text=None, iterations=None):
         """Gets the best sample in population in every cycle"""
         print
         print "Migration! Best individual overall:"
         print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
-        print "==================================="
-        print
-
-    def lastPrint(self, key, score, text=None):
-        print
-        print "=====Best Solution====="
-        print "Score:", score
         if (type(key) == dict):
             print "Key:"
             utils.pprint_dict(key)
         else:
             print "Key:", key
-        print "Text:", text
+        print "==================================="
+        print
 
     def setStartingPoint(self, startingPoint):
         for solver in self.solvers:

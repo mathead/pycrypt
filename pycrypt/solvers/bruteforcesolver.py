@@ -34,9 +34,6 @@ class BruteForceSolver(solver.Solver):
 			return sorted(all_keys, key=lambda x: -x[0])
 		return best
 
-	def printer(self, key, score, text=None):
-		print ("Score: {:.5f}      Key: {:2}      Text: {}").format(score, "".join(key), text[:80])
-
 	def lastPrint(self, key, score, text=None):
 		print
 		print "=====Best Solution====="

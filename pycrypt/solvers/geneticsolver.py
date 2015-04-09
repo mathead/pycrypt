@@ -3,7 +3,6 @@ from bruteforcesolver import *
 from ..translators.substitutiontranslator import *
 from ..keygenerators.substitutionkeygenerator import *
 from ..scorers.czechscorer import *
-from .. import utils
 
 class GeneticSolver(solver.Solver):
 	"""Uses own genetic algorithm, calls KeyGenerators mutateKey method"""
@@ -76,17 +75,6 @@ class GeneticSolver(solver.Solver):
 	def printer(self, key, score, text=None, iterations=None):
 		"""Gets the best sample in population in every cycle"""
 		print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
-
-	def lastPrint(self, key, score, text=None):
-		print
-		print "=====Best Solution====="
-		print "Score:", score
-		if (type(key) == dict):
-			print "Key:"
-			utils.pprint_dict(key)
-		else:
-			print "Key:", key
-		print "Text:", text
 
 	def setStartingPoint(self, startingPoint):
 		"""Starting population -> can be list"""

@@ -1,4 +1,5 @@
 from ..scorers.czechscorer import *
+from .. import utils
 
 class Solver(object):
 	"""Abstract class for connecting KeyGenerators, Scorers and optionally Translators"""
@@ -33,8 +34,16 @@ class Solver(object):
 
 	def printer(self, key, score, text=None):
 		"""Callback method for every key generated and scored"""
-		pass
+		print ("Score: {:.5f}      Key: {:2}      Text: {}").format(score, "".join(key), text[:80])
 
 	def lastPrint(self, key, score, text=None):
 		"""Callback method for last and best result"""
-		pass
+		print
+		print "=====Best Solution====="
+		print "Score:", score
+		if (type(key) == dict):
+			print "Key:"
+			utils.pprint_dict(key)
+		else:
+			print "Key:", key
+		print "Text:", text
