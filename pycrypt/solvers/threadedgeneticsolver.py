@@ -13,7 +13,7 @@ class ThreadedGeneticSolver(solver.Solver):
     """Implements the island model using GeneticSolver"""
 
     def __init__(self, keyGenerator=SubstitutionKeyGenerator(), translator=SubstitutionTranslator(), scorer=CzechScorer(),
-                 num_processes=None, migration_iterations=10, migration_size=10, quiet=False, **kwargs):
+                 num_processes=None, migration_iterations=10, migration_size=10, quiet=False, log=False, **kwargs):
         """
         kwargs are simply passed to GeneticSolver.
         Special argument num_processes sets the number of islands created, None sets it to number of cores.
@@ -31,21 +31,27 @@ class ThreadedGeneticSolver(solver.Solver):
         self.migration_iterations = migration_iterations
         self.migration_size = migration_size
         self.quiet = quiet
+        self.log = [[] for i in range(self.num_processes)] if log else None
         self.kwargs = kwargs
 
-        self.solvers = [GeneticSolver(self.keyGenerator, self.translator, self.scorer, quiet=i or quiet, **kwargs)
+        self.solvers = [GeneticSolver(self.keyGenerator, self.translator, self.scorer, quiet=i or quiet, log=log, **kwargs)
                         for i in range(self.num_processes)] # only one solver will not be quiet
         self.solvers[0].lastPrint = lambda *x: None
 
     def solve(self, text=None, iterations=0, return_all_keys=False):
         """Paralelized GeneticSolver's solve. Note that you can't interrupt the evolution as you could normally."""
         def mapper(solver):
-            return solver.solve(text, self.migration_size, return_all_keys=True)
+            res = solver.solve(text, self.migration_size, return_all_keys=True)
+            if self.log != None:
+                return res, solver.log
+            return res
 
         while (iterations != 1):
-            iterations -= self.migration_iterations
+            iterations -= 1
 
             results = mp.ProcessingPool().map(mapper, self.solvers)
+            if self.log != None:
+                results, logs = zip(*results)
 
             # exchange best individuals in cyclicly (island 1 sends to island2, island 2 to 3 and so on)
             best = results[0][0]
@@ -60,6 +66,9 @@ class ThreadedGeneticSolver(solver.Solver):
             self.translator.setKey(best[1])
             translated = self.translator.translate(text)
             self.printer(best[1], best[0], translated, iterations)
+            if self.log != None:
+                for i in range(len(self.solvers)):
+                    self.log[i].extend(logs[i])
 
         results = itertools.chain(*results)
         results = sorted(results, key=lambda x: -x[0])
