@@ -28,3 +28,15 @@ def permutation(parent1, parent2):
 
     result = filler[point1+len(cut):] + cut + filler[:point1+len(cut)]
     return [dict(zip(parent1.keys(), result))]
+
+
+class Tournament:
+    """Basic tournament selector for crossovers"""
+    def __init__(self, crossover_func=point1, tournament_size=20, crossovers=5):
+        self.crossover_func = crossover_func
+        self.tournament_size = tournament_size
+        self.crossovers = crossovers
+
+    def crossover(self, population):
+        """Returns a list of new offsprings from population"""
+        tournament = random.sample(population, self.tournament_size)
