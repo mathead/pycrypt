@@ -106,3 +106,18 @@ def plot_genetic_log_threaded(log):
     plt.legend(loc='lower right')
     plt.grid()
     plt.show()
+
+def cache(func):
+    """General decorator for function caching, if called with same arguments, it is bypassed"""
+    def hash_args(*args, **kwargs):
+        return tuple([hash(x) for x in list(args) + kwargs.items()])
+
+    cached = {}
+    def wrapper(*args, **kwargs):
+        h = hash_args(*args, **kwargs)
+        if h in cached:
+            return cached[h]
+        ret = func(*args, **kwargs)
+        cached[h] = ret
+        return ret
+    return wrapper

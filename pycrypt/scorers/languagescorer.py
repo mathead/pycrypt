@@ -1,4 +1,5 @@
 import scorer
+from .. import utils
 from unidecode import unidecode
 # import cgetngramfrequencies
 
@@ -75,6 +76,7 @@ class LanguageScorer(scorer.Scorer):
 		pts /= len(s)
 		return (pts ** 2.0) * 0.8
 
+	@utils.cache
 	def score(self, text):
 		if (self.unidec):
 			text = unidecode(unicode(text)).upper()

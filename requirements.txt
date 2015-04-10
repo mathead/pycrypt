@@ -2,3 +2,4 @@ mock
 numpy
 matplotlib
 unidecode
+-e git://github.com/uqfoundation/pathos.git@cd63efd17c4a36c0ace729820b1d3128187caae4

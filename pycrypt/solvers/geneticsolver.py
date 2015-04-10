@@ -48,7 +48,7 @@ class GeneticSolver(solver.Solver):
             while (iterations != 1):
                 iterations -= 1
 
-                next_population = population[:5] # copy the best from current population, so that the keys can't get worse (maybe remove this?)
+                next_population = population[:10] # copy the best from current population, so that the keys can't get worse (maybe remove this?)
                 for sample in population:
                     for i in range(self.mutations):
                         mutant = self.keyGenerator.mutateKey(sample[1])
