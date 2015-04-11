@@ -99,7 +99,7 @@ def plot_genetic_log(log):
 def plot_genetic_log_threaded(log):
     """Plots each island individually"""
     for n, island in enumerate(log):
-        plt.plot([max(*[k[0] for k in i]) for i in island], linewidth=2, label="Island " + str(n+1))
+        plt.plot([max(*[k[0] for k in i]) for i in island], label="Island " + str(n+1))
 
     plt.xlabel("iteration")
     plt.ylabel("score")

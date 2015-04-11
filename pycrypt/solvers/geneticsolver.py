@@ -44,8 +44,11 @@ class GeneticSolver(solver.Solver):
         if (self.exclude_tried):
             tried.extend(population)
 
+        if iterations > 1:
+            iterations += 1
+
         try:
-            while (iterations != 1):
+            while iterations != 1:
                 iterations -= 1
 
                 next_population = population[:10] # copy the best from current population, so that the keys can't get worse (maybe remove this?)

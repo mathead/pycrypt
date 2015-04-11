@@ -41,6 +41,7 @@ class ThreadedGeneticSolver(solver.Solver):
     def solve(self, text=None, iterations=0, return_all_keys=False):
         """Paralelized GeneticSolver's solve. Note that you can't interrupt the evolution as you could normally."""
         def mapper(solver):
+            random.seed() # since the environment is copied, we need to reinitialize the seed for each process
             res = solver.solve(text, self.migration_size, return_all_keys=True)
             if self.log != None:
                 return res, solver.log

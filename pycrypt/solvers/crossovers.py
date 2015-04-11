@@ -1,4 +1,5 @@
 import random
+import itertools as it
 
 def point1(parent1, parent2):
     """Basic 1 point crossover for lists"""
@@ -32,11 +33,13 @@ def permutation(parent1, parent2):
 
 class Tournament:
     """Basic tournament selector for crossovers"""
-    def __init__(self, crossover_func=point1, tournament_size=20, crossovers=5):
+    def __init__(self, crossover_func=point1, tournament_size=20, crossovers=4):
         self.crossover_func = crossover_func
         self.tournament_size = tournament_size
         self.crossovers = crossovers
 
     def crossover(self, population):
         """Returns a list of new offsprings from population"""
-        tournament = random.sample(population, self.tournament_size)
+        tournament = sorted(random.sample(population, self.tournament_size), key=lambda x: -x[0])[:self.crossovers*2]
+        random.shuffle(tournament)
+        return [self.crossover_func(*x) for x in it.izip_longest(*[iter(tournament)] * 2)] # map it by pairs
