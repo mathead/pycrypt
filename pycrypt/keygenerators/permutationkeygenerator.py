@@ -3,9 +3,9 @@ from .. import utils
 import random
 
 class PermutationKeyGenerator(SubstitutionKeyGenerator):
-	def __init__(self, sequence=utils.alphabet, rand_func=lambda x: x ** 5):
+	def __init__(self, sequence=utils.alphabet, rand_func=lambda x: x ** 5, **kwargs):
 		"""Similar to SubstitutionTranslator, but returns just lists"""
-		SubstitutionKeyGenerator.__init__(self, alphabet=sequence, rand_func=rand_func)
+		SubstitutionKeyGenerator.__init__(self, alphabet=sequence, rand_func=rand_func, **kwargs)
 		self.sequence = list(sequence)
 
 	def getRandomKey(self):

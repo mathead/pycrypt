@@ -8,7 +8,8 @@ class GeneticSolver(solver.Solver):
     """Uses own genetic algorithm, calls KeyGenerators mutateKey method"""
 
     def __init__(self, keyGenerator=SubstitutionKeyGenerator(), translator=SubstitutionTranslator(), scorer=CzechScorer(),
-                 population_size=20, mutations=20, random_starting_population=1000, quiet=False, exclude_tried=False, log=False):
+                 population_size=20, mutations=20, random_starting_population=1000, quiet=False, exclude_tried=False, log=False,
+                 crossover=True):
         """
         To silence text output use quiet, exclude_tried is for not using same keys more times.
         Other params to tune the genetic algorithm
@@ -24,6 +25,7 @@ class GeneticSolver(solver.Solver):
         self.mutations = mutations
         self.random_starting_population = random_starting_population
         self.printLength = 80
+        self.crossover = crossover
         self.log = [] if log else None
 
         self.bruteForceSolver = BruteForceSolver(translator=translator, scorer=scorer, quiet=True) # for scoring population
@@ -60,6 +62,10 @@ class GeneticSolver(solver.Solver):
                                 mutant = self.keyGenerator.mutateKey(sample[1])
                             tried.append(mutant)
                         next_population.append((self.score(mutant, text, False), mutant))
+
+                if self.crossover:
+                    for offspring in self.keyGenerator.crossover(population):
+                        next_population.append((self.score(offspring, text, False), offspring))
 
                 population = sorted(next_population, key=lambda x: -x[0])[:self.population_size]
                 if self.log != None:

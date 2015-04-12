@@ -3,11 +3,13 @@ from .. import utils
 from math import ceil
 import copy
 import random
+import crossovers
 
 class SubstitutionKeyGenerator(KeyGenerator):
-	def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6):
+	def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6,
+                 crossover=crossovers.Tournament(crossover_func=crossovers.permutation), **kwargs):
 		"""To be used with SubstitutionTranslator"""
-		KeyGenerator.__init__(self)
+		KeyGenerator.__init__(self, crossover=crossover, **kwargs)
 		self.alphabet = list(alphabet)
 		self.locks = {}
 		self.randFunc = rand_func

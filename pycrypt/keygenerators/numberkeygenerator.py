@@ -3,9 +3,9 @@ from ..translators.numberedalphabettranslator import *
 import random
 
 class NumberKeyGenerator(KeyGenerator):
-	def __init__(self, max_number=26, rand_func=lambda x: x ** 6):
+	def __init__(self, max_number=26, rand_func=lambda x: x ** 6, **kwargs):
 		"""To be used with CaesarTranslator"""
-		KeyGenerator.__init__(self)
+		KeyGenerator.__init__(self, **kwargs)
 		self.max_number = max_number
 		self.randFunc = rand_func
 

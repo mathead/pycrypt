@@ -33,7 +33,7 @@ def permutation(parent1, parent2):
 
 class Tournament:
     """Basic tournament selector for crossovers"""
-    def __init__(self, crossover_func=point1, tournament_size=20, crossovers=4):
+    def __init__(self, crossover_func=point2, tournament_size=20, crossovers=6):
         self.crossover_func = crossover_func
         self.tournament_size = tournament_size
         self.crossovers = crossovers
@@ -42,4 +42,7 @@ class Tournament:
         """Returns a list of new offsprings from population"""
         tournament = sorted(random.sample(population, self.tournament_size), key=lambda x: -x[0])[:self.crossovers*2]
         random.shuffle(tournament)
-        return [self.crossover_func(*x) for x in it.izip_longest(*[iter(tournament)] * 2)] # map it by pairs
+        ret = []
+        for parents in it.izip_longest(*[iter(tournament)] * 2): # map it by pairs
+            ret += self.crossover_func(parents[0][1], parents[1][1])
+        return ret

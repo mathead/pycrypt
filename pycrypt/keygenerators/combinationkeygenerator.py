@@ -7,9 +7,9 @@ import copy
 import random
 
 class CombinationKeyGenerator(KeyGenerator):
-	def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 10, length_range=(1, 6)):
+	def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 10, length_range=(1, 6), **kwargs):
 		"""To be used with VigenereTranslator, generates combinations of the given set (alphabet)"""
-		KeyGenerator.__init__(self)
+		KeyGenerator.__init__(self, **kwargs)
 		self.alphabet = list(alphabet)
 		self.locks = {}
 		self.randFunc = rand_func
