@@ -109,3 +109,6 @@ class GeneticSolver(solver.Solver):
 
         for char in string:
             self.keyGenerator.lock(char, key=key)
+
+    def plotLog(self):
+        utils.plot_genetic_log(self.log)

@@ -91,7 +91,7 @@ def plot_genetic_log(log):
     plt.plot(avg, ':', label='avg')
     plt.plot(min_, ':', label='min')
     plt.xlabel("iteration")
-    plt.ylabel("score")
+    plt.ylabel("fitness")
     plt.legend(loc='lower right')
     plt.grid()
     plt.show()
@@ -102,7 +102,7 @@ def plot_genetic_log_threaded(log):
         plt.plot([max(*[k[0] for k in i]) for i in island], label="Island " + str(n+1))
 
     plt.xlabel("iteration")
-    plt.ylabel("score")
+    plt.ylabel("fitness")
     plt.legend(loc='lower right')
     plt.grid()
     plt.show()

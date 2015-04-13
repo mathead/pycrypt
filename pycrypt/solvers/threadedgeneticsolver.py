@@ -98,3 +98,6 @@ class ThreadedGeneticSolver(solver.Solver):
     def lock(self, string, key=None):
         for solver in self.solvers:
             solver.lock(string, key)
+
+    def plotLog(self):
+        utils.plot_genetic_log_threaded(self.log)
