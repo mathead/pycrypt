@@ -9,6 +9,7 @@ setup(
     license='LICENSE.txt',
     description='Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games.',
     long_description=open('README.txt').read(),
+    dependency_links = [ "git+https://github.com/uqfoundation/pathos.git@cd63efd17c4a36c0ace729820b1d3128187caae4#egg=pathos" ],
     install_requires=[
 	"mock",
     "numpy",
