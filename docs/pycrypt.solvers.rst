@@ -1,35 +1,46 @@
-solvers Package
-===============
+pycrypt.solvers package
+=======================
 
-:mod:`solvers` Package
-----------------------
+Submodules
+----------
 
-.. automodule:: pycrypt.solvers
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`solver` Module
---------------------
-
-.. automodule:: pycrypt.solvers.solver
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`bruteforcesolver` Module
-------------------------------
+pycrypt.solvers.bruteforcesolver module
+---------------------------------------
 
 .. automodule:: pycrypt.solvers.bruteforcesolver
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`geneticsolver` Module
----------------------------
+pycrypt.solvers.geneticsolver module
+------------------------------------
 
 .. automodule:: pycrypt.solvers.geneticsolver
     :members:
     :undoc-members:
     :show-inheritance:
 
+pycrypt.solvers.solver module
+-----------------------------
+
+.. automodule:: pycrypt.solvers.solver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pycrypt.solvers.threadedgeneticsolver module
+--------------------------------------------
+
+.. automodule:: pycrypt.solvers.threadedgeneticsolver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pycrypt.solvers
+    :members:
+    :undoc-members:
+    :show-inheritance:

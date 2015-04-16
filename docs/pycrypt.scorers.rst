@@ -1,75 +1,78 @@
-scorers Package
-===============
+pycrypt.scorers package
+=======================
 
-:mod:`scorers` Package
-----------------------
+Submodules
+----------
 
-.. automodule:: pycrypt.scorers
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`scorer` Module
---------------------
-
-.. automodule:: pycrypt.scorers.scorer
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`cgetngramfrequencies` Module
-----------------------------------
+pycrypt.scorers.cgetngramfrequencies module
+-------------------------------------------
 
 .. automodule:: pycrypt.scorers.cgetngramfrequencies
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`czechfrequencies` Module
-------------------------------
+pycrypt.scorers.czechfrequencies module
+---------------------------------------
 
 .. automodule:: pycrypt.scorers.czechfrequencies
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`czechscorer` Module
--------------------------
+pycrypt.scorers.czechscorer module
+----------------------------------
 
 .. automodule:: pycrypt.scorers.czechscorer
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`englishfrequencies` Module
---------------------------------
+pycrypt.scorers.englishfrequencies module
+-----------------------------------------
 
 .. automodule:: pycrypt.scorers.englishfrequencies
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`englishscorer` Module
----------------------------
+pycrypt.scorers.englishscorer module
+------------------------------------
 
 .. automodule:: pycrypt.scorers.englishscorer
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`languagescorer` Module
-----------------------------
+pycrypt.scorers.languagescorer module
+-------------------------------------
 
 .. automodule:: pycrypt.scorers.languagescorer
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`ngram_converter` Module
------------------------------
+pycrypt.scorers.ngram_converter module
+--------------------------------------
 
 .. automodule:: pycrypt.scorers.ngram_converter
     :members:
     :undoc-members:
     :show-inheritance:
 
+pycrypt.scorers.scorer module
+-----------------------------
+
+.. automodule:: pycrypt.scorers.scorer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pycrypt.scorers
+    :members:
+    :undoc-members:
+    :show-inheritance:
