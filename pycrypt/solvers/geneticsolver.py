@@ -7,13 +7,21 @@ from ..scorers.czechscorer import *
 class GeneticSolver(solver.Solver):
     """Uses own genetic algorithm, calls KeyGenerators mutateKey method"""
 
-    def __init__(self, keyGenerator=SubstitutionKeyGenerator(), translator=SubstitutionTranslator(), scorer=CzechScorer(),
+    def __init__(self, keyGenerator=None, translator=SubstitutionTranslator(), scorer=CzechScorer(),
                  population_size=20, mutations=20, random_starting_population=1000, quiet=False, exclude_tried=False, log=False,
-                 crossover=True):
+                 crossover=True, temperature=True, temperature_func=lambda score, iter: min(2, 4 / score)):
         """
         To silence text output use quiet, exclude_tried is for not using same keys more times.
         Other params to tune the genetic algorithm
         """
+
+        self.temperature = temperature
+        self.temperature_func = temperature_func
+        if keyGenerator == None:
+            if temperature:
+                keyGenerator = SubstitutionKeyGenerator(weighted=scorer.ngramWeights[0])
+            else:
+                keyGenerator = SubstitutionKeyGenerator()
 
         solver.Solver.__init__(self, keyGenerator, translator, scorer)
         if (quiet):
@@ -56,10 +64,10 @@ class GeneticSolver(solver.Solver):
                 next_population = population[:10] # copy the best from current population, so that the keys can't get worse (maybe remove this?)
                 for sample in population:
                     for i in range(self.mutations):
-                        mutant = self.keyGenerator.mutateKey(sample[1])
+                        mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
                         if (self.exclude_tried):
                             while (mutant in tried):
-                                mutant = self.keyGenerator.mutateKey(sample[1])
+                                mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
                             tried.append(mutant)
                         next_population.append((self.score(mutant, text, False), mutant))
 

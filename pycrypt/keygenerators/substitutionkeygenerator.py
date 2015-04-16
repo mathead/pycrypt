@@ -6,7 +6,7 @@ import random
 import crossovers
 
 class SubstitutionKeyGenerator(KeyGenerator):
-    def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6, weighted=False,
+    def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6, weighted=None,
                  crossover=crossovers.Tournament(crossover_func=crossovers.permutation), **kwargs):
         """To be used with SubstitutionTranslator"""
         KeyGenerator.__init__(self, crossover=crossover, **kwargs)
@@ -46,9 +46,10 @@ class SubstitutionKeyGenerator(KeyGenerator):
             perm[k], perm[l] = perm[l], perm[k]
             perm = perm[:k+1] + list(reversed(perm[k+1:]))
 
-    def mutateKey(self, key, _return_list=False):
+    def mutateKey(self, key, temp=1, _return_list=False):
         """Swaps random number of elements around"""
         ret = copy.copy(key)
+        inverse = dict(zip(ret.values(), ret.keys()))
 
         if (_return_list): # if locked key isn't what it is supposed to be
             for i in self.locks:
@@ -58,7 +59,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
                 ret[ret.index(self.locks[i])] = b
                 ret[j] = a
         else:
-            bret = dict(zip(ret.values(), ret.keys()))
+            bret = inverse
             for i in self.locks:
                 ret[i], ret[bret[self.locks[i]]] = self.locks[i], ret[i]
 
@@ -69,9 +70,12 @@ class SubstitutionKeyGenerator(KeyGenerator):
                 sample.remove(self.alphabet.index(lock))
 
         for i in range(int(ceil(self.randFunc(random.random()) * len(self._getLockedAlphabet())))):
-            if (len(sample) < 2):
+            if len(sample) < 2:
                 return ret
-            a, b = random.sample(sample, 2)
+            if self.weighted != None:
+                a, b = self._getPairTemp(temp, sample, inverse)
+            else:
+                a, b = random.sample(sample, 2)
             ret[a], ret[b] = ret[b], ret[a]
 
         return ret
@@ -129,3 +133,17 @@ class SubstitutionKeyGenerator(KeyGenerator):
         sample.remove(first)
 
         return first, self._getWeightedChoice(weights, sample)
+
+    def _getPairTemp(self, temp, sample, inverse):
+        """
+        Get keys with higher frequency more or less often according to temperature.
+        temp = 1 no weights, temp = 2 take more frequent more often, temp = 0 take less frequent more often
+        """
+        freq = max(0, temp - 1)
+        norm = 1 - abs(temp - 1)
+        inv = max(0, 1 - temp)
+
+        # we have to invert the key, because the weights are for the values, not keys
+        weights = {key: self.weighted[inverse[key]] * (freq + inv) + norm for key in sample}
+        return self._getWeightedPair(weights, sample[:])
+

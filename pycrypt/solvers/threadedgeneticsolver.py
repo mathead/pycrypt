@@ -81,7 +81,7 @@ class ThreadedGeneticSolver(solver.Solver):
     def printer(self, key, score, text=None, iterations=None):
         """Gets the best sample in population in every cycle"""
         print
-        print "Migration! Best individual overall:"
+        print "Migration! Best individual from all {} islands:".format(self.num_processes)
         print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
         if (type(key) == dict):
             print "Key:"
