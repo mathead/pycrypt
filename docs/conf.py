@@ -36,7 +36,7 @@ class Mock(object):
         else:
             return Mock()
 
-MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.interpolate', 'unidecode']
+MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.interpolate', 'unidecode', 'dill']
 for mod_name in MOCK_MODULES:
   sys.modules[mod_name] = mock.Mock()
 
