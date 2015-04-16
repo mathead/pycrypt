@@ -1,8 +1,8 @@
-pycrypt package
-===============
+API
+***
 
-Subpackages
------------
+pycrypt package
+---------------
 
 .. toctree::
 
@@ -10,9 +10,6 @@ Subpackages
     pycrypt.scorers
     pycrypt.solvers
     pycrypt.translators
-
-Submodules
-----------
 
 pycrypt.utils module
 --------------------

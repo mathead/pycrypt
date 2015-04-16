@@ -19,7 +19,7 @@ class GeneticSolver(solver.Solver):
         self.temperature_func = temperature_func
         if keyGenerator == None:
             if temperature:
-                keyGenerator = SubstitutionKeyGenerator(weighted=scorer.ngramWeights[0])
+                keyGenerator = SubstitutionKeyGenerator(weighted=scorer.idealNgramFrequencies[0])
             else:
                 keyGenerator = SubstitutionKeyGenerator()
 
