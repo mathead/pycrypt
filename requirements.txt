@@ -1,5 +1,5 @@
-mock
-numpy
-matplotlib
-unidecode
--e git://github.com/uqfoundation/pathos.git@cd63efd17c4a36c0ace729820b1d3128187caae4
+mock==1.0.1
+numpy==1.8.0
+matplotlib==1.4.3
+unidecode==0.04.17
+-e git://github.com/uqfoundation/pathos.git@cd63efd17c4a36c0ace729820b1d3128187caae4#egg=pathos
