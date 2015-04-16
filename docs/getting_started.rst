@@ -1,18 +1,18 @@
 Getting started
 ***************
 
-Getting pycrypt
-===============
+Getting pycrypt's source
+========================
 
-Right now, the only way to get pycrypt is to clone it from github `here <https://github.com/PrehistoricTeam/pycrypt/>`_.
+Pycrypt is on github `here <https://github.com/PrehistoricTeam/pycrypt/>`_.
 You can clone it with:
 
 .. code-block:: bash
 
 	$ git clone https://github.com/PrehistoricTeam/pycrypt.git
 
-Prerequisites
-=============
+Installation
+============
 
 Pycrypt was developed on Python 2.7.5, but should work fine on previous versions as well.
 
@@ -22,15 +22,21 @@ If you don’t have pip (you should), run this first:
 
 	$ curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
 
-
-For graphical capabilities, NumPy and pyplot are required. You can get these modules with pip:
+You can now install pycrypt with pip:
 
 .. code-block:: bash
-	
-	$ pip install numpy
-	$ pip install matplotlib
 
-Optional, but recommended modules are unidecode and ipython console for interactive use:
+	$ pip install "git+https://github.com/PrehistoricTeam/pycrypt.git@master#egg=pycrypt"
+
+If you want to hack on pycrypt's source, install it with:
+
+.. code-block:: bash
+
+	$ pip install -e "git+https://github.com/PrehistoricTeam/pycrypt.git@master#egg=pycrypt"
+
+It will download the source to the current directory and link it in the python installation.
+
+Optional, but recommended packages are unidecode and ipython console for interactive use:
 
 .. code-block:: bash
 
@@ -63,4 +69,4 @@ To start solving a basic `substitution cipher <http://en.wikipedia.org/wiki/Subs
 Put it in a file (e.g. first_test.py) in the root directory and run it. You'll see some output and after some time, you *should* see the result close to::
 
 	The White-bellied Sea Eagle is a large diurnal bird of prey in the family Accipitridae. A distinctive bird, adults have a white head, breast, under-wing coverts and tail. The upper parts are grey and the black under-wing flight feathers contrast with the white coverts.
-	
+
