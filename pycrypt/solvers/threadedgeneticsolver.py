@@ -1,4 +1,5 @@
-import pathos.multiprocessing as mp
+import multiprocessing as mp
+import dill
 import itertools
 import solver
 from geneticsolver import GeneticSolver
@@ -8,6 +9,14 @@ from ..scorers.czechscorer import *
 from .. import utils
 import pprint
 
+
+def mapper(solver):
+    solver, text, iterations, log = dill.loads(solver)
+    random.seed()  # since the environment is copied, we need to reinitialize the seed for each process
+    res = solver.solve(text, iterations, return_all_keys=True)
+    if log != None:
+        return res, solver.log
+    return res
 
 class ThreadedGeneticSolver(solver.Solver):
     """Implements the island model using GeneticSolver"""
@@ -40,17 +49,11 @@ class ThreadedGeneticSolver(solver.Solver):
 
     def solve(self, text=None, iterations=0, return_all_keys=False):
         """Paralelized GeneticSolver's solve. Note that you can't interrupt the evolution as you could normally."""
-        def mapper(solver):
-            random.seed() # since the environment is copied, we need to reinitialize the seed for each process
-            res = solver.solve(text, self.migration_size, return_all_keys=True)
-            if self.log != None:
-                return res, solver.log
-            return res
-
         while (iterations != 1):
             iterations -= 1
 
-            results = mp.ProcessingPool().map(mapper, self.solvers)
+            # we need to pickle all the needed information for the mapper function (as it is completely isolated)
+            results = mp.Pool().map(mapper, [dill.dumps((s, text, self.migration_size, self.log)) for s in self.solvers])
             if self.log != None:
                 results, logs = zip(*results)
 
