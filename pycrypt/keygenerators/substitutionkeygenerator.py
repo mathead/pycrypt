@@ -46,7 +46,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
             perm[k], perm[l] = perm[l], perm[k]
             perm = perm[:k+1] + list(reversed(perm[k+1:]))
 
-    def mutateKey(self, key, temp=1, _return_list=False):
+    def mutateKey(self, key, _return_list=False, temp=1):
         """Swaps random number of elements around"""
         ret = copy.copy(key)
         inverse = dict(zip(ret.values(), ret.keys()))

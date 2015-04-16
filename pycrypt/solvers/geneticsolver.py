@@ -9,7 +9,7 @@ class GeneticSolver(solver.Solver):
 
     def __init__(self, keyGenerator=None, translator=SubstitutionTranslator(), scorer=CzechScorer(),
                  population_size=20, mutations=20, random_starting_population=1000, quiet=False, exclude_tried=False, log=False,
-                 crossover=True, temperature=True, temperature_func=lambda score, iter: min(2, 4 / score)):
+                 crossover=True, temperature=False, temperature_func=lambda score, iter: min(2, 4 / score)):
         """
         To silence text output use quiet, exclude_tried is for not using same keys more times.
         Other params to tune the genetic algorithm
@@ -64,10 +64,17 @@ class GeneticSolver(solver.Solver):
                 next_population = population[:10] # copy the best from current population, so that the keys can't get worse (maybe remove this?)
                 for sample in population:
                     for i in range(self.mutations):
-                        mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
+                        if self.temperature:
+                            mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
+                        else:
+                            mutant = self.keyGenerator.mutateKey(sample[1])
+
                         if (self.exclude_tried):
                             while (mutant in tried):
-                                mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
+                                if self.temperature:
+                                    mutant = self.keyGenerator.mutateKey(sample[1], temp=self.temperature_func(population[0][0], abs(iterations)))
+                                else:
+                                    mutant = self.keyGenerator.mutateKey(sample[1])
                             tried.append(mutant)
                         next_population.append((self.score(mutant, text, False), mutant))
 

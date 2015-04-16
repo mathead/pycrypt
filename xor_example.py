@@ -29,7 +29,7 @@ ciphers = ("32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e90
 ciphers = [c.decode('hex') for c in ciphers]
 # print [[ord(i) for i in c] for c in ciphers]
 
-s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(alphabet=[chr(i) for i in range(255)], length_range=(83, 83)), translator=pc.MulXorTranslator(), scorer=pc.EnglishScorer())
+s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(alphabet=[chr(i) for i in range(255)], length_range=(83, 83)), translator=MulXorTranslator(), scorer=pc.EnglishScorer())
 s.scorer.unidec = False
 
 
@@ -44,5 +44,5 @@ s.scorer.unidec = False
 # s.translator.setKey(key)
 # print s.translator.translate(ciphers)
 
-# s.setStartingPoint(key)
+# s.setStartingPoint([key])
 s.solve(ciphers)
