@@ -1,14 +1,14 @@
 What's new in v0.2
 ******************
 
-Version 0.2 of pycrypt came with some new features. Let's break them down:
+Apart from some bug fixes and improvements, version 0.2 of pycrypt came with some new features. Let's break them down:
 
 The island model
 ================
 
 The biggest improvement in pycrypt is that it's now multi-threaded. It can now eat up all your processing power and is about 4 (or equivalent to your number of cores) times faster.
 
-The new ``ThreadedGeneticSolver`` has the same interface as ``GeneticSolver``, but runs as many instances of ``GeneticSolver`` as you have cores (you can change that with the ``num_processes`` argument). They don't just run separated though, every 10 iterations (set by ``migration_iterations``), the "islands" exchange their best individuals in a cyclic pattern.
+The new ``ThreadedGeneticSolver`` has the same interface as ``GeneticSolver``, but runs as many instances of ``GeneticSolver`` as you have cores (you can change that with the ``num_processes`` argument). They don't just run separated though, every 10 iterations (set by ``migration_iterations``) the "islands" exchange their best individuals in a cyclic pattern.
 
 
 .. figure::  _static/islands.png
@@ -64,4 +64,4 @@ Pycrypt is now structured as a legit python package with requirements done final
 
     $ pip install "git+https://github.com/PrehistoricTeam/pycrypt.git@master#egg=pycrypt"
 
-I might consider getting pycrypt on PyPI in the near future.
+I might even consider getting pycrypt on PyPI in the near future.
