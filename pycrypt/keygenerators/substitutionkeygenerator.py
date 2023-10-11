@@ -1,9 +1,9 @@
-from keygenerator import *
+from .keygenerator import *
 from .. import utils
 from math import ceil
 import copy
 import random
-import crossovers
+from . import crossovers
 
 class SubstitutionKeyGenerator(KeyGenerator):
     def __init__(self, alphabet=utils.alphabet, rand_func=lambda x: x ** 6, weighted=None,
@@ -21,7 +21,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
 
         ret = self._addLockedKeys(values)
         if (_return_list):
-            return zip(*ret)[1]
+            return list(zip(*ret))[1]
         return dict(ret)
 
     def getAllKeys(self, _return_list=False):
@@ -30,7 +30,7 @@ class SubstitutionKeyGenerator(KeyGenerator):
         while True: # doesn't use itertools because of locking speed optimization
             ret = self._addLockedKeys(perm)
             if (_return_list): # for PermutationKeyGenerator
-                yield zip(*ret)[1]
+                yield list(zip(*ret))[1]
             else:
                 yield dict(ret)
 

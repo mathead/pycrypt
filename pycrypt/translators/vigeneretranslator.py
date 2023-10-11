@@ -1,5 +1,5 @@
-import translator
-from substitutiontranslator import *
+from . import translator
+from .substitutiontranslator import *
 from .. import utils
 
 class VigenereTranslator(translator.Translator):

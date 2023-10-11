@@ -1,4 +1,4 @@
-from substitutionkeygenerator import *
+from .substitutionkeygenerator import *
 from .. import utils
 import random
 
@@ -17,7 +17,8 @@ class PermutationKeyGenerator(SubstitutionKeyGenerator):
 
 	def mutateKey(self, key):
 		"""Swaps random number of elements around"""
-		return super(PermutationKeyGenerator, self).mutateKey(key, True)
+		ret = super(PermutationKeyGenerator, self).mutateKey(dict(enumerate(key)), False)
+		return [ret[i] for i in range(len(ret))]
 
 	def lock(self, indx, value):
 		"""Lock an index of the key, so that the other functions return only keys with the set value on the given index"""

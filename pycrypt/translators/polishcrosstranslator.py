@@ -1,4 +1,4 @@
-import translator
+from . import translator
 from .. import utils
 from collections import OrderedDict
 import numpy as np

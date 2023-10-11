@@ -1,5 +1,5 @@
-import solver
-from bruteforcesolver import *
+from . import solver
+from .bruteforcesolver import *
 from ..translators.substitutiontranslator import *
 from ..keygenerators.substitutionkeygenerator import *
 from ..scorers.czechscorer import *
@@ -49,7 +49,7 @@ class GeneticSolver(solver.Solver):
             if self.log:
                 self.log.append(population)
         else:
-            population = zip([self.score(i, text, False) for i in self.startingPoint], self.startingPoint)
+            population = list(zip([self.score(i, text, False) for i in self.startingPoint], self.startingPoint))
 
         if (self.exclude_tried):
             tried.extend(population)
@@ -93,7 +93,7 @@ class GeneticSolver(solver.Solver):
                     best = (score, key)
 
         except (KeyboardInterrupt, SystemExit):
-            print "Evolution interrupted! Setting starting point to continue"
+            print("Evolution interrupted! Setting starting point to continue")
             self.startingPoint = [best[1]]
 
         self.lastPrint(best[1], best[0], self.score(best[1], text)[1])
@@ -103,7 +103,7 @@ class GeneticSolver(solver.Solver):
 
     def printer(self, key, score, text=None, iterations=None):
         """Gets the best sample in population in every cycle"""
-        print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
+        print(("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength]))
 
     def setStartingPoint(self, startingPoint):
         """Starting population -> can be list"""

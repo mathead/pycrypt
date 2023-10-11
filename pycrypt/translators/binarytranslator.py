@@ -1,4 +1,4 @@
-import translator
+from . import translator
 from .. import utils
 from collections import OrderedDict
 import numpy as np
@@ -25,7 +25,7 @@ class BinaryTranslator(translator.Translator):
 				for j, k in enumerate(reversed(bin_char)):
 					num += (2 ** j) * int(k)
 				ret += utils.alphabet[num]
-			except ValueError, IndexError:
+			except (ValueError, IndexError):
 				ret += i
 		return ret
 

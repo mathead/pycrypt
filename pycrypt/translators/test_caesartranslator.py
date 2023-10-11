@@ -1,5 +1,5 @@
 import unittest
-from caesartranslator import *
+from .caesartranslator import *
 
 class TestCaesarTranslator(unittest.TestCase):
     def setUp(self):

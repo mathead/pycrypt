@@ -1,8 +1,8 @@
 import multiprocessing as mp
 import dill
 import itertools
-import solver
-from geneticsolver import GeneticSolver
+from . import solver
+from .geneticsolver import GeneticSolver
 from ..translators.substitutiontranslator import *
 from ..keygenerators.substitutionkeygenerator import *
 from ..scorers.czechscorer import *
@@ -84,14 +84,14 @@ class ThreadedGeneticSolver(solver.Solver):
     def printer(self, key, score, text=None, iterations=None):
         """Gets the best sample in population in every cycle"""
         print
-        print "Migration! Best individual from all {} islands:".format(self.num_processes)
-        print ("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text[:self.printLength])
+        print("Migration! Best individual from all {} islands:".format(self.num_processes))
+        print(("{:3}.      Score: {:.5f}      Text: {}").format(abs(iterations), score, text))#[:self.printLength]))
         if (type(key) == dict):
-            print "Key:"
+            print("Key:")
             utils.pprint_dict(key)
         else:
-            print "Key:", key
-        print "==================================="
+            print("Key:", key)
+        print("===================================")
         print
 
     def setStartingPoint(self, startingPoint):

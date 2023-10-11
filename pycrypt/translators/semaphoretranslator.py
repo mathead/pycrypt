@@ -1,4 +1,4 @@
-import translator
+from . import translator
 from .. import utils
 import numpy as np
 

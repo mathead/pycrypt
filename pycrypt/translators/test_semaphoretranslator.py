@@ -1,5 +1,5 @@
 import unittest
-from semaphoretranslator import *
+from .semaphoretranslator import *
 from .. import utils
 import numpy
 

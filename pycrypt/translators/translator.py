@@ -9,18 +9,18 @@ class Translator():
 
 	def interactiveTranslate(self):
 		"""For quick translating with each character typed from the user, type ! to remove last characters"""
-		print "Interactive translation:"
+		print("Interactive translation:")
 		result = ""
 		while True:
 			try:
-				i = raw_input(" "*len(result))
+				i = input(" "*len(result))
 				if (len(i) and i[0] == "!"):
 					result = result[:-len(i)]
 				else:
 					result += self.translate(i)
-				print result
+				print(result)
 			except KeyboardInterrupt:
-				print result
+				print(result)
 				return result
 
 	def encode(self, *args):

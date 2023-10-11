@@ -34,16 +34,18 @@ class Solver(object):
 
 	def printer(self, key, score, text=None):
 		"""Callback method for every key generated and scored"""
-		print ("Score: {:.5f}      Key: {:2}      Text: {}").format(score, "".join(key), text[:80])
+		if "-" in text or "." in text:
+			return
+		print(("Score: {:.5f}      Key: {:2}      Text: {}").format(score, key, text)) # TODO check iterable
 
 	def lastPrint(self, key, score, text=None):
 		"""Callback method for last and best result"""
 		print
-		print "=====Best Solution====="
-		print "Score:", score
+		print("=====Best Solution=====")
+		print("Score:", score)
 		if (type(key) == dict):
-			print "Key:"
+			print("Key:")
 			utils.pprint_dict(key)
 		else:
-			print "Key:", key
-		print "Text:", text
+			print("Key:", key)
+		print("Text:", text)

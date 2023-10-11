@@ -1,4 +1,4 @@
-import translator
+from . import translator
 from .. import utils
 from collections import OrderedDict
 
@@ -21,7 +21,7 @@ class SubstitutionTranslator(translator.Translator):
 	def translate(self, cipher):
 		result = ""
 		for i in self.parseInput(cipher):
-			if (self.key.has_key(i)):
+			if i in self.key:
 				result += self.key[i]
 			else:
 				result += i

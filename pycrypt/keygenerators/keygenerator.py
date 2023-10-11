@@ -1,4 +1,4 @@
-import crossovers
+from . import crossovers
 
 class KeyGenerator(object):
     """Abstract class for generating keys for specific Translator"""

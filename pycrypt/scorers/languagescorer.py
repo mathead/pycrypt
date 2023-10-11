@@ -1,4 +1,4 @@
-import scorer
+from . import scorer
 from .. import utils
 from unidecode import unidecode
 # import cgetngramfrequencies
@@ -17,7 +17,7 @@ class LanguageScorer(scorer.Scorer):
 	def setIdealNgramFrequencies(self, freqs):
 		self.idealNgramFrequencies = freqs
 		self.idealNgramsKeySets = [set(i.keys()) for i in freqs]
-		self.ngramLens = [len(i.keys()[0]) for i in freqs]
+		self.ngramLens = [len(list(i.keys())[0]) for i in freqs]
 		if (self.ngramWeights == None):
 			self.ngramWeights = [1] * len(freqs)
 
@@ -39,7 +39,7 @@ class LanguageScorer(scorer.Scorer):
 		d = {}
 		for i in range(len(text) + 1 - length):
 			sub = text[i:i+length]
-			if (d.has_key(sub)):
+			if sub in d:
 				d[sub] += 1
 			else:
 				d[sub] = 1
@@ -79,7 +79,7 @@ class LanguageScorer(scorer.Scorer):
 	@utils.cache
 	def score(self, text):
 		if (self.unidec):
-			text = unidecode(unicode(text)).upper()
+			text = unidecode(text).upper()
 		else:
 			text = text.upper()
 		ngrams_scores = [i * j for i, j in zip(self.ngramWeights, self.scoreNgrams(text))]

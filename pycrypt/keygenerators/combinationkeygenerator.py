@@ -1,4 +1,4 @@
-from keygenerator import *
+from .keygenerator import *
 from ..translators.vigeneretranslator import *
 from .. import utils
 from math import ceil

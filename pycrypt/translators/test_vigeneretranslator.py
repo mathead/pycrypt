@@ -1,5 +1,5 @@
 import unittest
-from vigeneretranslator import *
+from .vigeneretranslator import *
 from .. import utils
 import numpy
 

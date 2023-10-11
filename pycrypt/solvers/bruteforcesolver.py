@@ -1,4 +1,4 @@
-import solver
+from . import solver
 from ..translators.caesartranslator import *
 from ..keygenerators.numberkeygenerator import *
 from ..keygenerators.keygenerator import *
@@ -36,10 +36,10 @@ class BruteForceSolver(solver.Solver):
 
 	def lastPrint(self, key, score, text=None):
 		print
-		print "=====Best Solution====="
-		print "Score:", score
-		print "Key:", "".join(key)
-		print "Text:", text
+		print("=====Best Solution=====")
+		print("Score:", score)
+		print("Key:", key) # TODO
+		print("Text:", text)
 
 	def setKeyGenerator(self, keyGenerator):
 		self.keyGenerator = keyGenerator

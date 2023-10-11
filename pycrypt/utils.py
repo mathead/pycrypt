@@ -79,8 +79,8 @@ def pprint_dict(d):
     """Prints dicts keys and values on top of each other"""
     keys = sorted(d.keys())
     values = [d[i] for i in keys]
-    print "".join(keys)
-    print "".join(values)
+    print("".join(keys))
+    print("".join(values))
 
 def plot_genetic_log(log):
     """Plots the max, min and avg fitness of the population"""
@@ -110,7 +110,7 @@ def plot_genetic_log_threaded(log):
 def cache(func):
     """General decorator for function caching, if called with same arguments, it is bypassed"""
     def hash_args(*args, **kwargs):
-        return tuple([hash(x) for x in list(args) + kwargs.items()])
+        return tuple([hash(x) for x in list(args) + list(kwargs.items())])
 
     cached = {}
     def wrapper(*args, **kwargs):

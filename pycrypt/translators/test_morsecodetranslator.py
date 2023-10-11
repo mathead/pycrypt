@@ -1,5 +1,5 @@
 import unittest
-from morsecodetranslator import *
+from .morsecodetranslator import *
 from .. import utils
 import numpy
 

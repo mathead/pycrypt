@@ -10,6 +10,6 @@ text = unidecode(u"Na začátku si musíme vytvořit tabulku substitucí, což j
 for i in range(26):
 	b.setKey(i + 3)
 	ctext = b.translate(text)
-	print ctext
+	print(ctext)
 	a.score(ctext)
-	print "\n\n\n"
+	print("\n\n\n")

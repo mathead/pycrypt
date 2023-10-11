@@ -1,6 +1,6 @@
-from scorer import *
-from languagescorer import *
-from czechscorer import *
-from englishscorer import *
-import czechfrequencies as CzechFrequencies
-import englishfrequencies as EnglishFrequencies
+from .scorer import *
+from .languagescorer import *
+from .czechscorer import *
+from .englishscorer import *
+from . import czechfrequencies as CzechFrequencies
+from . import englishfrequencies as EnglishFrequencies

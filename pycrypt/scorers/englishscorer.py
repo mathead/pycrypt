@@ -1,5 +1,5 @@
-import languagescorer
-import englishfrequencies as en
+from . import languagescorer
+from . import englishfrequencies as en
 
 class EnglishScorer(languagescorer.LanguageScorer):
 	"""English scorer, frequencies got from interwebz"""

@@ -32,7 +32,7 @@ def permutation(parent1, parent2):
     point1 = random.randint(1, len(parent1) - 2)
     point2 = random.randint(point1 + 1, len(parent1) - 1)
 
-    cut = parent1.values()[point1:point2]
+    cut = list(parent1.values())[point1:point2]
     filler = [x for x in parent2 if x not in cut]
 
     result = filler[point1+len(cut):] + cut + filler[:point1+len(cut)]
@@ -54,6 +54,6 @@ class Tournament:
         tournament = sorted(random.sample(population, self.tournament_size), key=lambda x: -x[0])[:self.crossovers*2]
         random.shuffle(tournament)
         ret = []
-        for parents in it.izip_longest(*[iter(tournament)] * 2): # map it by pairs
+        for parents in it.zip_longest(*[iter(tournament)] * 2): # map it by pairs
             ret += self.crossover_func(parents[0][1], parents[1][1])
         return ret

@@ -1,6 +1,6 @@
-import unittest
+from . import unittest
 from .. import utils
-from crossovers import *
+from .crossovers import *
 
 class TestCrossovers(unittest.TestCase):
     def test_point1(self):

@@ -27,7 +27,7 @@ ciphers = ("32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e90
 "466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83",)
 
 ciphers = [c.decode('hex') for c in ciphers]
-# print [[ord(i) for i in c] for c in ciphers]
+# print([[ord(i) for i in c] for c in ciphers])
 
 s = pc.GeneticSolver(keyGenerator=pc.CombinationKeyGenerator(alphabet=[chr(i) for i in range(255)], length_range=(83, 83)), translator=MulXorTranslator(), scorer=pc.EnglishScorer())
 s.scorer.unidec = False
@@ -42,7 +42,7 @@ s.scorer.unidec = False
 # t.setKey("The ciphertext produced by a weak encryption algorithm looks as good as ciphertext ")
 # key = t.translate(ciphers[4])
 # s.translator.setKey(key)
-# print s.translator.translate(ciphers)
+# print(s.translator.translate(ciphers))
 
 # s.setStartingPoint([key])
 s.solve(ciphers)

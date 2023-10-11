@@ -1,4 +1,4 @@
-from keygenerator import *
+from .keygenerator import *
 from ..translators.numberedalphabettranslator import *
 import random
 
@@ -13,7 +13,7 @@ class NumberKeyGenerator(KeyGenerator):
 		return random.randint(0, self.max_number - 1)
 
 	def getAllKeys(self):
-		return xrange(self.max_number)
+		return range(self.max_number)
 
 	def mutateKey(self, key):
 		"""Change randFunc for different transformation number after random.random"""

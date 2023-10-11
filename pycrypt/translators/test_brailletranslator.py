@@ -1,5 +1,5 @@
 import unittest
-from brailletranslator import *
+from .brailletranslator import *
 from .. import utils
 import numpy
 

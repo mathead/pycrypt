@@ -1,5 +1,5 @@
 import unittest
-from binarytranslator import *
+from .binarytranslator import *
 from .. import utils
 import numpy
 

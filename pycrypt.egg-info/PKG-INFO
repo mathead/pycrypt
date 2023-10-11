@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: pycrypt
+Version: 0.2
+Summary: Pycrypt is a python suite for solving ciphers at (mostly Czech) cryptography games.
+Home-page: UNKNOWN
+Author: Matej Hlavacek
+Author-email: hlavacek.matej@gmail.com
+License: LICENSE.txt
+Description: You can check out the docs at http://pycrypt.readthedocs.org/en/latest/
+Platform: UNKNOWN

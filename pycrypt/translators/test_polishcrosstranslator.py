@@ -1,5 +1,5 @@
 import unittest
-from polishcrosstranslator import *
+from .polishcrosstranslator import *
 from .. import utils
 import numpy
 

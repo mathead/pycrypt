@@ -14,7 +14,7 @@ from unidecode import unidecode
 NGRAM_LENGTH = 5
 FILE_PATH = "czech-letters-5.txt"
 
-alphabet = string.uppercase + " "
+alphabet = string.ascii_uppercase + " "
 
 def normalize(istring):
 	istring = istring.replace(" ", "")
@@ -39,13 +39,13 @@ with codecs.open(FILE_PATH, "r", "utf-8") as f:
 		if (first_match):
 			first = first_match.group(1)
 		else:
-			print "ERROR:", l[0]
+			print("ERROR:", l[0])
 
 		first = normalize(first)
 		if (not first):
 			continue
 
-		print first
+		print(first)
 
 		for j in l[2:-1]:
 			freq_match = freq_pattern.search(j)
@@ -61,7 +61,7 @@ with codecs.open(FILE_PATH, "r", "utf-8") as f:
 							final_dict[key] = int(freq)
 			else:
 				pass
-				# print "ERROR:", j
+				# print("ERROR:", j)
 
 	# pprint(final_dict)
 	for i in final_dict:
