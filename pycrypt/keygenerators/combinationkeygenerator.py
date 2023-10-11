@@ -19,7 +19,10 @@ class CombinationKeyGenerator(KeyGenerator):
 		"""If length is None, random from range is set"""
 		if (length == None):
 			length = random.randint(*self.length_range)
-		return "".join([random.choice(self.alphabet) for i in range(length)])
+		key = [random.choice(self.alphabet) for i in range(length)]
+		if isinstance(key, str):
+			return "".join()
+		return key
 
 	def getAllKeys(self):
 		"""Generator of all combinations from shortest to longest from length_range"""

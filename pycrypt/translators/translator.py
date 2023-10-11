@@ -41,3 +41,4 @@ class Translator():
 
 	def setKey(self, key):
 		self.key = key
+		return self

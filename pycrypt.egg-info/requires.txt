@@ -2,3 +2,4 @@ matplotlib
 mock
 numpy
 unidecode
+dill

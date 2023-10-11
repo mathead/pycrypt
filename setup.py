@@ -17,5 +17,6 @@ setup(
     "numpy",
     "matplotlib",
 	"unidecode",
+    "dill",
     ],
 )
